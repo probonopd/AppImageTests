@@ -1,0 +1,818 @@
+{
+  "records": [
+    {
+      "run_id": "37514697939",
+      "app": "kdenlive",
+      "arch": "x86_64",
+      "category": "large-qt",
+      "variant": "squashfs-gzip9-b128K",
+      "container": "squashfs",
+      "codec": "gzip",
+      "level": 9,
+      "block_bytes": 131072,
+      "family_key": "sq-baseline",
+      "stage": "2",
+      "retry": false,
+      "runtime": "type2-runtime@156f4bdbde9c",
+      "size": {
+        "payload": 217497600,
+        "runtime": 944632,
+        "total": 218442232,
+        "uncompressed": 658645291,
+        "ratio": 0.3316538279175217
+      },
+      "build": {
+        "wall_s": 22.99,
+        "cpu_s": 89.52000000000001,
+        "rss_mb": 734.15234375,
+        "timeout": false,
+        "deterministic": null
+      },
+      "env": {
+        "cpu": "AMD EPYC 7763 64-Core Processor",
+        "cores": 4,
+        "ram_gb": 15.6,
+        "kernel": "6.17.0-1022-azure",
+        "image": "20261004.327.1",
+        "runner": "GitHub Actions 1000009248",
+        "tools": {
+          "mksquashfs": "mksquashfs version 4.6.1 (2023/03/25)",
+          "mkdwarfs": "___                  ___ ___",
+          "zsync": "zsync v0.6.2 (compiled Apr 18 2024 17:54:59)"
+        }
+      },
+      "startup": {
+        "mount": {
+          "warm": [
+            {
+              "mount_ms": 8.24282099998186,
+              "workset_ms": 146.24511100001314,
+              "cpu_s_startup": 0.13,
+              "walk_ms": 927.2374789999844,
+              "rand4k_ms": 0.4841597249999552,
+              "seq_mb_s": 178.00412940356128,
+              "uncompressed_bytes": 658645291,
+              "cpu_s_total": 3.2800000000000002,
+              "fuse_rss_mb": 33.38671875
+            },
+            {
+              "mount_ms": 9.539121999978306,
+              "workset_ms": 149.03960600000232,
+              "cpu_s_startup": 0.13,
+              "walk_ms": 893.1959610000035,
+              "rand4k_ms": 0.5026453300000355,
+              "seq_mb_s": 178.41213193986903,
+              "uncompressed_bytes": 658645291,
+              "cpu_s_total": 3.24,
+              "fuse_rss_mb": 31.109375
+            },
+            {
+              "mount_ms": 7.630472000016653,
+              "workset_ms": 140.61907300001053,
+              "cpu_s_startup": 0.12,
+              "walk_ms": 884.1651479999939,
+              "rand4k_ms": 0.48214552000004574,
+              "seq_mb_s": 174.52354522166215,
+              "uncompressed_bytes": 658645291,
+              "cpu_s_total": 3.2800000000000002,
+              "fuse_rss_mb": 33.34375
+            },
+            {
+              "mount_ms": 9.112213000008751,
+              "workset_ms": 140.62485200000197,
+              "cpu_s_startup": 0.12,
+              "walk_ms": 940.8612249999919,
+              "rand4k_ms": 0.5361690049998913,
+              "seq_mb_s": 173.28141038208392,
+              "uncompressed_bytes": 658645291,
+              "cpu_s_total": 3.35,
+              "fuse_rss_mb": 33.26171875
+            },
+            {
+              "mount_ms": 9.40527200000929,
+              "workset_ms": 144.18246700000736,
+              "cpu_s_startup": 0.13,
+              "walk_ms": 980.6656389999944,
+              "rand4k_ms": 0.4852300000000298,
+              "seq_mb_s": 165.25393911091504,
+              "uncompressed_bytes": 658645291,
+              "cpu_s_total": 3.47,
+              "fuse_rss_mb": 33.37109375
+            },
+            {
+              "mount_ms": 9.16396099998451,
+              "workset_ms": 147.95816100001957,
+              "cpu_s_startup": 0.13,
+              "walk_ms": 968.1628989999922,
+              "rand4k_ms": 0.5576105200000825,
+              "seq_mb_s": 166.56908687599895,
+              "uncompressed_bytes": 658645291,
+              "cpu_s_total": 3.47,
+              "fuse_rss_mb": 31.13671875
+            },
+            {
+              "mount_ms": 7.29717100000471,
+              "workset_ms": 148.46462399998472,
+              "cpu_s_startup": 0.13,
+              "walk_ms": 896.1087250000332,
+              "rand4k_ms": 0.5071365300000252,
+              "seq_mb_s": 173.13468292876627,
+              "uncompressed_bytes": 658645291,
+              "cpu_s_total": 3.29,
+              "fuse_rss_mb": 31.52734375
+            }
+          ],
+          "cold": [
+            {
+              "mount_ms": 37.07151999998359,
+              "workset_ms": 174.2330779999861,
+              "cpu_s_startup": 0.14,
+              "walk_ms": 961.2993889999757,
+              "rand4k_ms": 0.6651416249999897,
+              "seq_mb_s": 169.07306127956844,
+              "uncompressed_bytes": 658645291,
+              "cpu_s_total": 3.4299999999999997,
+              "fuse_rss_mb": 33.1953125
+            },
+            {
+              "mount_ms": 32.594707000043854,
+              "workset_ms": 174.59905900000194,
+              "cpu_s_startup": 0.14,
+              "walk_ms": 970.0120100000049,
+              "rand4k_ms": 0.7596019249999131,
+              "seq_mb_s": 166.02368432954182,
+              "uncompressed_bytes": 658645291,
+              "cpu_s_total": 3.47,
+              "fuse_rss_mb": 31.41015625
+            },
+            {
+              "mount_ms": 32.20703800002411,
+              "workset_ms": 167.0640699999808,
+              "cpu_s_startup": 0.13,
+              "walk_ms": 874.3347770000014,
+              "rand4k_ms": 0.7341855850000911,
+              "seq_mb_s": 168.511889128416,
+              "uncompressed_bytes": 658645291,
+              "cpu_s_total": 3.34,
+              "fuse_rss_mb": 33.15625
+            },
+            {
+              "mount_ms": 31.602413000030083,
+              "workset_ms": 164.9457249999955,
+              "cpu_s_startup": 0.13,
+              "walk_ms": 893.9716230000272,
+              "rand4k_ms": 0.7986313699998959,
+              "seq_mb_s": 162.7930622174954,
+              "uncompressed_bytes": 658645291,
+              "cpu_s_total": 3.46,
+              "fuse_rss_mb": 30.94921875
+            },
+            {
+              "mount_ms": 32.28422000000819,
+              "workset_ms": 165.07397700002002,
+              "cpu_s_startup": 0.13,
+              "walk_ms": 895.7771159999766,
+              "rand4k_ms": 0.7653272999999672,
+              "seq_mb_s": 161.33052870273477,
+              "uncompressed_bytes": 658645291,
+              "cpu_s_total": 3.47,
+              "fuse_rss_mb": 33.2109375
+            }
+          ],
+          "tmpfs": [
+            {
+              "mount_ms": 27.961910000044554,
+              "workset_ms": 145.014486999969,
+              "cpu_s_startup": 0.13,
+              "walk_ms": 978.4103499999901,
+              "rand4k_ms": 0.536477009999885,
+              "seq_mb_s": 168.03987325532873,
+              "uncompressed_bytes": 658645291,
+              "cpu_s_total": 3.42,
+              "fuse_rss_mb": 32.5546875
+            },
+            {
+              "mount_ms": 27.994114000023274,
+              "workset_ms": 144.76046900000483,
+              "cpu_s_startup": 0.12,
+              "walk_ms": 1016.4729560000296,
+              "rand4k_ms": 0.5401892899999439,
+              "seq_mb_s": 176.74734197685532,
+              "uncompressed_bytes": 658645291,
+              "cpu_s_total": 3.36,
+              "fuse_rss_mb": 32.546875
+            },
+            {
+              "mount_ms": 28.87760400000161,
+              "workset_ms": 140.08763499998622,
+              "cpu_s_startup": 0.12,
+              "walk_ms": 890.0676019999878,
+              "rand4k_ms": 0.5409226200001171,
+              "seq_mb_s": 168.70947143404157,
+              "uncompressed_bytes": 658645291,
+              "cpu_s_total": 3.39,
+              "fuse_rss_mb": 32.546875
+            },
+            {
+              "mount_ms": 28.31224800002019,
+              "workset_ms": 147.03774599996677,
+              "cpu_s_startup": 0.13,
+              "walk_ms": 898.4973799999807,
+              "rand4k_ms": 0.48212382999992087,
+              "seq_mb_s": 168.7669657107066,
+              "uncompressed_bytes": 658645291,
+              "cpu_s_total": 3.39,
+              "fuse_rss_mb": 32.44921875
+            },
+            {
+              "mount_ms": 26.767645999996148,
+              "workset_ms": 139.9243099999694,
+              "cpu_s_startup": 0.12,
+              "walk_ms": 868.3257779999849,
+              "rand4k_ms": 0.4823758549997592,
+              "seq_mb_s": 170.6155370427352,
+              "uncompressed_bytes": 658645291,
+              "cpu_s_total": 3.33,
+              "fuse_rss_mb": 32.5546875
+            }
+          ]
+        },
+        "launch": {
+          "warm": [
+            {
+              "launch_ms": null,
+              "ok": false,
+              "output": "/tmp/.mount_squashKBJJkE/AppRun.wrapped: error while loading shared libraries: libOpenGL.so.0: cannot open shared object file: No such file or directory\n"
+            },
+            {
+              "launch_ms": null,
+              "ok": false,
+              "output": "/tmp/.mount_squashfaMkjP/AppRun.wrapped: error while loading shared libraries: libOpenGL.so.0: cannot open shared object file: No such file or directory\n"
+            },
+            {
+              "launch_ms": null,
+              "ok": false,
+              "output": "/tmp/.mount_squashBgnoJj/AppRun.wrapped: error while loading shared libraries: libOpenGL.so.0: cannot open shared object file: No such file or directory\n"
+            }
+          ],
+          "cold": [
+            {
+              "launch_ms": null,
+              "ok": false,
+              "output": "/tmp/.mount_squashmPMglG/AppRun.wrapped: error while loading shared libraries: libOpenGL.so.0: cannot open shared object file: No such file or directory\n"
+            },
+            {
+              "launch_ms": null,
+              "ok": false,
+              "output": "/tmp/.mount_squashLPNnPf/AppRun.wrapped: error while loading shared libraries: libOpenGL.so.0: cannot open shared object file: No such file or directory\n"
+            },
+            {
+              "launch_ms": null,
+              "ok": false,
+              "output": "/tmp/.mount_squashbaJkHG/AppRun.wrapped: error while loading shared libraries: libOpenGL.so.0: cannot open shared object file: No such file or directory\n"
+            }
+          ],
+          "tmpfs": [
+            {
+              "launch_ms": null,
+              "ok": false,
+              "output": "/tmp/.mount_bench-deIOnB/AppRun.wrapped: error while loading shared libraries: libOpenGL.so.0: cannot open shared object file: No such file or directory\n"
+            },
+            {
+              "launch_ms": null,
+              "ok": false,
+              "output": "/tmp/.mount_bench-ppKlEH/AppRun.wrapped: error while loading shared libraries: libOpenGL.so.0: cannot open shared object file: No such file or directory\n"
+            },
+            {
+              "launch_ms": null,
+              "ok": false,
+              "output": "/tmp/.mount_bench-OPbfmM/AppRun.wrapped: error while loading shared libraries: libOpenGL.so.0: cannot open shared object file: No such file or directory\n"
+            }
+          ]
+        }
+      },
+      "zsync": [
+        {
+          "zsync_block": 1024,
+          "zsync_file": 1493497,
+          "control_served": 1493497,
+          "downloaded": 172588743,
+          "requests": 14,
+          "ok": true,
+          "update_cost": 174082240,
+          "update_ratio": 0.7969257519763853,
+          "pair": "patch"
+        },
+        {
+          "zsync_block": 2048,
+          "zsync_file": 746870,
+          "control_served": 746870,
+          "downloaded": 172897897,
+          "requests": 13,
+          "ok": true,
+          "update_cost": 173644767,
+          "update_ratio": 0.7949230577354657,
+          "pair": "patch"
+        },
+        {
+          "zsync_block": 4096,
+          "zsync_file": 373553,
+          "control_served": 373553,
+          "downloaded": 173555025,
+          "requests": 11,
+          "ok": true,
+          "update_cost": 173928578,
+          "update_ratio": 0.7962223074153536,
+          "pair": "patch"
+        },
+        {
+          "zsync_block": 2048,
+          "zsync_file": 746870,
+          "control_served": 746870,
+          "downloaded": 299348,
+          "requests": 1,
+          "ok": true,
+          "update_cost": 1046218,
+          "update_ratio": 0.004789449322235455,
+          "pair": "rebuild"
+        }
+      ],
+      "summary": {
+        "build_wall_s": 22.99,
+        "build_cpu_s": 89.52000000000001,
+        "build_rss_mb": 734.15234375,
+        "mount_ms_warm": 9.112213000008751,
+        "workset_ms_warm": 146.24511100001314,
+        "rand4k_ms_warm": 0.5026453300000355,
+        "cpu_s_startup_warm": 0.13,
+        "seq_mb_s_warm": 173.28141038208392,
+        "fuse_rss_mb_warm": 33.26171875,
+        "cpu_s_total_warm": 3.29,
+        "walk_ms_warm": 927.2374789999844,
+        "mount_ms_cold": 32.28422000000819,
+        "workset_ms_cold": 167.0640699999808,
+        "rand4k_ms_cold": 0.7596019249999131,
+        "cpu_s_startup_cold": 0.13,
+        "seq_mb_s_cold": 166.02368432954182,
+        "fuse_rss_mb_cold": 33.15625,
+        "cpu_s_total_cold": 3.46,
+        "walk_ms_cold": 895.7771159999766,
+        "mount_ms_tmpfs": 27.994114000023274,
+        "workset_ms_tmpfs": 144.76046900000483,
+        "rand4k_ms_tmpfs": 0.536477009999885,
+        "cpu_s_startup_tmpfs": 0.12,
+        "seq_mb_s_tmpfs": 168.7669657107066,
+        "fuse_rss_mb_tmpfs": 32.546875,
+        "cpu_s_total_tmpfs": 3.39,
+        "walk_ms_tmpfs": 898.4973799999807,
+        "launch_ms_warm": null,
+        "launch_ms_cold": null,
+        "launch_ms_tmpfs": null
+      },
+      "canary": {
+        "build_wall_s": 22.99,
+        "build_cpu_s": 89.52000000000001,
+        "build_rss_mb": 734.15234375,
+        "mount_ms_warm": 9.112213000008751,
+        "workset_ms_warm": 146.24511100001314,
+        "rand4k_ms_warm": 0.5026453300000355,
+        "cpu_s_startup_warm": 0.13,
+        "seq_mb_s_warm": 173.28141038208392,
+        "fuse_rss_mb_warm": 33.26171875,
+        "cpu_s_total_warm": 3.29,
+        "walk_ms_warm": 927.2374789999844,
+        "mount_ms_cold": 32.28422000000819,
+        "workset_ms_cold": 167.0640699999808,
+        "rand4k_ms_cold": 0.7596019249999131,
+        "cpu_s_startup_cold": 0.13,
+        "seq_mb_s_cold": 166.02368432954182,
+        "fuse_rss_mb_cold": 33.15625,
+        "cpu_s_total_cold": 3.46,
+        "walk_ms_cold": 895.7771159999766,
+        "mount_ms_tmpfs": 27.994114000023274,
+        "workset_ms_tmpfs": 144.76046900000483,
+        "rand4k_ms_tmpfs": 0.536477009999885,
+        "cpu_s_startup_tmpfs": 0.12,
+        "seq_mb_s_tmpfs": 168.7669657107066,
+        "fuse_rss_mb_tmpfs": 32.546875,
+        "cpu_s_total_tmpfs": 3.39,
+        "walk_ms_tmpfs": 898.4973799999807,
+        "launch_ms_warm": null,
+        "launch_ms_cold": null,
+        "launch_ms_tmpfs": null
+      },
+      "noisy": []
+    },
+    {
+      "run_id": "37514697939",
+      "app": "kdenlive",
+      "arch": "x86_64",
+      "category": "large-qt",
+      "variant": "dwarfs-l7-S16",
+      "container": "dwarfs",
+      "codec": "preset",
+      "level": 7,
+      "block_bytes": 65536,
+      "family_key": "dw-preset",
+      "stage": "2",
+      "retry": false,
+      "runtime": "uruntime@179cfd3c37ed",
+      "size": {
+        "payload": 199379258,
+        "runtime": 3089544,
+        "total": 202468802,
+        "uncompressed": 658645291,
+        "ratio": 0.307401881963808
+      },
+      "build": {
+        "wall_s": 105.67,
+        "cpu_s": 415.46000000000004,
+        "rss_mb": 89.94921875,
+        "timeout": false,
+        "deterministic": null
+      },
+      "env": {
+        "cpu": "AMD EPYC 7763 64-Core Processor",
+        "cores": 4,
+        "ram_gb": 15.6,
+        "kernel": "6.17.0-1022-azure",
+        "image": "20261004.327.1",
+        "runner": "GitHub Actions 1000009248",
+        "tools": {
+          "mksquashfs": "mksquashfs version 4.6.1 (2023/03/25)",
+          "mkdwarfs": "___                  ___ ___",
+          "zsync": "zsync v0.6.2 (compiled Apr 18 2024 17:54:59)"
+        }
+      },
+      "startup": {
+        "mount": {
+          "warm": [
+            {
+              "mount_ms": 47.42131599999766,
+              "workset_ms": 113.95372600000542,
+              "cpu_s_startup": 0.15,
+              "walk_ms": 889.5510429999831,
+              "rand4k_ms": 0.3057828000000029,
+              "seq_mb_s": 248.359249691503,
+              "uncompressed_bytes": 658645291,
+              "cpu_s_total": 3.22,
+              "fuse_rss_mb": 769.9609375
+            },
+            {
+              "mount_ms": 47.33921299998656,
+              "workset_ms": 115.65269899998043,
+              "cpu_s_startup": 0.14,
+              "walk_ms": 894.2678519999845,
+              "rand4k_ms": 0.2984798949999856,
+              "seq_mb_s": 242.3760485568272,
+              "uncompressed_bytes": 658645291,
+              "cpu_s_total": 3.2,
+              "fuse_rss_mb": 779.45703125
+            },
+            {
+              "mount_ms": 50.35623899999564,
+              "workset_ms": 111.21702700000924,
+              "cpu_s_startup": 0.16,
+              "walk_ms": 896.7637880000154,
+              "rand4k_ms": 0.2982697049999672,
+              "seq_mb_s": 249.66377203140917,
+              "uncompressed_bytes": 658645291,
+              "cpu_s_total": 3.22,
+              "fuse_rss_mb": 775.625
+            },
+            {
+              "mount_ms": 48.6436230000038,
+              "workset_ms": 112.23122400002694,
+              "cpu_s_startup": 0.15,
+              "walk_ms": 890.2224779999983,
+              "rand4k_ms": 0.2906522849998794,
+              "seq_mb_s": 250.1993881278031,
+              "uncompressed_bytes": 658645291,
+              "cpu_s_total": 3.23,
+              "fuse_rss_mb": 775.1875
+            },
+            {
+              "mount_ms": 50.57122200000208,
+              "workset_ms": 116.36948500000699,
+              "cpu_s_startup": 0.13999999999999999,
+              "walk_ms": 891.8170670000052,
+              "rand4k_ms": 0.3001149150000515,
+              "seq_mb_s": 248.03046307524326,
+              "uncompressed_bytes": 658645291,
+              "cpu_s_total": 3.2,
+              "fuse_rss_mb": 774.8984375
+            },
+            {
+              "mount_ms": 52.39079699998683,
+              "workset_ms": 112.23026499999378,
+              "cpu_s_startup": 0.15,
+              "walk_ms": 912.3316820000014,
+              "rand4k_ms": 0.29798142499998903,
+              "seq_mb_s": 249.13251437565424,
+              "uncompressed_bytes": 658645291,
+              "cpu_s_total": 3.2299999999999995,
+              "fuse_rss_mb": 774.45703125
+            },
+            {
+              "mount_ms": 46.81393800001388,
+              "workset_ms": 123.55745899998283,
+              "cpu_s_startup": 0.14,
+              "walk_ms": 1023.6685529999932,
+              "rand4k_ms": 0.3232620699998279,
+              "seq_mb_s": 222.07712835321985,
+              "uncompressed_bytes": 658645291,
+              "cpu_s_total": 3.2,
+              "fuse_rss_mb": 777.44921875
+            }
+          ],
+          "cold": [
+            {
+              "mount_ms": 55.771992000018145,
+              "workset_ms": 117.93984700000237,
+              "cpu_s_startup": 0.15,
+              "walk_ms": 888.8670879999836,
+              "rand4k_ms": 0.52556694499998,
+              "seq_mb_s": 218.375329398618,
+              "uncompressed_bytes": 658645291,
+              "cpu_s_total": 3.34,
+              "fuse_rss_mb": 780.58203125
+            },
+            {
+              "mount_ms": 61.891410999976415,
+              "workset_ms": 118.32924300000514,
+              "cpu_s_startup": 0.15,
+              "walk_ms": 892.8894040000159,
+              "rand4k_ms": 0.5091824950000046,
+              "seq_mb_s": 216.54254780736744,
+              "uncompressed_bytes": 658645291,
+              "cpu_s_total": 3.3499999999999996,
+              "fuse_rss_mb": 786.9765625
+            },
+            {
+              "mount_ms": 55.243722999989586,
+              "workset_ms": 116.32707500001516,
+              "cpu_s_startup": 0.16,
+              "walk_ms": 874.5010679999723,
+              "rand4k_ms": 0.5184276500000351,
+              "seq_mb_s": 217.6097596394624,
+              "uncompressed_bytes": 658645291,
+              "cpu_s_total": 3.3,
+              "fuse_rss_mb": 788.59765625
+            },
+            {
+              "mount_ms": 53.09596199998623,
+              "workset_ms": 115.8128339999962,
+              "cpu_s_startup": 0.15,
+              "walk_ms": 911.2302940000063,
+              "rand4k_ms": 0.5142839949999711,
+              "seq_mb_s": 219.34185514262478,
+              "uncompressed_bytes": 658645291,
+              "cpu_s_total": 3.3299999999999996,
+              "fuse_rss_mb": 776.5625
+            },
+            {
+              "mount_ms": 56.663668999988204,
+              "workset_ms": 120.89447700003575,
+              "cpu_s_startup": 0.14,
+              "walk_ms": 905.3074909999737,
+              "rand4k_ms": 0.5110614299999838,
+              "seq_mb_s": 218.9250982814206,
+              "uncompressed_bytes": 658645291,
+              "cpu_s_total": 3.34,
+              "fuse_rss_mb": 779.1484375
+            }
+          ],
+          "tmpfs": [
+            {
+              "mount_ms": 54.0063669999995,
+              "workset_ms": 139.5722340000134,
+              "cpu_s_startup": 0.15,
+              "walk_ms": 910.1736160000087,
+              "rand4k_ms": 0.34117817500003866,
+              "seq_mb_s": 211.74161714388254,
+              "uncompressed_bytes": 658645291,
+              "cpu_s_total": 3.3299999999999996,
+              "fuse_rss_mb": 694.66796875
+            },
+            {
+              "mount_ms": 54.65393800000129,
+              "workset_ms": 93.76919699997188,
+              "cpu_s_startup": 0.15,
+              "walk_ms": 907.2160790000225,
+              "rand4k_ms": 0.32517971999993733,
+              "seq_mb_s": 235.6357194258219,
+              "uncompressed_bytes": 658645291,
+              "cpu_s_total": 3.38,
+              "fuse_rss_mb": 688.69140625
+            },
+            {
+              "mount_ms": 52.75906200000691,
+              "workset_ms": 94.20349800001304,
+              "cpu_s_startup": 0.15,
+              "walk_ms": 873.3322820000353,
+              "rand4k_ms": 0.3381173550002359,
+              "seq_mb_s": 239.38845911884067,
+              "uncompressed_bytes": 658645291,
+              "cpu_s_total": 3.33,
+              "fuse_rss_mb": 692.10546875
+            },
+            {
+              "mount_ms": 52.50232899999219,
+              "workset_ms": 93.20480499997075,
+              "cpu_s_startup": 0.15,
+              "walk_ms": 875.7850549999944,
+              "rand4k_ms": 0.31921036999989383,
+              "seq_mb_s": 238.7111173817336,
+              "uncompressed_bytes": 658645291,
+              "cpu_s_total": 3.34,
+              "fuse_rss_mb": 691.82421875
+            },
+            {
+              "mount_ms": 52.8824029999555,
+              "workset_ms": 92.06507099997907,
+              "cpu_s_startup": 0.15,
+              "walk_ms": 893.3153960000482,
+              "rand4k_ms": 0.32261028500016664,
+              "seq_mb_s": 238.69900550629907,
+              "uncompressed_bytes": 658645291,
+              "cpu_s_total": 3.36,
+              "fuse_rss_mb": 689.19921875
+            }
+          ]
+        },
+        "launch": {
+          "warm": [
+            {
+              "launch_ms": null,
+              "ok": false,
+              "output": "/tmp/.mount_dwarfremp2503609542144324393/AppRun.wrapped: error while loading shared libraries: libOpenGL.so.0: cannot open shared object file: No such file or directory\n"
+            },
+            {
+              "launch_ms": null,
+              "ok": false,
+              "output": "/tmp/.mount_dwarfremp2503609542144324393/AppRun.wrapped: error while loading shared libraries: libOpenGL.so.0: cannot open shared object file: No such file or directory\n"
+            },
+            {
+              "launch_ms": null,
+              "ok": false,
+              "output": "/tmp/.mount_dwarfremp2503609542144324393/AppRun.wrapped: error while loading shared libraries: libOpenGL.so.0: cannot open shared object file: No such file or directory\n"
+            }
+          ],
+          "cold": [
+            {
+              "launch_ms": null,
+              "ok": false,
+              "output": "/tmp/.mount_dwarfremp2503609542144324393/AppRun.wrapped: error while loading shared libraries: libOpenGL.so.0: cannot open shared object file: No such file or directory\n"
+            },
+            {
+              "launch_ms": null,
+              "ok": false,
+              "output": "/tmp/.mount_dwarfremp2503609542144324393/AppRun.wrapped: error while loading shared libraries: libOpenGL.so.0: cannot open shared object file: No such file or directory\n"
+            },
+            {
+              "launch_ms": null,
+              "ok": false,
+              "output": "/tmp/.mount_dwarfremp2503609542144324393/AppRun.wrapped: error while loading shared libraries: libOpenGL.so.0: cannot open shared object file: No such file or directory\n"
+            }
+          ],
+          "tmpfs": [
+            {
+              "launch_ms": null,
+              "ok": false,
+              "output": "/tmp/.mount_benchremp2503609542144324393/AppRun.wrapped: error while loading shared libraries: libOpenGL.so.0: cannot open shared object file: No such file or directory\n"
+            },
+            {
+              "launch_ms": null,
+              "ok": false,
+              "output": "/tmp/.mount_benchremp2503609542144324393/AppRun.wrapped: error while loading shared libraries: libOpenGL.so.0: cannot open shared object file: No such file or directory\n"
+            },
+            {
+              "launch_ms": null,
+              "ok": false,
+              "output": "/tmp/.mount_benchremp2503609542144324393/AppRun.wrapped: error while loading shared libraries: libOpenGL.so.0: cannot open shared object file: No such file or directory\n"
+            }
+          ]
+        }
+      },
+      "zsync": [
+        {
+          "zsync_block": 1024,
+          "zsync_file": 1384297,
+          "control_served": 1384297,
+          "downloaded": 197193412,
+          "requests": 17,
+          "ok": true,
+          "update_cost": 198577709,
+          "update_ratio": 0.9807817650839856,
+          "pair": "patch"
+        },
+        {
+          "zsync_block": 2048,
+          "zsync_file": 692263,
+          "control_served": 692263,
+          "downloaded": 197809342,
+          "requests": 6,
+          "ok": true,
+          "update_cost": 198501605,
+          "update_ratio": 0.9804058849520925,
+          "pair": "patch"
+        },
+        {
+          "zsync_block": 4096,
+          "zsync_file": 346246,
+          "control_served": 346246,
+          "downloaded": 198170166,
+          "requests": 3,
+          "ok": true,
+          "update_cost": 198516412,
+          "update_ratio": 0.980479017206809,
+          "pair": "patch"
+        },
+        {
+          "zsync_block": 2048,
+          "zsync_file": 692263,
+          "control_served": 692263,
+          "downloaded": 180208,
+          "requests": 1,
+          "ok": true,
+          "update_cost": 872471,
+          "update_ratio": 0.004309162653118282,
+          "pair": "rebuild"
+        }
+      ],
+      "summary": {
+        "build_wall_s": 105.67,
+        "build_cpu_s": 415.46000000000004,
+        "build_rss_mb": 89.94921875,
+        "mount_ms_warm": 48.6436230000038,
+        "workset_ms_warm": 113.95372600000542,
+        "rand4k_ms_warm": 0.2984798949999856,
+        "cpu_s_startup_warm": 0.15,
+        "seq_mb_s_warm": 248.359249691503,
+        "fuse_rss_mb_warm": 775.1875,
+        "cpu_s_total_warm": 3.22,
+        "walk_ms_warm": 894.2678519999845,
+        "mount_ms_cold": 55.771992000018145,
+        "workset_ms_cold": 117.93984700000237,
+        "rand4k_ms_cold": 0.5142839949999711,
+        "cpu_s_startup_cold": 0.15,
+        "seq_mb_s_cold": 218.375329398618,
+        "fuse_rss_mb_cold": 780.58203125,
+        "cpu_s_total_cold": 3.34,
+        "walk_ms_cold": 892.8894040000159,
+        "mount_ms_tmpfs": 52.8824029999555,
+        "workset_ms_tmpfs": 93.76919699997188,
+        "rand4k_ms_tmpfs": 0.32517971999993733,
+        "cpu_s_startup_tmpfs": 0.15,
+        "seq_mb_s_tmpfs": 238.69900550629907,
+        "fuse_rss_mb_tmpfs": 691.82421875,
+        "cpu_s_total_tmpfs": 3.34,
+        "walk_ms_tmpfs": 893.3153960000482,
+        "launch_ms_warm": null,
+        "launch_ms_cold": null,
+        "launch_ms_tmpfs": null
+      },
+      "canary": {
+        "build_wall_s": 22.99,
+        "build_cpu_s": 89.52000000000001,
+        "build_rss_mb": 734.15234375,
+        "mount_ms_warm": 9.112213000008751,
+        "workset_ms_warm": 146.24511100001314,
+        "rand4k_ms_warm": 0.5026453300000355,
+        "cpu_s_startup_warm": 0.13,
+        "seq_mb_s_warm": 173.28141038208392,
+        "fuse_rss_mb_warm": 33.26171875,
+        "cpu_s_total_warm": 3.29,
+        "walk_ms_warm": 927.2374789999844,
+        "mount_ms_cold": 32.28422000000819,
+        "workset_ms_cold": 167.0640699999808,
+        "rand4k_ms_cold": 0.7596019249999131,
+        "cpu_s_startup_cold": 0.13,
+        "seq_mb_s_cold": 166.02368432954182,
+        "fuse_rss_mb_cold": 33.15625,
+        "cpu_s_total_cold": 3.46,
+        "walk_ms_cold": 895.7771159999766,
+        "mount_ms_tmpfs": 27.994114000023274,
+        "workset_ms_tmpfs": 144.76046900000483,
+        "rand4k_ms_tmpfs": 0.536477009999885,
+        "cpu_s_startup_tmpfs": 0.12,
+        "seq_mb_s_tmpfs": 168.7669657107066,
+        "fuse_rss_mb_tmpfs": 32.546875,
+        "cpu_s_total_tmpfs": 3.39,
+        "walk_ms_tmpfs": 898.4973799999807,
+        "launch_ms_warm": null,
+        "launch_ms_cold": null,
+        "launch_ms_tmpfs": null
+      },
+      "noisy": []
+    }
+  ],
+  "reference": [
+    {
+      "pair": "patch",
+      "xdelta3_bytes": 96773388
+    }
+  ],
+  "app": "kdenlive",
+  "arch": "x86_64"
+}
