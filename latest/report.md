@@ -1,0 +1,364 @@
+# AppImage compression benchmark results
+
+180 (app, arch, variant) records from 4 app/arch pairs. Lower is better; baseline = `squashfs-gzip9-b128K` = 1.00. Measured on GitHub-hosted runners (AMD EPYC 7763 64-Core Processor, AMD EPYC 9V45 96-Core Processor, AMD EPYC 9V74 80-Core Processor, INTEL(R) XEON(R) PLATINUM 8573C, Intel(R) Xeon(R) 6973P-C); real hardware (HDD, slow ARM) shifts startup conclusions toward higher ratio at lower CPU cost.
+
+## Metric weights (variants/weights.yml)
+
+| metric | weight |
+|---|---|
+| Download size (total AppImage bytes) | 35% |
+| App launch time, cold cache (real launch) | 16% |
+| Startup decompression CPU (mount + working set) | 8% |
+| Mount time, warm | 4% |
+| zsync update cost (best of tested -b; .zsync file + downloaded bytes) | 24% |
+| RAM of the FUSE/runtime process | 10% |
+| AppImage generation (build) time | 3% |
+
+Weighted score = weighted geometric mean of metric/baseline (lower is better); metrics without data (e.g. startup/zsync in stage 1) are left out and the rest renormalised (see *weight coverage*).
+
+## Table 1 - Headline (geometric mean over corpus, relative to baseline)
+
+| variant | weighted score | total size | mount (warm) | startup CPU | launch (cold) | update cost | build time | RAM (FUSE) | apps | weight coverage |
+|---|---|---|---|---|---|---|---|---|---|---|
+| squashfs-zstd7-b256K | 0.838 | 0.95 |  |  |  |  | 0.19 |  | 4 | 38% |
+| squashfs-zstd7-b128K | 0.860 | 0.98 |  |  |  |  | 0.19 |  | 4 | 38% |
+| dwarfs-zstd7-S20 | 0.882 | 0.97 |  |  |  |  | 0.31 |  | 4 | 38% |
+| dwarfs-brotli6-S20 | 0.896 | 0.93 |  |  |  |  | 0.57 |  | 4 | 38% |
+| dwarfs-zstd12-S20 | 0.898 | 0.96 |  |  |  |  | 0.43 |  | 4 | 38% |
+| squashfs-zstd7-b32K | 0.902 | 1.03 |  |  |  |  | 0.20 |  | 4 | 38% |
+| dwarfs-lzma3-S20 | 0.906 | 0.88 |  |  |  |  | 1.20 |  | 4 | 38% |
+| squashfs-xz-bcjnone-b256K | 0.907 | 0.83 |  |  |  |  | 2.54 |  | 4 | 38% |
+| dwarfs-brotli8-S20 | 0.912 | 0.93 |  |  |  |  | 0.76 |  | 4 | 38% |
+| squashfs-gzip5-b256K | 0.912 | 1.01 |  |  |  |  | 0.29 |  | 4 | 38% |
+| squashfs-gzip5-b128K | 0.916 | 1.01 |  |  |  |  | 0.29 |  | 4 | 38% |
+| dwarfs-brotli3-S20 | 0.925 | 1.02 |  |  |  |  | 0.29 |  | 4 | 38% |
+| squashfs-zstd12-b256K | 0.925 | 0.94 |  |  |  |  | 0.76 |  | 4 | 38% |
+| squashfs-gzip3-b256K | 0.927 | 1.05 |  |  |  |  | 0.21 |  | 4 | 38% |
+| dwarfs-lzma5-S20 | 0.929 | 0.84 |  |  |  |  | 2.99 |  | 4 | 38% |
+| squashfs-xz-bcjnone-b128K | 0.929 | 0.86 |  |  |  |  | 2.37 |  | 4 | 38% |
+| dwarfs-lzma7-S20 | 0.930 | 0.84 |  |  |  |  | 3.19 |  | 4 | 38% |
+| squashfs-gzip3-b128K | 0.931 | 1.06 |  |  |  |  | 0.21 |  | 4 | 38% |
+| dwarfs-l7-S24 | 0.934 | 0.82 |  |  |  |  | 4.52 |  | 4 | 38% |
+| squashfs-xz-bcjauto-b256K | 0.935 | 0.81 |  |  |  |  | 4.95 |  | 4 | 38% |
+| squashfs-zstd12-b128K | 0.935 | 0.97 |  |  |  |  | 0.63 |  | 4 | 38% |
+| squashfs-gzip5-b32K | 0.938 | 1.04 |  |  |  |  | 0.27 |  | 4 | 38% |
+| squashfs-gzip7-b256K | 0.944 | 1.00 |  |  |  |  | 0.50 |  | 4 | 38% |
+| dwarfs-l5-S24 | 0.946 | 0.83 |  |  |  |  | 4.44 |  | 4 | 38% |
+| squashfs-gzip3-b32K | 0.947 | 1.09 |  |  |  |  | 0.19 |  | 4 | 38% |
+| squashfs-gzip7-b128K | 0.947 | 1.00 |  |  |  |  | 0.49 |  | 4 | 38% |
+| squashfs-zstd17-b256K | 0.950 | 0.89 |  |  |  |  | 2.16 |  | 4 | 38% |
+| dwarfs-zstd17-S20 | 0.955 | 0.91 |  |  |  |  | 1.59 |  | 4 | 38% |
+| squashfs-xz-bcjauto-b128K | 0.961 | 0.84 |  |  |  |  | 4.77 |  | 4 | 38% |
+| squashfs-gzip7-b32K | 0.961 | 1.04 |  |  |  |  | 0.40 |  | 4 | 38% |
+| squashfs-zstd12-b32K | 0.966 | 1.02 |  |  |  |  | 0.50 |  | 4 | 38% |
+| squashfs-zstd17-b128K | 0.970 | 0.91 |  |  |  |  | 2.00 |  | 4 | 38% |
+| dwarfs-l5-S20 | 0.971 | 0.89 |  |  |  |  | 2.87 |  | 4 | 38% |
+| dwarfs-l7-S20 | 0.978 | 0.88 |  |  |  |  | 3.46 |  | 4 | 38% |
+| squashfs-xz-bcjnone-b32K | 0.995 | 0.93 |  |  |  |  | 2.22 |  | 4 | 38% |
+| **squashfs-gzip9-b128K** | 1.000 | 1.00 |  |  |  |  | 1.00 |  | 4 | 38% |
+| squashfs-zstd17-b32K | 1.024 | 0.98 |  |  |  |  | 1.78 |  | 4 | 38% |
+| squashfs-xz-bcjauto-b32K | 1.031 | 0.91 |  |  |  |  | 4.37 |  | 4 | 38% |
+| dwarfs-l5-S16 | 1.093 | 0.99 |  |  |  |  | 3.46 |  | 4 | 38% |
+| dwarfs-l3-S24 | 1.097 | 1.16 |  |  |  |  | 0.55 |  | 4 | 38% |
+| dwarfs-l3-S20 | 1.099 | 1.18 |  |  |  |  | 0.48 |  | 4 | 38% |
+| dwarfs-l7-S16 | 1.112 | 0.99 |  |  |  |  | 4.55 |  | 4 | 38% |
+| squashfs-lzo-b128K | 1.117 | 1.09 |  |  |  |  | 1.44 |  | 4 | 38% |
+| dwarfs-l3-S16 | 1.159 | 1.26 |  |  |  |  | 0.44 |  | 4 | 38% |
+| squashfs-lz4hc-b128K | 1.176 | 1.17 |  |  |  |  | 1.29 |  | 4 | 38% |
+
+## Table 5 - Category: electron
+
+| variant | weighted score | total size | mount (warm) | startup CPU | launch (cold) | update cost | build time | RAM (FUSE) | apps | weight coverage |
+|---|---|---|---|---|---|---|---|---|---|---|
+| squashfs-zstd7-b256K | 0.843 | 0.94 |  |  |  |  | 0.23 |  | 1 | 38% |
+| dwarfs-zstd7-S20 | 0.857 | 0.92 |  |  |  |  | 0.37 |  | 1 | 38% |
+| dwarfs-zstd12-S20 | 0.867 | 0.91 |  |  |  |  | 0.48 |  | 1 | 38% |
+| squashfs-zstd7-b128K | 0.872 | 0.97 |  |  |  |  | 0.24 |  | 1 | 38% |
+| dwarfs-lzma3-S20 | 0.872 | 0.84 |  |  |  |  | 1.41 |  | 1 | 38% |
+| dwarfs-brotli6-S20 | 0.884 | 0.89 |  |  |  |  | 0.80 |  | 1 | 38% |
+| dwarfs-brotli8-S20 | 0.892 | 0.88 |  |  |  |  | 0.98 |  | 1 | 38% |
+| squashfs-xz-bcjnone-b256K | 0.900 | 0.81 |  |  |  |  | 2.90 |  | 1 | 38% |
+| dwarfs-lzma5-S20 | 0.901 | 0.79 |  |  |  |  | 4.30 |  | 1 | 38% |
+| dwarfs-lzma7-S20 | 0.902 | 0.79 |  |  |  |  | 4.50 |  | 1 | 38% |
+| dwarfs-brotli3-S20 | 0.907 | 0.99 |  |  |  |  | 0.34 |  | 1 | 38% |
+| dwarfs-l7-S24 | 0.908 | 0.78 |  |  |  |  | 5.27 |  | 1 | 38% |
+| dwarfs-l5-S24 | 0.920 | 0.79 |  |  |  |  | 5.62 |  | 1 | 38% |
+| squashfs-zstd7-b32K | 0.926 | 1.04 |  |  |  |  | 0.24 |  | 1 | 38% |
+| squashfs-xz-bcjauto-b256K | 0.928 | 0.79 |  |  |  |  | 5.75 |  | 1 | 38% |
+| squashfs-gzip5-b256K | 0.931 | 1.01 |  |  |  |  | 0.38 |  | 1 | 38% |
+| squashfs-xz-bcjnone-b128K | 0.931 | 0.85 |  |  |  |  | 2.81 |  | 1 | 38% |
+| squashfs-gzip5-b128K | 0.935 | 1.01 |  |  |  |  | 0.37 |  | 1 | 38% |
+| dwarfs-zstd17-S20 | 0.936 | 0.87 |  |  |  |  | 2.33 |  | 1 | 38% |
+| dwarfs-l5-S20 | 0.937 | 0.84 |  |  |  |  | 3.58 |  | 1 | 38% |
+| squashfs-zstd12-b256K | 0.941 | 0.93 |  |  |  |  | 1.14 |  | 1 | 38% |
+| squashfs-zstd17-b256K | 0.946 | 0.87 |  |  |  |  | 2.43 |  | 1 | 38% |
+| squashfs-gzip3-b256K | 0.946 | 1.05 |  |  |  |  | 0.27 |  | 1 | 38% |
+| squashfs-zstd12-b128K | 0.949 | 0.96 |  |  |  |  | 0.83 |  | 1 | 38% |
+| squashfs-gzip3-b128K | 0.951 | 1.06 |  |  |  |  | 0.27 |  | 1 | 38% |
+| dwarfs-l7-S20 | 0.951 | 0.84 |  |  |  |  | 4.35 |  | 1 | 38% |
+| squashfs-xz-bcjauto-b128K | 0.959 | 0.83 |  |  |  |  | 5.44 |  | 1 | 38% |
+| squashfs-gzip7-b256K | 0.959 | 0.99 |  |  |  |  | 0.63 |  | 1 | 38% |
+| squashfs-gzip7-b128K | 0.964 | 1.00 |  |  |  |  | 0.62 |  | 1 | 38% |
+| squashfs-gzip5-b32K | 0.965 | 1.05 |  |  |  |  | 0.35 |  | 1 | 38% |
+| squashfs-zstd17-b128K | 0.972 | 0.91 |  |  |  |  | 2.24 |  | 1 | 38% |
+| squashfs-gzip3-b32K | 0.974 | 1.09 |  |  |  |  | 0.25 |  | 1 | 38% |
+| squashfs-gzip7-b32K | 0.985 | 1.05 |  |  |  |  | 0.49 |  | 1 | 38% |
+| squashfs-zstd12-b32K | 0.992 | 1.03 |  |  |  |  | 0.62 |  | 1 | 38% |
+| **squashfs-gzip9-b128K** | 1.000 | 1.00 |  |  |  |  | 1.00 |  | 1 | 38% |
+| squashfs-xz-bcjnone-b32K | 1.012 | 0.93 |  |  |  |  | 2.63 |  | 1 | 38% |
+| squashfs-zstd17-b32K | 1.034 | 0.98 |  |  |  |  | 1.84 |  | 1 | 38% |
+| squashfs-xz-bcjauto-b32K | 1.043 | 0.91 |  |  |  |  | 4.89 |  | 1 | 38% |
+| dwarfs-l3-S24 | 1.063 | 1.11 |  |  |  |  | 0.62 |  | 1 | 38% |
+| dwarfs-l3-S20 | 1.065 | 1.12 |  |  |  |  | 0.57 |  | 1 | 38% |
+| dwarfs-l5-S16 | 1.066 | 0.96 |  |  |  |  | 3.75 |  | 1 | 38% |
+| dwarfs-l7-S16 | 1.101 | 0.96 |  |  |  |  | 5.66 |  | 1 | 38% |
+| squashfs-lzo-b128K | 1.128 | 1.08 |  |  |  |  | 1.80 |  | 1 | 38% |
+| dwarfs-l3-S16 | 1.133 | 1.22 |  |  |  |  | 0.49 |  | 1 | 38% |
+| squashfs-lz4hc-b128K | 1.144 | 1.15 |  |  |  |  | 1.06 |  | 1 | 38% |
+
+## Table 5 - Category: huge
+
+| variant | weighted score | total size | mount (warm) | startup CPU | launch (cold) | update cost | build time | RAM (FUSE) | apps | weight coverage |
+|---|---|---|---|---|---|---|---|---|---|---|
+| squashfs-zstd7-b256K | 0.842 | 0.96 |  |  |  |  | 0.17 |  | 1 | 38% |
+| dwarfs-zstd7-S20 | 0.857 | 0.94 |  |  |  |  | 0.29 |  | 1 | 38% |
+| squashfs-zstd7-b128K | 0.858 | 0.98 |  |  |  |  | 0.18 |  | 1 | 38% |
+| dwarfs-brotli6-S20 | 0.869 | 0.91 |  |  |  |  | 0.52 |  | 1 | 38% |
+| dwarfs-zstd12-S20 | 0.876 | 0.93 |  |  |  |  | 0.43 |  | 1 | 38% |
+| dwarfs-lzma3-S20 | 0.882 | 0.86 |  |  |  |  | 1.18 |  | 1 | 38% |
+| squashfs-zstd7-b32K | 0.887 | 1.02 |  |  |  |  | 0.18 |  | 1 | 38% |
+| dwarfs-brotli8-S20 | 0.888 | 0.90 |  |  |  |  | 0.72 |  | 1 | 38% |
+| dwarfs-brotli3-S20 | 0.892 | 0.99 |  |  |  |  | 0.27 |  | 1 | 38% |
+| dwarfs-l7-S24 | 0.894 | 0.78 |  |  |  |  | 4.60 |  | 1 | 38% |
+| dwarfs-lzma5-S20 | 0.898 | 0.82 |  |  |  |  | 2.57 |  | 1 | 38% |
+| dwarfs-l5-S24 | 0.900 | 0.80 |  |  |  |  | 3.63 |  | 1 | 38% |
+| dwarfs-lzma7-S20 | 0.908 | 0.82 |  |  |  |  | 3.04 |  | 1 | 38% |
+| squashfs-gzip5-b256K | 0.912 | 1.01 |  |  |  |  | 0.29 |  | 1 | 38% |
+| squashfs-gzip5-b128K | 0.915 | 1.01 |  |  |  |  | 0.29 |  | 1 | 38% |
+| squashfs-gzip3-b256K | 0.918 | 1.04 |  |  |  |  | 0.21 |  | 1 | 38% |
+| squashfs-zstd12-b256K | 0.922 | 0.95 |  |  |  |  | 0.63 |  | 1 | 38% |
+| squashfs-xz-bcjnone-b256K | 0.924 | 0.85 |  |  |  |  | 2.52 |  | 1 | 38% |
+| squashfs-gzip3-b128K | 0.925 | 1.05 |  |  |  |  | 0.22 |  | 1 | 38% |
+| dwarfs-zstd17-S20 | 0.926 | 0.89 |  |  |  |  | 1.40 |  | 1 | 38% |
+| squashfs-xz-bcjnone-b128K | 0.931 | 0.87 |  |  |  |  | 2.11 |  | 1 | 38% |
+| squashfs-gzip5-b32K | 0.932 | 1.03 |  |  |  |  | 0.28 |  | 1 | 38% |
+| squashfs-gzip3-b32K | 0.933 | 1.07 |  |  |  |  | 0.19 |  | 1 | 38% |
+| squashfs-zstd12-b128K | 0.933 | 0.97 |  |  |  |  | 0.57 |  | 1 | 38% |
+| dwarfs-l5-S20 | 0.942 | 0.87 |  |  |  |  | 2.54 |  | 1 | 38% |
+| squashfs-xz-bcjauto-b256K | 0.942 | 0.82 |  |  |  |  | 4.68 |  | 1 | 38% |
+| squashfs-gzip7-b256K | 0.945 | 1.00 |  |  |  |  | 0.50 |  | 1 | 38% |
+| squashfs-gzip7-b128K | 0.946 | 1.00 |  |  |  |  | 0.48 |  | 1 | 38% |
+| dwarfs-l7-S20 | 0.951 | 0.86 |  |  |  |  | 3.25 |  | 1 | 38% |
+| squashfs-zstd12-b32K | 0.951 | 1.01 |  |  |  |  | 0.46 |  | 1 | 38% |
+| squashfs-gzip7-b32K | 0.953 | 1.03 |  |  |  |  | 0.40 |  | 1 | 38% |
+| squashfs-xz-bcjauto-b128K | 0.964 | 0.84 |  |  |  |  | 4.69 |  | 1 | 38% |
+| squashfs-zstd17-b256K | 0.974 | 0.90 |  |  |  |  | 2.42 |  | 1 | 38% |
+| squashfs-xz-bcjnone-b32K | 0.983 | 0.92 |  |  |  |  | 2.03 |  | 1 | 38% |
+| squashfs-zstd17-b128K | 0.990 | 0.92 |  |  |  |  | 2.30 |  | 1 | 38% |
+| **squashfs-gzip9-b128K** | 1.000 | 1.00 |  |  |  |  | 1.00 |  | 1 | 38% |
+| squashfs-xz-bcjauto-b32K | 1.018 | 0.90 |  |  |  |  | 4.35 |  | 1 | 38% |
+| squashfs-zstd17-b32K | 1.024 | 0.97 |  |  |  |  | 1.93 |  | 1 | 38% |
+| dwarfs-l3-S24 | 1.045 | 1.11 |  |  |  |  | 0.49 |  | 1 | 38% |
+| dwarfs-l3-S20 | 1.055 | 1.13 |  |  |  |  | 0.46 |  | 1 | 38% |
+| dwarfs-l5-S16 | 1.059 | 0.95 |  |  |  |  | 3.65 |  | 1 | 38% |
+| dwarfs-l7-S16 | 1.085 | 0.95 |  |  |  |  | 5.32 |  | 1 | 38% |
+| dwarfs-l3-S16 | 1.102 | 1.20 |  |  |  |  | 0.42 |  | 1 | 38% |
+| squashfs-lzo-b128K | 1.106 | 1.08 |  |  |  |  | 1.40 |  | 1 | 38% |
+| squashfs-lz4hc-b128K | 1.152 | 1.15 |  |  |  |  | 1.14 |  | 1 | 38% |
+
+## Table 5 - Category: large-qt
+
+| variant | weighted score | total size | mount (warm) | startup CPU | launch (cold) | update cost | build time | RAM (FUSE) | apps | weight coverage |
+|---|---|---|---|---|---|---|---|---|---|---|
+| squashfs-zstd7-b256K | 0.819 | 0.95 |  |  |  |  | 0.14 |  | 1 | 38% |
+| dwarfs-brotli6-S20 | 0.829 | 0.88 |  |  |  |  | 0.41 |  | 1 | 38% |
+| dwarfs-zstd7-S20 | 0.830 | 0.92 |  |  |  |  | 0.24 |  | 1 | 38% |
+| squashfs-zstd7-b128K | 0.845 | 0.97 |  |  |  |  | 0.16 |  | 1 | 38% |
+| dwarfs-lzma3-S20 | 0.847 | 0.84 |  |  |  |  | 0.99 |  | 1 | 38% |
+| dwarfs-brotli8-S20 | 0.847 | 0.88 |  |  |  |  | 0.58 |  | 1 | 38% |
+| dwarfs-zstd12-S20 | 0.850 | 0.92 |  |  |  |  | 0.35 |  | 1 | 38% |
+| dwarfs-brotli3-S20 | 0.864 | 0.97 |  |  |  |  | 0.23 |  | 1 | 38% |
+| dwarfs-l7-S24 | 0.865 | 0.78 |  |  |  |  | 3.07 |  | 1 | 38% |
+| dwarfs-lzma5-S20 | 0.869 | 0.80 |  |  |  |  | 2.36 |  | 1 | 38% |
+| dwarfs-lzma7-S20 | 0.871 | 0.79 |  |  |  |  | 2.56 |  | 1 | 38% |
+| dwarfs-l5-S24 | 0.880 | 0.79 |  |  |  |  | 3.10 |  | 1 | 38% |
+| squashfs-zstd7-b32K | 0.885 | 1.02 |  |  |  |  | 0.17 |  | 1 | 38% |
+| squashfs-xz-bcjnone-b256K | 0.897 | 0.83 |  |  |  |  | 2.34 |  | 1 | 38% |
+| squashfs-gzip5-b256K | 0.898 | 1.01 |  |  |  |  | 0.24 |  | 1 | 38% |
+| dwarfs-zstd17-S20 | 0.898 | 0.88 |  |  |  |  | 1.20 |  | 1 | 38% |
+| squashfs-gzip5-b128K | 0.900 | 1.01 |  |  |  |  | 0.23 |  | 1 | 38% |
+| squashfs-gzip3-b256K | 0.908 | 1.05 |  |  |  |  | 0.17 |  | 1 | 38% |
+| squashfs-gzip3-b128K | 0.909 | 1.05 |  |  |  |  | 0.17 |  | 1 | 38% |
+| squashfs-zstd12-b256K | 0.911 | 0.94 |  |  |  |  | 0.61 |  | 1 | 38% |
+| squashfs-gzip5-b32K | 0.919 | 1.04 |  |  |  |  | 0.22 |  | 1 | 38% |
+| squashfs-xz-bcjnone-b128K | 0.920 | 0.85 |  |  |  |  | 2.27 |  | 1 | 38% |
+| dwarfs-l7-S20 | 0.920 | 0.84 |  |  |  |  | 2.82 |  | 1 | 38% |
+| squashfs-zstd12-b128K | 0.921 | 0.97 |  |  |  |  | 0.53 |  | 1 | 38% |
+| squashfs-gzip3-b32K | 0.924 | 1.08 |  |  |  |  | 0.16 |  | 1 | 38% |
+| dwarfs-l5-S20 | 0.926 | 0.85 |  |  |  |  | 2.67 |  | 1 | 38% |
+| squashfs-gzip7-b256K | 0.929 | 1.00 |  |  |  |  | 0.41 |  | 1 | 38% |
+| squashfs-xz-bcjauto-b256K | 0.931 | 0.81 |  |  |  |  | 4.63 |  | 1 | 38% |
+| squashfs-gzip7-b128K | 0.932 | 1.00 |  |  |  |  | 0.40 |  | 1 | 38% |
+| squashfs-zstd17-b256K | 0.934 | 0.88 |  |  |  |  | 1.77 |  | 1 | 38% |
+| squashfs-gzip7-b32K | 0.945 | 1.03 |  |  |  |  | 0.33 |  | 1 | 38% |
+| squashfs-zstd12-b32K | 0.948 | 1.02 |  |  |  |  | 0.43 |  | 1 | 38% |
+| squashfs-zstd17-b128K | 0.953 | 0.91 |  |  |  |  | 1.66 |  | 1 | 38% |
+| squashfs-xz-bcjauto-b128K | 0.955 | 0.84 |  |  |  |  | 4.46 |  | 1 | 38% |
+| squashfs-xz-bcjnone-b32K | 0.980 | 0.92 |  |  |  |  | 2.09 |  | 1 | 38% |
+| **squashfs-gzip9-b128K** | 1.000 | 1.00 |  |  |  |  | 1.00 |  | 1 | 38% |
+| squashfs-zstd17-b32K | 1.018 | 0.97 |  |  |  |  | 1.83 |  | 1 | 38% |
+| squashfs-xz-bcjauto-b32K | 1.019 | 0.90 |  |  |  |  | 4.13 |  | 1 | 38% |
+| dwarfs-l3-S24 | 1.029 | 1.11 |  |  |  |  | 0.42 |  | 1 | 38% |
+| dwarfs-l7-S16 | 1.030 | 0.94 |  |  |  |  | 3.16 |  | 1 | 38% |
+| dwarfs-l5-S16 | 1.044 | 0.94 |  |  |  |  | 3.50 |  | 1 | 38% |
+| dwarfs-l3-S20 | 1.050 | 1.13 |  |  |  |  | 0.43 |  | 1 | 38% |
+| squashfs-lzo-b128K | 1.101 | 1.09 |  |  |  |  | 1.26 |  | 1 | 38% |
+| dwarfs-l3-S16 | 1.103 | 1.21 |  |  |  |  | 0.38 |  | 1 | 38% |
+| squashfs-lz4hc-b128K | 1.189 | 1.16 |  |  |  |  | 1.53 |  | 1 | 38% |
+
+## Table 5 - Category: tiny-cli
+
+| variant | weighted score | total size | mount (warm) | startup CPU | launch (cold) | update cost | build time | RAM (FUSE) | apps | weight coverage |
+|---|---|---|---|---|---|---|---|---|---|---|
+| squashfs-zstd7-b256K | 0.850 | 0.96 |  |  |  |  | 0.22 |  | 1 | 38% |
+| squashfs-zstd7-b128K | 0.867 | 0.98 |  |  |  |  | 0.21 |  | 1 | 38% |
+| squashfs-xz-bcjnone-b256K | 0.907 | 0.83 |  |  |  |  | 2.44 |  | 1 | 38% |
+| squashfs-gzip5-b256K | 0.909 | 1.01 |  |  |  |  | 0.27 |  | 1 | 38% |
+| squashfs-zstd7-b32K | 0.911 | 1.03 |  |  |  |  | 0.21 |  | 1 | 38% |
+| squashfs-gzip5-b128K | 0.916 | 1.01 |  |  |  |  | 0.28 |  | 1 | 38% |
+| squashfs-zstd12-b256K | 0.927 | 0.94 |  |  |  |  | 0.78 |  | 1 | 38% |
+| squashfs-xz-bcjnone-b128K | 0.933 | 0.86 |  |  |  |  | 2.36 |  | 1 | 38% |
+| squashfs-gzip5-b32K | 0.936 | 1.05 |  |  |  |  | 0.25 |  | 1 | 38% |
+| squashfs-gzip3-b256K | 0.936 | 1.07 |  |  |  |  | 0.20 |  | 1 | 38% |
+| squashfs-zstd12-b128K | 0.939 | 0.97 |  |  |  |  | 0.65 |  | 1 | 38% |
+| squashfs-xz-bcjauto-b256K | 0.940 | 0.82 |  |  |  |  | 4.80 |  | 1 | 38% |
+| squashfs-gzip3-b128K | 0.940 | 1.07 |  |  |  |  | 0.20 |  | 1 | 38% |
+| squashfs-gzip7-b256K | 0.942 | 1.00 |  |  |  |  | 0.49 |  | 1 | 38% |
+| squashfs-zstd17-b256K | 0.946 | 0.88 |  |  |  |  | 2.07 |  | 1 | 38% |
+| squashfs-gzip7-b128K | 0.946 | 1.00 |  |  |  |  | 0.49 |  | 1 | 38% |
+| squashfs-gzip3-b32K | 0.958 | 1.10 |  |  |  |  | 0.19 |  | 1 | 38% |
+| squashfs-gzip7-b32K | 0.962 | 1.04 |  |  |  |  | 0.39 |  | 1 | 38% |
+| squashfs-zstd17-b128K | 0.965 | 0.91 |  |  |  |  | 1.86 |  | 1 | 38% |
+| squashfs-xz-bcjauto-b128K | 0.966 | 0.85 |  |  |  |  | 4.53 |  | 1 | 38% |
+| squashfs-zstd12-b32K | 0.972 | 1.03 |  |  |  |  | 0.51 |  | 1 | 38% |
+| dwarfs-zstd7-S20 | 0.993 | 1.09 |  |  |  |  | 0.34 |  | 1 | 38% |
+| **squashfs-gzip9-b128K** | 1.000 | 1.00 |  |  |  |  | 1.00 |  | 1 | 38% |
+| squashfs-xz-bcjnone-b32K | 1.007 | 0.94 |  |  |  |  | 2.18 |  | 1 | 38% |
+| dwarfs-zstd12-S20 | 1.009 | 1.08 |  |  |  |  | 0.46 |  | 1 | 38% |
+| dwarfs-brotli6-S20 | 1.011 | 1.06 |  |  |  |  | 0.59 |  | 1 | 38% |
+| squashfs-zstd17-b32K | 1.019 | 0.98 |  |  |  |  | 1.54 |  | 1 | 38% |
+| dwarfs-brotli8-S20 | 1.031 | 1.05 |  |  |  |  | 0.81 |  | 1 | 38% |
+| dwarfs-lzma3-S20 | 1.037 | 1.02 |  |  |  |  | 1.27 |  | 1 | 38% |
+| squashfs-xz-bcjauto-b32K | 1.044 | 0.93 |  |  |  |  | 4.13 |  | 1 | 38% |
+| dwarfs-brotli3-S20 | 1.048 | 1.16 |  |  |  |  | 0.33 |  | 1 | 38% |
+| dwarfs-lzma7-S20 | 1.051 | 0.96 |  |  |  |  | 2.95 |  | 1 | 38% |
+| dwarfs-lzma5-S20 | 1.058 | 0.97 |  |  |  |  | 3.05 |  | 1 | 38% |
+| dwarfs-zstd17-S20 | 1.069 | 1.03 |  |  |  |  | 1.62 |  | 1 | 38% |
+| dwarfs-l7-S24 | 1.086 | 0.94 |  |  |  |  | 5.60 |  | 1 | 38% |
+| dwarfs-l5-S20 | 1.089 | 1.00 |  |  |  |  | 2.79 |  | 1 | 38% |
+| dwarfs-l5-S24 | 1.099 | 0.95 |  |  |  |  | 6.15 |  | 1 | 38% |
+| dwarfs-l7-S20 | 1.100 | 0.99 |  |  |  |  | 3.58 |  | 1 | 38% |
+| squashfs-lzo-b128K | 1.132 | 1.11 |  |  |  |  | 1.35 |  | 1 | 38% |
+| dwarfs-l5-S16 | 1.212 | 1.12 |  |  |  |  | 3.00 |  | 1 | 38% |
+| squashfs-lz4hc-b128K | 1.222 | 1.20 |  |  |  |  | 1.48 |  | 1 | 38% |
+| dwarfs-l3-S20 | 1.237 | 1.34 |  |  |  |  | 0.49 |  | 1 | 38% |
+| dwarfs-l7-S16 | 1.242 | 1.11 |  |  |  |  | 4.49 |  | 1 | 38% |
+| dwarfs-l3-S24 | 1.267 | 1.33 |  |  |  |  | 0.71 |  | 1 | 38% |
+| dwarfs-l3-S16 | 1.310 | 1.43 |  |  |  |  | 0.46 |  | 1 | 38% |
+
+## Table 2 - Total size per app (MB)
+
+| app | uncompressed | squashfs-zstd7-b256K | squashfs-zstd7-b128K | dwarfs-zstd7-S20 | dwarfs-brotli6-S20 | dwarfs-zstd12-S20 | squashfs-zstd7-b32K | squashfs-gzip9-b128K | best |
+|---|---|---|---|---|---|---|---|---|---|
+| krita/x86_64 | 1003.6 | 350.6 | 358.9 | 340.6 | 324.3 | 338.1 | 376.1 | 368.4 | dwarfs-l7-S24 |
+| libreoffice/x86_64 | 732.8 | 289.3 | 294.4 | 281.6 | 272.3 | 279.3 | 305.3 | 300.0 | dwarfs-l7-S24 |
+| neovim/x86_64 | 38.0 | 12.3 | 12.6 | 14.0 | 13.6 | 13.9 | 13.3 | 12.9 | squashfs-xz-bcjauto-b256K |
+| obsidian/x86_64 | 291.3 | 107.4 | 111.0 | 104.9 | 101.6 | 103.8 | 118.5 | 113.9 | dwarfs-l7-S24 |
+
+## Table 3 - zsync update cost (median over patch pairs)
+
+_no zsync data (stage 1 only)_
+
+No-change rebuild: 0 variants tested; 0 downloaded >1% (non-determinism / unstable layout): none
+
+## Table 3b - Compression block x zsync block (update cost, % of image; best per row bold)
+
+## Table 4 - Block-size sweep (mid-level compressor)
+
+dwarfs zstd level 12 (median over apps)
+
+| block | size ratio | mount ms | workset ms | seq MB/s | update % |
+|---|---|---|---|---|---|
+| 1.0M | 0.361 |  |  |  |  |
+
+## Table 6 - Compatibility (recorded, not measured) and codec-only reference
+
+| family | min kernel | FUSE | static reader |
+|---|---|---|---|
+| dwarfs-brotli3 | n/a (FUSE3) | 3.x | True |
+| dwarfs-brotli6 | n/a (FUSE3) | 3.x | True |
+| dwarfs-brotli8 | n/a (FUSE3) | 3.x | True |
+| dwarfs-l3 | n/a (FUSE3) | 3.x | True |
+| dwarfs-l5 | n/a (FUSE3) | 3.x | True |
+| dwarfs-l7 | n/a (FUSE3) | 3.x | True |
+| dwarfs-lzma3 | n/a (FUSE3) | 3.x | True |
+| dwarfs-lzma5 | n/a (FUSE3) | 3.x | True |
+| dwarfs-lzma7 | n/a (FUSE3) | 3.x | True |
+| dwarfs-zstd12 | n/a (FUSE3) | 3.x | True |
+| dwarfs-zstd17 | n/a (FUSE3) | 3.x | True |
+| dwarfs-zstd7 | n/a (FUSE3) | 3.x | True |
+| squashfs-gzip3 | 2.6.29 | 2.9 | True |
+| squashfs-gzip5 | 2.6.29 | 2.9 | True |
+| squashfs-gzip7 | 2.6.29 | 2.9 | True |
+| squashfs-gzip9 | 2.6.29 | 2.9 | True |
+| squashfs-lz4hc | 3.19 | 2.9 | True |
+| squashfs-lzo | 2.6.36 | 2.9 | True |
+| squashfs-xz | 2.6.38 | 2.9 | True |
+| squashfs-zstd12 | 4.14 | 2.9 | True |
+| squashfs-zstd17 | 4.14 | 2.9 | True |
+| squashfs-zstd7 | 4.14 | 2.9 | True |
+
+| codec-only (tar stream) | geomean ratio | note |
+|---|---|---|
+| xz-l7 | 0.258 | no random access, no startup metric |
+| xz-l6 | 0.263 | no random access, no startup metric |
+| zstd19-long25 | 0.271 | no random access, no startup metric |
+| zstd19-long24 | 0.272 | no random access, no startup metric |
+| zstd19-rsyncable | 0.276 | no random access, no startup metric |
+| zstd19-long22 | 0.280 | no random access, no startup metric |
+| zstd-l17 | 0.286 | no random access, no startup metric |
+| xz-l3 | 0.287 | no random access, no startup metric |
+| bzip3 | 0.292 | no random access, no startup metric |
+| brotli-q8 | 0.293 | no random access, no startup metric |
+| brotli-q6 | 0.302 | no random access, no startup metric |
+| zstd-l12 | 0.307 | no random access, no startup metric |
+| zstd-l7 | 0.318 | no random access, no startup metric |
+| brotli-q3 | 0.345 | no random access, no startup metric |
+
+## Decision rule
+
+Best by weighted score: `squashfs-zstd7-b256K` (0.838, coverage 38%), `squashfs-zstd7-b128K` (0.860, coverage 38%), `dwarfs-zstd7-S20` (0.882, coverage 38%)
+
+1. keep variants within +5% of the best update cost and +10% of the best warm startup CPU (when those metrics exist);
+2. choose the smallest total size;
+3. reject non-deterministic builds, zsync verification failures, reference-only variants.
+
+_no candidate satisfies the rule yet (need stage 2 data)_
+
+- smallest: `squashfs-xz-bcjauto-b256K` (0.81), runner-up `dwarfs-l7-S24`
+- fastest build: `squashfs-gzip3-b32K` (0.19), runner-up `squashfs-zstd7-b128K`
+
+## Edge extension (levers whose best value is at the edge of the tested range)
+
+- `dwarfs-l7-S26`: dw-preset: best bits=24 is the high edge of the tested values -> try bits=26
+- `dwarfs-l8-S24`: dw-preset: best level=7 is the high edge of the tested values -> try level=8
+- `dwarfs-lzma2-S20`: dw-lzma: best level=3 is the low edge of the tested values -> try level=2
+- `dwarfs-zstd4-S20`: dw-zstd: best level=7 is the low edge of the tested values -> try level=4
+- `squashfs-gzip5-b512K`: sq-gzip: best block=256K is the high edge of the tested values -> try block=512K
+- `squashfs-xz-bcjnone-b512K`: sq-xz: best block=256K is the high edge of the tested values -> try block=512K
+- `squashfs-zstd4-b256K`: sq-zstd: best level=7 is the low edge of the tested values -> try level=4
+- `squashfs-zstd7-b512K`: sq-zstd: best block=256K is the high edge of the tested values -> try block=512K
+
+Shortlist for the next stage: `squashfs-zstd7-b256K`, `squashfs-zstd7-b128K`, `dwarfs-zstd7-S20`, `squashfs-xz-bcjauto-b256K`, `squashfs-gzip9-b128K`
+
+Noisy (CV>10%) variants queued for retry: 0
