@@ -1,0 +1,137 @@
+# Variant table. Every continuous lever (compression level, block size,
+# zsync block size, ...) is tested at exactly three points: low / mid / high.
+# NOT the extremes: low = halfway between mid and the lever minimum, high =
+# halfway between mid and the lever maximum (powers of two: halfway on the
+# log2 scale, rounded toward mid). Extremes only if results suggest it.
+#   gzip level 1..9 mid 5 | zstd level 1..22 mid 12 | dwarfs -l 0..9 mid 5
+#   squashfs block 4K..1M mid 128K | dwarfs -S 12..28 mid 20
+#   lzma 0..9 mid 5 | brotli 0..11 mid 6 | zsync -b 512..64K mid 4K
+# Categorical options (bcj, order, categorize, ...) are listed explicitly.
+# A parameter given as a list is expanded as a cartesian product; the id
+# template is formatted with the parameter values.
+#
+# levers:  params that are continuous (low/mid/high)
+# lever_ranges: hard range of each lever. After each stage the planner looks at the
+#   best value of every lever; if it sits on the low or high EDGE of the tested
+#   values, the next point beyond it is added (halfway to the range extreme, the
+#   extreme itself when adjacent) and measured in an `ext` stage. Interior winners
+#   stop the extension. Ids of such points resolve dynamically (common.get_variant).
+# stage3:  families only run in stage 3 (option axes)
+
+canary: squashfs-gzip9-b128K     # in EVERY job; also the "current default"
+default: squashfs-gzip9-b128K
+
+# zsync block sizes (low / mid / high); xz is not mountable by the current type2-runtime
+runtime_unsupported_codecs: [xz]
+# zsync block sizes
+zsync_blocks: [1024, 2048, 4096]   # stage 2 found the optimum at the old low edge (2048)
+
+families:
+  # The current default (gzip-9, 128K) is the baseline/canary even though it is
+  # outside the low/mid/high grid, so everything is comparable to it.
+  - name: sq-baseline
+    kind: squashfs
+    id: "squashfs-gzip9-b128K"
+    params: {codec: gzip, level: 9, block: 128K}
+    levers: []
+    compat: {kernel: "2.6.29", fuse: "2.9", static_reader: true}
+
+  # ---- SquashFS --------------------------------------------------------
+  - name: sq-gzip
+    kind: squashfs
+    id: "squashfs-gzip{level}-b{block}"
+    params: {codec: gzip, level: [3, 5, 7], block: [32K, 128K, 256K]}
+    levers: [level, block]
+    lever_ranges: {level: {min: 1, max: 9}, block: {min: 4K, max: 1M, scale: log2}}
+    compat: {kernel: "2.6.29", fuse: "2.9", static_reader: true}
+
+  - name: sq-xz
+    kind: squashfs
+    id: "squashfs-xz-bcj{bcj}-b{block}"
+    params: {codec: xz, bcj: [none, auto], block: [32K, 128K, 256K]}
+    levers: [block]
+    lever_ranges: {block: {min: 4K, max: 1M, scale: log2}}
+    compat: {kernel: "2.6.38", fuse: "2.9", static_reader: true}
+
+  - name: sq-zstd
+    kind: squashfs
+    id: "squashfs-zstd{level}-b{block}"
+    params: {codec: zstd, level: [7, 12, 17], block: [32K, 128K, 256K]}
+    levers: [level, block]
+    lever_ranges: {level: {min: 1, max: 22}, block: {min: 4K, max: 1M, scale: log2}}
+    compat: {kernel: "4.14", fuse: "2.9", static_reader: true}
+
+  - name: sq-lz4
+    kind: squashfs
+    id: "squashfs-lz4hc-b{block}"
+    params: {codec: lz4, level: 0, block: 128K}
+    levers: []
+    compat: {kernel: "3.19", fuse: "2.9", static_reader: true}
+
+  - name: sq-lzo
+    kind: squashfs
+    id: "squashfs-lzo-b{block}"
+    params: {codec: lzo, level: 0, block: 128K}
+    levers: []
+    reference_only: true
+    compat: {kernel: "2.6.36", fuse: "2.9", static_reader: true}
+
+  # ---- DwarFS ----------------------------------------------------------
+  # preset level x block bits, 3 x 3 (S: 16=64K, 20=1M, 24=16M)
+  - name: dw-preset
+    kind: dwarfs
+    id: "dwarfs-l{level}-S{bits}"
+    params: {codec: preset, level: [3, 5, 7], bits: [16, 20, 24]}
+    levers: [level, bits]
+    lever_ranges: {level: {min: 0, max: 9}, bits: {min: 12, max: 28}}
+    compat: {kernel: "n/a (FUSE3)", fuse: "3.x", static_reader: true}
+
+  # codec level sweeps at a fixed mid preset (-l 5 -S 20)
+  - name: dw-zstd
+    kind: dwarfs
+    id: "dwarfs-zstd{level}-S20"
+    params: {codec: zstd, preset: 5, bits: 20, level: [7, 12, 17]}
+    levers: [level]
+    lever_ranges: {level: {min: 1, max: 22}}
+    compat: {kernel: "n/a (FUSE3)", fuse: "3.x", static_reader: true}
+
+  - name: dw-lzma
+    kind: dwarfs
+    id: "dwarfs-lzma{level}-S20"
+    params: {codec: lzma, preset: 5, bits: 20, level: [3, 5, 7]}
+    levers: [level]
+    lever_ranges: {level: {min: 0, max: 9}}
+    compat: {kernel: "n/a (FUSE3)", fuse: "3.x", static_reader: true}
+
+  - name: dw-brotli
+    kind: dwarfs
+    id: "dwarfs-brotli{level}-S20"
+    params: {codec: brotli, preset: 5, bits: 20, level: [3, 6, 8]}
+    levers: [level]
+    lever_ranges: {level: {min: 0, max: 11}}
+    compat: {kernel: "n/a (FUSE3)", fuse: "3.x", static_reader: true}
+
+  # ordering (categorical) - the zsync-relevant axis
+  - name: dw-order
+    kind: dwarfs
+    id: "dwarfs-l5-S20-order{order}"
+    params: {codec: preset, level: 5, bits: 20, order: [none, path, similarity, nilsimsa]}
+    levers: []
+    stage3: true
+    compat: {kernel: "n/a (FUSE3)", fuse: "3.x", static_reader: true}
+
+  - name: dw-categorize
+    kind: dwarfs
+    id: "dwarfs-l5-S20-categorize"
+    params: {codec: preset, level: 5, bits: 20, categorize: true}
+    levers: []
+    stage3: true
+    compat: {kernel: "n/a (FUSE3)", fuse: "3.x", static_reader: true}
+
+# Option axes derived for the top-3 shortlisted squashfs variants in stage 3.
+# id = <base>+<suffix>
+squashfs_options:
+  nofrag:  {flags: ["-no-fragments"]}
+  notail:  {flags: ["-no-tailends"]}
+  nodup:   {flags: ["-no-duplicates"]}
+  sorttype: {sort: type}

@@ -1,0 +1,85 @@
+name: Aggregate
+# Reusable: tables -> job summary, plots, results branch (+ README on default branch).
+on:
+  workflow_dispatch:
+    inputs:
+      stage:
+        description: "Label for the commit message"
+        type: string
+        default: "2"
+      run_id:
+        description: "Aggregate the raw-* artifacts of this run id"
+        type: string
+        required: true
+  workflow_call:
+    inputs:
+      stage:
+        type: string
+        default: "1"
+      run_id:
+        description: "download artifacts of this run instead of the current one"
+        type: string
+        default: ""
+
+jobs:
+  aggregate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq python3-yaml python3-matplotlib
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: raw-*
+          merge-multiple: true
+          path: new-raw
+          run-id: ${{ inputs.run_id || github.run_id }}
+          github-token: ${{ github.token }}
+      - name: Load results branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git clone --depth 1 --branch results \
+            "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git" rb \
+            || { mkdir rb; git -C rb init -q -b results; \
+                 git -C rb remote add origin "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"; }
+          mkdir -p rb/raw
+      - name: Aggregate
+        run: |
+          mkdir -p report
+          python3 tools/aggregate.py --raw rb/raw new-raw --out report | tee report/stdout.txt >/dev/null
+          cat report/report.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: report-${{ github.run_id }}
+          path: report/
+      - name: Noisy list for retry
+        uses: actions/upload-artifact@v4
+        with:
+          name: noisy
+          path: report/noisy.json
+      - name: Publish to results branch
+        run: |
+          set -e
+          mkdir -p rb/raw/${{ github.run_id }} rb/latest
+          cp new-raw/*.json rb/raw/${{ github.run_id }}/ 2>/dev/null || true
+          cp report/* rb/latest/
+          cp report/shortlist.json rb/shortlist.json
+          cp report/extensions.json rb/extensions.json
+          cd rb
+          git config user.name "github-actions"; git config user.email "actions@github.com"
+          git add -A
+          git commit -qm "results: run ${{ github.run_id }} (stage ${{ inputs.stage }})" || exit 0
+          git push origin results
+      - name: Update README (default branch only)
+        if: github.ref_name == github.event.repository.default_branch
+        run: |
+          python3 - <<'PY'
+          import re
+          r = open("README.md").read()
+          rep = open("report/report.md").read()
+          new = f"<!-- RESULTS:START -->\n{rep}\n<!-- RESULTS:END -->"
+          r = re.sub(r"<!-- RESULTS:START -->.*<!-- RESULTS:END -->", lambda m: new, r, flags=re.S)
+          open("README.md", "w").write(r)
+          PY
+          git config user.name "github-actions"; git config user.email "actions@github.com"
+          git add README.md && git commit -qm "README: update results" && git push || true

@@ -1,0 +1,18 @@
+name: Pin corpus
+# Downloads every unpinned URL in corpus/corpus.yml and corpus/runtimes.yml,
+# writes the sha256 values back and commits them. Failing URLs are reported.
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  pin:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo mkdir -p /mnt/bench && sudo chown $USER /mnt/bench && sudo apt-get install -y -qq python3-yaml
+      - run: python3 tools/pin.py 2>&1 | tee pin.log
+      - run: |
+          cat pin.log >> "$GITHUB_STEP_SUMMARY"
+          git config user.name github-actions; git config user.email actions@github.com
+          git add corpus && git commit -m "corpus: pin sha256" && git push || echo "nothing to commit"

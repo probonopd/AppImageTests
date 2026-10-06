@@ -1,0 +1,32 @@
+name: Manual run
+# One app, one variant filter - for reproducing a single data point.
+on:
+  workflow_dispatch:
+    inputs:
+      app: {description: "App name from corpus.yml", required: true}
+      arch: {description: "x86_64 or aarch64", default: "x86_64"}
+      variants: {description: "Comma list of variant ids", required: true}
+      startup: {description: "Measure startup", type: boolean, default: true}
+      zsync: {description: "Measure zsync", type: boolean, default: true}
+jobs:
+  run:
+    runs-on: ${{ inputs.arch == 'aarch64' && 'ubuntu-24.04-arm' || 'ubuntu-24.04' }}
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash tools/install_tools.sh
+      - run: |
+          mkdir -p out
+          python3 tools/run_group.py --app "${{ inputs.app }}" --arch "${{ inputs.arch }}" \
+            --variants "${{ inputs.variants }}" --stage 2 \
+            ${{ !inputs.startup && '--no-startup' || '' }} ${{ !inputs.zsync && '--no-zsync' || '' }} \
+            --out out/manual.json
+        env:
+          ALLOW_UNPINNED: ${{ inputs.app == 'synthetic' && '1' || '0' }}
+      - if: always()
+        run: |
+          pip install -q pyyaml || true
+          python3 tools/aggregate.py --raw out --out report >/dev/null && cat report/report.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: manual, path: "out/"}

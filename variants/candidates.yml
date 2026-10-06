@@ -1,0 +1,21 @@
+# Experimental / "successor" slot. Not yet wired into the harness: codec-only
+# rows are run by tools/codec_reference.py (see codecs: below); the
+# blockstore / EROFS / OpenZL entries are placeholders (status: todo) so a new
+# codec costs one YAML entry plus a small adapter.
+#
+# Continuous levers again use low/mid/high (halfway to the extremes, see variants.yml).
+
+codecs:   # codec-only reference on tar --sort=name of the AppDir
+  - {id: "zstd-l{level}", cmd: "zstd -{level} --ultra -T4 -c", level: [7, 12, 17]}
+  - {id: "zstd19-long{wlog}", cmd: "zstd -19 --long={wlog} -T4 -c", wlog: [22, 24, 25]}
+  - {id: "zstd19-rsyncable", cmd: "zstd -19 --rsyncable -T4 -c"}
+  - {id: "xz-l{level}", cmd: "xz -{level} -T4 -c", level: [3, 6, 7]}
+  - {id: "brotli-q{level}", cmd: "brotli -q {level} -c", level: [3, 6, 8]}
+  - {id: "bzip3", cmd: "bzip3 -c"}
+
+todo:
+  - {id: "erofs-lz4hc", kind: erofs, status: todo}
+  - {id: "erofs-lzma", kind: erofs, status: todo}
+  - {id: "blockstore-zstd-dict", kind: blockstore, status: todo}
+  - {id: "blockstore-openzl", kind: blockstore, status: todo,
+     note: "needs tools/blockstore.py; unknown whether OpenZL supports independent blocks"}

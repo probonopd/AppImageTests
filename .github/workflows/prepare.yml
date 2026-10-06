@@ -1,0 +1,148 @@
+name: Benchmark
+# Entry point: plan -> fetch corpus (matrix) -> bench (matrix, reusable) -> aggregate.
+on:
+  workflow_dispatch:
+    inputs:
+      stage:
+        description: "1 = screen (size+build), 2 = shortlist (startup+zsync), 3 = option axes, ext = edge extension of levers, full = everything"
+        type: choice
+        options: ["1", "2", "3", "ext", "full"]
+        default: "1"
+      apps:
+        description: "Comma list of apps (default: stage rules)"
+        default: ""
+      variants_filter:
+        description: "Regex on variant ids (default: all)"
+        default: ""
+      round:
+        description: "Edge-extension round (set by the chain)"
+        default: "0"
+      wide:
+        description: "Stage 2: measure all runtime-mountable variants instead of only the shortlist"
+        type: boolean
+        default: false
+      chain:
+        description: "After this stage, automatically start the next one"
+        type: boolean
+        default: false
+  schedule:
+    - cron: "17 3 * * 0"       # weekly screen
+permissions:
+  contents: write
+  actions: write
+concurrency:
+  group: benchmark-${{ github.ref }}-${{ inputs.stage || '1' }}
+  cancel-in-progress: false
+
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    outputs:
+      fetch: ${{ steps.plan.outputs.fetch }}
+      bench: ${{ steps.plan.outputs.bench }}
+      codec: ${{ steps.plan.outputs.codec }}
+      has_fetch: ${{ steps.plan.outputs.has_fetch }}
+      has_bench: ${{ steps.plan.outputs.has_bench }}
+      has_codec: ${{ steps.plan.outputs.has_codec }}
+      stage: ${{ steps.plan.outputs.stage }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get install -y -qq python3-yaml
+      - name: Fetch previous results (shortlist)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git clone --depth 1 --branch results \
+            "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git" results-branch \
+            || mkdir results-branch
+          ls results-branch || true
+      - id: plan
+        run: |
+          python3 tools/plan_matrix.py --stage "${{ inputs.stage || '1' }}" \
+            --apps "${{ inputs.apps }}" --variants-filter "${{ inputs.variants_filter }}" \
+            --results results-branch ${{ inputs.wide && '--wide' || '' }}
+
+  fetch:
+    needs: plan
+    if: needs.plan.outputs.has_fetch == 'true'
+    name: corpus ${{ matrix.app }} ${{ matrix.arch }}
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.plan.outputs.fetch) }}
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash tools/install_tools.sh
+      - uses: actions/cache@v4
+        with:
+          path: /mnt/bench/corpus/${{ matrix.app }}-${{ matrix.arch }}
+          key: ${{ matrix.cache_key }}
+      - name: Fetch, extract, stats (+ working set for GUI apps)
+        run: |
+          python3 tools/fetch_corpus.py --app "${{ matrix.app }}" --arch "${{ matrix.arch }}" \
+            ${{ matrix.workset && '--workset' || '' }}
+          cat /mnt/bench/corpus/${{ matrix.app }}-${{ matrix.arch }}/new.stats.json | head -40 >> "$GITHUB_STEP_SUMMARY" || true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: corpus-stats-${{ matrix.app }}-${{ matrix.arch }}
+          path: /mnt/bench/corpus/${{ matrix.app }}-${{ matrix.arch }}/*.stats.json
+
+  bench:
+    needs: [plan, fetch]
+    if: needs.plan.outputs.has_bench == 'true' && !cancelled()
+    uses: ./.github/workflows/bench.yml
+    with:
+      matrix: ${{ needs.plan.outputs.bench }}
+      stage: ${{ needs.plan.outputs.stage }}
+      retry: false
+
+  codec:
+    needs: [plan, fetch]
+    if: needs.plan.outputs.has_codec == 'true' && !cancelled()
+    name: codec-only ${{ matrix.app }}
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.plan.outputs.codec) }}
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash tools/install_tools.sh
+      - uses: actions/cache@v4
+        with:
+          path: /mnt/bench/corpus/${{ matrix.app }}-${{ matrix.arch }}
+          key: ${{ matrix.cache_key }}
+      - run: python3 tools/codec_reference.py --app "${{ matrix.app }}" --out out/codec-${{ matrix.app }}.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: raw-codec-${{ matrix.app }}
+          path: out/codec-${{ matrix.app }}.json
+
+  aggregate:
+    needs: [plan, bench, codec]
+    if: always() && needs.plan.outputs.has_bench == 'true' && !cancelled()
+    uses: ./.github/workflows/aggregate.yml
+    with:
+      stage: ${{ needs.plan.outputs.stage }}
+
+  chain:
+    needs: [plan, aggregate]
+    if: >-
+      always() && !cancelled() && inputs.chain && needs.aggregate.result != 'skipped' &&
+      contains(fromJSON('["1","2","3","ext"]'), needs.plan.outputs.stage) &&
+      (needs.plan.outputs.stage != 'ext' || fromJSON(inputs.round || '0') < 3)
+    runs-on: ubuntu-24.04
+    steps:
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          stage="${{ needs.plan.outputs.stage }}"; round="${{ inputs.round || '0' }}"
+          case "$stage" in
+            1) next=2; extra="-f wide=true";;
+            2) next=3; extra="";;
+            3) next=ext; extra="-f round=1";;
+            ext) next=ext; extra="-f round=$((round+1))";;
+          esac
+          gh workflow run prepare.yml --repo "${{ github.repository }}" \
+            --ref "${{ github.ref_name }}" -f stage=$next -f chain=true $extra

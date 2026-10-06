@@ -1,0 +1,54 @@
+name: Retry noisy
+# Re-run variants whose timing CV > 10% once, on fresh runners.
+on:
+  workflow_run:
+    workflows: ["Benchmark"]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: "Benchmark run id to take noisy.json from"
+        required: true
+permissions:
+  contents: write
+  actions: read
+jobs:
+  plan:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion != 'cancelled'
+    runs-on: ubuntu-24.04
+    outputs:
+      bench: ${{ steps.p.outputs.bench }}
+      has_bench: ${{ steps.p.outputs.has_bench }}
+      run_id: ${{ steps.rid.outputs.id }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: rid
+        run: echo "id=${{ github.event.inputs.run_id || github.event.workflow_run.id }}" >> "$GITHUB_OUTPUT"
+      - run: sudo apt-get install -y -qq python3-yaml
+      - uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: noisy
+          path: noisy
+          run-id: ${{ steps.rid.outputs.id }}
+          github-token: ${{ github.token }}
+      - id: p
+        run: |
+          if [ -s noisy/noisy.json ] && [ "$(cat noisy/noisy.json)" != "[]" ]; then
+            python3 tools/plan_matrix.py --retry noisy/noisy.json --include-synthetic
+          else
+            echo "has_bench=false" >> "$GITHUB_OUTPUT"
+          fi
+  bench:
+    needs: plan
+    if: needs.plan.outputs.has_bench == 'true'
+    uses: ./.github/workflows/bench.yml
+    with:
+      matrix: ${{ needs.plan.outputs.bench }}
+      retry: true
+  aggregate:
+    needs: [plan, bench]
+    if: always() && needs.plan.outputs.has_bench == 'true'
+    uses: ./.github/workflows/aggregate.yml
+    with:
+      stage: retry

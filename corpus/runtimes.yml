@@ -1,0 +1,14 @@
+# Pinned runtimes. sha256 is filled in by the `pin` workflow (tools/pin.py).
+# Replace rolling URLs by tagged ones when you have chosen a release.
+squashfs:
+  name: type2-runtime
+  urls:
+    x86_64: https://github.com/AppImage/type2-runtime/releases/download/continuous/runtime-x86_64
+    aarch64: https://github.com/AppImage/type2-runtime/releases/download/continuous/runtime-aarch64
+  sha256: {x86_64: "156f4bdbde9c52d01814600013e0a273f0118dc2de98975f3c8c63427ec79074", aarch64: "b4ff0030242d0c3bb12ce40541828303cf167493f4793456f0436edd6255c39d"}
+dwarfs:
+  name: uruntime
+  urls:
+    x86_64: https://github.com/VHSgunzo/uruntime/releases/latest/download/uruntime-appimage-dwarfs-x86_64
+    aarch64: https://github.com/VHSgunzo/uruntime/releases/latest/download/uruntime-appimage-dwarfs-aarch64
+  sha256: {x86_64: "179cfd3c37ed7afe31b044f3ac9e422777ff0a6881ec2b55304bd30752d8717b", aarch64: "724f8b92fbfc1aada336fcaa5a4b0a37e6db6a631ad164a17328327cab328cb9"}

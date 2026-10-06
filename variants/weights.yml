@@ -1,0 +1,15 @@
+# Importance of each metric for the final ranking (percent, sums to 100).
+# Download size matters most, app launch speed second, zsync update size
+# third; generation (build) time matters least. Edit to taste: aggregate.py
+# normalises, and renormalises over the metrics available in a result set.
+#
+# Score = weighted geometric mean of "metric relative to baseline" (lower is
+# better); baseline (squashfs gzip-9 128K) = 1.00.
+weights:
+  size_total:          {weight: 35, label: "Download size (total AppImage bytes)"}
+  launch_ms_cold:      {weight: 16, label: "App launch time, cold cache (real launch)"}
+  cpu_s_startup_warm:  {weight: 8,  label: "Startup decompression CPU (mount + working set)"}
+  mount_ms_warm:       {weight: 4,  label: "Mount time, warm"}
+  update_cost:         {weight: 24, label: "zsync update cost (best of tested -b; .zsync file + downloaded bytes)"}
+  fuse_rss_mb_warm:    {weight: 10, label: "RAM of the FUSE/runtime process"}
+  build_wall_s:        {weight: 3,  label: "AppImage generation (build) time"}

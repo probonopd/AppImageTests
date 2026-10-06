@@ -1,0 +1,52 @@
+name: Bench matrix
+# Reusable: one job per (app, arch, group). Small groups => many parallel jobs.
+on:
+  workflow_call:
+    inputs:
+      matrix:
+        type: string
+        required: true
+      stage:
+        type: string
+        default: "1"
+      retry:
+        type: boolean
+        default: false
+
+jobs:
+  bench:
+    name: ${{ matrix.app }} ${{ matrix.arch }} g${{ matrix.group }}
+    strategy:
+      fail-fast: false            # one bad variant must not cancel the grid
+      max-parallel: 20            # concurrency cap for the free plan
+      matrix: ${{ fromJSON(inputs.matrix) }}
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: ${{ matrix.timeout }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash tools/install_tools.sh
+      - uses: actions/cache/restore@v4
+        with:
+          path: /mnt/bench/corpus/${{ matrix.app }}-${{ matrix.arch }}
+          key: ${{ matrix.cache_key }}
+      - name: Run group
+        env:
+          ALLOW_UNPINNED: ${{ matrix.app == 'synthetic' && '1' || '0' }}
+        run: |
+          mkdir -p out
+          python3 tools/run_group.py --app "${{ matrix.app }}" --arch "${{ matrix.arch }}" \
+            --variants "${{ matrix.variants }}" --stage "${{ inputs.stage }}" \
+            ${{ matrix.no_startup && '--no-startup' || '' }} ${{ matrix.no_zsync && '--no-zsync' || '' }} \
+            ${{ inputs.retry && '--retry' || '' }} \
+            --out "out/${{ matrix.app }}-${{ matrix.arch }}-g${{ matrix.group }}.json"
+      - name: Summary
+        if: always()
+        run: |
+          echo "### ${{ matrix.app }} ${{ matrix.arch }} group ${{ matrix.group }}" >> "$GITHUB_STEP_SUMMARY"
+          echo '`${{ matrix.variants }}`' >> "$GITHUB_STEP_SUMMARY"
+          ls -l out >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: raw-${{ inputs.retry && 'retry-' || '' }}${{ matrix.app }}-${{ matrix.arch }}-g${{ matrix.group }}
+          path: out/*.json

@@ -1,0 +1,99 @@
+# Pinned corpus. Entries with an empty sha256 are skipped by plan_matrix until
+# the `pin` workflow has filled them in (it also reports URLs that 404).
+# URLs are release assets; never "latest". Add apps by adding entries.
+# reference: true  -> part of the 4 stage-1 reference apps.
+# RULE: only apps with at least one older release (`pairs`) belong here, so
+# every app can be used for the zsync delta-update tests (a unit test enforces it).
+# Add aarch64 entries (arch: aarch64) for the reduced ARM subset.
+
+apps:
+  - name: synthetic            # self-test only, built locally, no download
+    category: synthetic
+    arch: x86_64
+    synthetic: true
+    launch: {mode: cli-only, cmd: ["--version"], ready: {type: exit, timeout_s: 20}}
+
+  - name: neovim
+    category: tiny-cli
+    arch: x86_64
+    reference: true
+    url: https://github.com/neovim/neovim/releases/download/v0.10.2/nvim.appimage
+    sha256: "970113b5279718126b82adddf3fbed1741db7afabf8a4134635a0d75c9f2c5d8"
+    pairs:
+      - {kind: patch, old_url: "https://github.com/neovim/neovim/releases/download/v0.10.1/nvim.appimage", old_sha256: "c4762d54cadfd9fa4497c7969197802c9cf9e0d926c39e561f0bd170e36c8aa0"}
+    launch: {mode: cli-only, cmd: ["--version"], ready: {type: exit, timeout_s: 30}}
+
+  - name: keepassxc
+    category: small-qt
+    arch: x86_64
+    url: https://github.com/keepassxreboot/keepassxc/releases/download/2.7.9/KeePassXC-2.7.9-x86_64.AppImage
+    sha256: "2a868b681a8ec4e381ac14203aec3d80ff6fa7a535fa102265a3ec9329b4b846"
+    pairs:
+      - {kind: patch, old_url: "https://github.com/keepassxreboot/keepassxc/releases/download/2.7.8/KeePassXC-2.7.8-x86_64.AppImage", old_sha256: "101b4d28a4960f01cc4dd6ca6a937dc4be60f47ccadd84b729d51401b4d346dd"}
+    launch:
+      mode: gui
+      cmd: []
+      env: {QT_QPA_PLATFORM: xcb, LIBGL_ALWAYS_SOFTWARE: "1"}
+      ready: {type: window, timeout_s: 60}
+      workset_seconds: 10
+
+  - name: obsidian
+    category: electron
+    arch: x86_64
+    reference: true
+    url: https://github.com/obsidianmd/obsidian-releases/releases/download/v1.5.12/Obsidian-1.5.12.AppImage
+    sha256: "aa65d9992a7b60f676936fbc80d616f45cf9b3468c4ab60730123b727f4cf2ee"
+    pairs:
+      - {kind: patch, old_url: "https://github.com/obsidianmd/obsidian-releases/releases/download/v1.5.11/Obsidian-1.5.11.AppImage", old_sha256: "73f6d9e2bad7a6766d3d40b24757afe042f4d90f082efefdab8b8a31193b2494"}
+    launch:
+      mode: gui
+      cmd: ["--no-sandbox", "--disable-gpu"]
+      env: {LIBGL_ALWAYS_SOFTWARE: "1"}
+      ready: {type: window, timeout_s: 90}
+      workset_seconds: 15
+
+  - name: krita
+    category: large-qt
+    arch: x86_64
+    reference: true
+    url: https://download.kde.org/stable/krita/5.2.9/krita-5.2.9-x86_64.appimage
+    sha256: "e81dedfdaf52d69daf280856265dcbca81b1c3cfab615a90147a9a63c132b308"
+    pairs:
+      - {kind: patch, old_url: "https://download.kde.org/stable/krita/5.2.6/krita-5.2.6-x86_64.appimage", old_sha256: "9066adb31952a061702988851809f3bf125a58541f9158c6fd81b2ac064682a0"}
+    launch:
+      mode: gui
+      cmd: ["--nosplash"]
+      env: {QT_QPA_PLATFORM: xcb, LIBGL_ALWAYS_SOFTWARE: "1"}
+      ready: {type: window, timeout_s: 90}
+      workset_seconds: 15
+
+  - name: kdenlive
+    category: large-qt
+    arch: x86_64
+    url: https://download.kde.org/stable/kdenlive/25.08/linux/kdenlive-25.08.1-x86_64.AppImage
+    sha256: "12c8e730138856b1830062463536413c0f0509f76b9e2f8587a813ee95f6c4a2"
+    pairs:
+      - {kind: patch, old_url: "https://download.kde.org/stable/kdenlive/25.08/linux/kdenlive-25.08.0-x86_64.AppImage", old_sha256: "0bea107d9fe46e986616c85b1fd74866b34fee379a5e41e34109f57f7de0d6d7"}
+    launch:
+      mode: gui
+      cmd: []
+      env: {QT_QPA_PLATFORM: xcb, LIBGL_ALWAYS_SOFTWARE: "1"}
+      ready: {type: window, timeout_s: 90}
+      workset_seconds: 15
+
+  # Smallest variant TDF offers ("basic": no help, no extra language packs).
+  - name: libreoffice
+    category: huge
+    arch: x86_64
+    reference: true
+    url: https://appimages.libreitalia.org/LibreOffice-26.8.1.1.basic-x86_64.AppImage
+    sha256: "bccf75d0bf9bff86ed62b3676c2514da902019b5ce701c006b2f9062a82068ff"
+    pairs:
+      - {kind: patch, old_url: "https://appimages.libreitalia.org/LibreOffice-26.8.0.3.basic-x86_64.AppImage", old_sha256: "e6e15ce518e1ea37cfa54ba5eea79df1fc39514ff22ad7f0fecb4d0c5ba00be5"}
+      - {kind: major, old_url: "https://appimages.libreitalia.org/LibreOffice-26.2.6.3.basic-x86_64.AppImage", old_sha256: "9f808e6313cbf9e0629ee8ce34c81fa8861591797aa2746cc811d46b87e702e0"}
+    launch:
+      mode: gui
+      cmd: ["--norestore", "--nologo", "--writer"]
+      env: {SAL_USE_VCLPLUGIN: gen, LIBGL_ALWAYS_SOFTWARE: "1"}
+      ready: {type: window, timeout_s: 120}
+      workset_seconds: 20

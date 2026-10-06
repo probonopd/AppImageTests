@@ -1,0 +1,28 @@
+name: Selftest
+# Unit tests + an end-to-end run of the whole pipeline on a synthetic app
+# (build, determinism, mount/startup, nginx+zsync, aggregate).
+on:
+  push:
+    paths: ["tools/**", "tests/**", "variants/**", "corpus/**", ".github/workflows/**"]
+  pull_request:
+  workflow_dispatch:
+jobs:
+  unit:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq python3-yaml python3-matplotlib
+      - run: python3 -m unittest discover -s tests -v
+  e2e:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash tools/install_tools.sh
+      - name: End-to-end on the synthetic app
+        env:
+          ALLOW_UNPINNED: "1"
+        run: bash tests/e2e.sh
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: e2e-output, path: "e2e-out/"}
