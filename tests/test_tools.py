@@ -37,6 +37,26 @@ class Variants(unittest.TestCase):
         self.assertEqual(d[d.index("-S") + 1], "24")
 
 
+class DwarfsUser(unittest.TestCase):
+    def test_owner_configuration(self):
+        import build_variant as bv
+        plain = bv.payload_cmd(common.get_variant("dwarfs-user-S26-B6-plain"), "a", "p", "x86_64", 0, "/tmp")
+        for flag in ("--no-history", "--no-create-timestamp"):
+            self.assertIn(flag, plain)
+        self.assertEqual(plain[plain.index("-S") + 1], "26")
+        self.assertEqual(plain[plain.index("-B") + 1], "6")
+        self.assertEqual(plain[plain.index("--order") + 1], "path")
+        self.assertEqual(plain[plain.index("-C") + 1], "zstd:level=22")
+        self.assertEqual(plain[plain.index("--set-owner") + 1], "0")
+        self.assertEqual(plain[plain.index("--set-group") + 1], "0")
+        self.assertNotIn("-l", plain)                 # mkdwarfs default preset
+        self.assertNotIn("--hotness-list", plain)
+        hot = bv.payload_cmd(common.get_variant("dwarfs-user-S26-B6-hot"), "a", "p", "x86_64", 0, "/tmp", "hot.txt")
+        self.assertEqual(hot[hot.index("--hotness-list") + 1], "hot.txt")
+        with self.assertRaises(ValueError):
+            bv.payload_cmd(common.get_variant("dwarfs-user-S26-B6-hot"), "a", "p", "x86_64", 0, "/tmp")
+
+
 class Corpus(unittest.TestCase):
     def test_every_app_has_an_older_version(self):
         for a in common.load_corpus():

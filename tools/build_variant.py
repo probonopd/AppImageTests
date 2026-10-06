@@ -26,7 +26,7 @@ def _sort_file(appdir, dest):
                 f.write(f"{rel} {ORDER_PRIO[classify(p)]}\n")
 
 
-def payload_cmd(v, appdir, payload, arch, epoch, workdir):
+def payload_cmd(v, appdir, payload, arch, epoch, workdir, hotness=None):
     p = v["params"]
     if v["kind"] == "squashfs":
         cmd = ["mksquashfs", str(appdir), str(payload), "-comp", p["codec"],
@@ -48,10 +48,18 @@ def payload_cmd(v, appdir, payload, arch, epoch, workdir):
         return cmd
     if v["kind"] == "dwarfs":
         preset = p.get("preset", p.get("level") if p["codec"] == "preset" else 5)
-        cmd = ["mkdwarfs", "-i", str(appdir), "-o", str(payload), "-l", str(preset),
-               "-S", str(p["bits"]), "-N", str(PROCS), "--set-owner", "0",
-               "--set-group", "0", "--set-time", str(epoch), "--no-create-timestamp",
-               "--progress=none", "--log-level=warn", "--no-history"]
+        cmd = ["mkdwarfs", "-i", str(appdir), "-o", str(payload)]
+        if preset != "default":            # "default": leave mkdwarfs's own -l default
+            cmd += ["-l", str(preset)]
+        cmd += ["-S", str(p["bits"]), "-N", str(PROCS), "--set-owner", "0",
+                "--set-group", "0", "--set-time", str(epoch), "--no-create-timestamp",
+                "--progress=none", "--log-level=warn", "--no-history"]
+        if p.get("lookback"):
+            cmd += ["-B", str(p["lookback"])]
+        if p.get("hotness") == "hot":
+            if not hotness:
+                raise ValueError("hotness variant needs a hotness list")
+            cmd += ["--hotness-list", str(hotness)]
         c, lvl = p["codec"], p.get("level")
         if c == "zstd":
             cmd += ["-C", f"zstd:level={lvl}"]
@@ -67,7 +75,7 @@ def payload_cmd(v, appdir, payload, arch, epoch, workdir):
     raise ValueError(v["kind"])
 
 
-def build_once(v, appdir, out, arch="x86_64", epoch=0, timeout=2400):
+def build_once(v, appdir, out, arch="x86_64", epoch=0, timeout=2400, hotness=None):
     out = Path(out)
     out.parent.mkdir(parents=True, exist_ok=True)
     payload = out.with_suffix(".payload")
@@ -75,7 +83,7 @@ def build_once(v, appdir, out, arch="x86_64", epoch=0, timeout=2400):
         payload.unlink()
     rt_kind = "dwarfs" if v["kind"] == "dwarfs" else "squashfs"
     rt_path, rt_name, rt_sha = get_runtime(rt_kind, arch)
-    cmd = payload_cmd(v, appdir, payload, arch, epoch, out.parent)
+    cmd = payload_cmd(v, appdir, payload, arch, epoch, out.parent, hotness)
     t = timed(cmd, timeout=timeout)
     res = {"build": {k: t[k] for k in ("wall_s", "cpu_s", "rss_mb", "timeout")},
            "runtime": f"{rt_name}@{rt_sha[:12]}"}
@@ -93,15 +101,15 @@ def build_once(v, appdir, out, arch="x86_64", epoch=0, timeout=2400):
     return res
 
 
-def build(v, appdir, out, arch="x86_64", determinism=True, epoch=0, timeout=2400):
-    res = build_once(v, appdir, out, arch, epoch, timeout)
+def build(v, appdir, out, arch="x86_64", determinism=True, epoch=0, timeout=2400, hotness=None):
+    res = build_once(v, appdir, out, arch, epoch, timeout, hotness)
     if "error" in res:
         return res
     sha = sha256_file(out)
     res["sha256"] = sha
     if determinism:
         second = out.parent / "again" / out.name   # same basename: paths end up in dwarfs metadata
-        r2 = build_once(v, appdir, second, arch, epoch, timeout)
+        r2 = build_once(v, appdir, second, arch, epoch, timeout, hotness)
         res["build"]["deterministic"] = ("error" not in r2 and sha256_file(second) == sha)
         if not res["build"]["deterministic"] and second.exists():
             a, b = out.read_bytes(), second.read_bytes()

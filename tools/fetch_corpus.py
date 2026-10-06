@@ -96,6 +96,9 @@ def fetch(name, arch="x86_64", workset=False):
     if app.get("synthetic"):
         fetch_one(app, "new", None, None, cdir, 2)
         fetch_one(app, "old-patch", None, None, cdir, 1)
+        # a small fake launch working set so the hotness-list variants can be tested
+        (cdir / "workset.json").write_text(json.dumps(
+            {"files": ["AppRun", "usr/lib/lib0.so", "usr/share/doc/doc0.txt"]}))
     else:
         fetch_one(app, "new", app["url"], app.get("sha256"), cdir, workset=workset)
         for pr in app.get("pairs", []):

@@ -93,11 +93,21 @@ def main():
     failures = 0
 
     recs = {}
+    hot_of = {}
     for vid in ids:
         v = get_variant(vid)
         img = run_dir / "img" / f"{vid}.AppImage"
         print(f"== build {vid}", flush=True)
-        r = build(v, new_dir, img, a.arch, determinism=uncompressed < 400 << 20, timeout=a.timeout)
+        hot = None
+        if v["params"].get("hotness") == "hot":
+            if workset:
+                hot = run_dir / "hotness.txt"
+                hot.write_text("\n".join(workset) + "\n")
+        if v["params"].get("hotness") == "hot" and hot is None:
+            r = {"error": "no recorded working set for a hotness list (cli-only app)"}
+        else:
+            r = build(v, new_dir, img, a.arch, determinism=uncompressed < 400 << 20,
+                      timeout=a.timeout, hotness=hot)
         rec = {"run_id": run_id, "app": a.app, "arch": a.arch, "category": app.get("category"),
                "variant": vid, "container": v["kind"], "codec": v["codec"], "level": v["level"],
                "block_bytes": v["block_bytes"], "family_key": v["family_key"],
@@ -109,6 +119,8 @@ def main():
         if "error" in r:
             rec["error"] = r["error"]
         recs[vid] = (rec, img)
+        if hot is not None:
+            hot_of[vid] = hot
         if r.get("build", {}).get("deterministic") is False:
             print(f"!! {vid} is NOT deterministic", flush=True)
 
@@ -169,7 +181,7 @@ def main():
                 rec, img = recs[vid]
                 v = get_variant(vid)
                 old_img = run_dir / "img" / f"{vid}.old.AppImage"
-                ro = build(v, old_dir, old_img, a.arch, determinism=False, timeout=a.timeout)
+                ro = build(v, old_dir, old_img, a.arch, determinism=False, timeout=a.timeout, hotness=hot_of.get(vid))
                 if "error" in ro:
                     continue
                 for z in mz.measure(old_img, img, blocks):
@@ -184,7 +196,8 @@ def main():
             rec, img = recs[vid]
             v = get_variant(vid)
             alt = run_dir / "img" / f"{vid}.alt.AppImage"
-            ra = build(v, new_dir, alt, a.arch, determinism=False, epoch=86400, timeout=a.timeout)
+            ra = build(v, new_dir, alt, a.arch, determinism=False, epoch=86400, timeout=a.timeout,
+                       hotness=hot_of.get(vid))
             if "error" not in ra:
                 for z in mz.measure(alt, img, [blocks[1]]):
                     z["pair"] = "rebuild"
