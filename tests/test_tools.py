@@ -102,6 +102,15 @@ class EdgeExtension(unittest.TestCase):
         self.assertEqual(aggregate._next_t(1, 1, -1), None)
         self.assertEqual(aggregate._next_t(19, 20, 1), 20)
 
+    def test_dynamic_id_matching_other_family_template(self):
+        # 'dwarfs-lzma2-S20' also fits the pattern of dwarfs-l{level}-S{bits}; must resolve
+        # to the lzma family (level 2) instead of crashing
+        v = common.get_variant("dwarfs-lzma2-S20")
+        self.assertEqual(v["params"]["codec"], "lzma")
+        self.assertEqual(v["params"]["level"], 2)
+        with self.assertRaises(KeyError):
+            common.get_variant("dwarfs-zma2-S20")
+
     def test_dynamic_ids_validated(self):
         self.assertEqual(common.get_variant("squashfs-zstd4-b512K")["block_bytes"], 512 * 1024)
         for bad in ("squashfs-zstd23-b128K", "squashfs-zstd7-b2K", "squashfs-zstd7-b2M", "squashfs-zstd7-b100K"):

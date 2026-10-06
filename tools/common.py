@@ -122,10 +122,13 @@ def _resolve_dynamic(base_id):
         if not m:
             continue
         params = {}
-        for k, ref in fam["params"].items():
-            ref0 = ref[0] if isinstance(ref, list) else ref
-            val = m.group(k) if k in m.groupdict() else ref0
-            params[k] = int(val) if isinstance(ref0, int) and not isinstance(ref0, bool) and k in m.groupdict() else val
+        try:
+            for k, ref in fam["params"].items():
+                ref0 = ref[0] if isinstance(ref, list) else ref
+                val = m.group(k) if k in m.groupdict() else ref0
+                params[k] = int(val) if isinstance(ref0, int) and not isinstance(ref0, bool) and k in m.groupdict() else val
+        except ValueError:          # e.g. 'dwarfs-lzma2-S20' also fits 'dwarfs-l{level}-S{bits}'
+            continue
         for lever, spec in ranges.items():
             try:
                 t = lever_value(spec, params[lever])
