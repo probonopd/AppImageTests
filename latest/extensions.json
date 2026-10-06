@@ -1,20 +1,10 @@
 {
  "variants": [
-  "dwarfs-l2-S24",
-  "dwarfs-l3-S26",
-  "dwarfs-zstd4-S20",
-  "squashfs-gzip7-b16K",
-  "squashfs-gzip8-b32K",
-  "squashfs-zstd4-b32K",
-  "squashfs-zstd7-b16K"
+  "dwarfs-l1-S24",
+  "squashfs-zstd3-b32K"
  ],
  "reasons": {
-  "squashfs-zstd4-b32K": "sq-zstd: best level=7 is the low edge of the tested values -> try level=4",
-  "squashfs-zstd7-b16K": "sq-zstd: best block=32K is the low edge of the tested values -> try block=16K",
-  "squashfs-gzip8-b32K": "sq-gzip: best level=7 is the high edge of the tested values -> try level=8",
-  "squashfs-gzip7-b16K": "sq-gzip: best block=32K is the low edge of the tested values -> try block=16K",
-  "dwarfs-l2-S24": "dw-preset: best level=3 is the low edge of the tested values -> try level=2",
-  "dwarfs-l3-S26": "dw-preset: best bits=24 is the high edge of the tested values -> try bits=26",
-  "dwarfs-zstd4-S20": "dw-zstd: best level=7 is the low edge of the tested values -> try level=4"
+  "squashfs-zstd3-b32K": "sq-zstd: best level=4 is the low edge of the tested values -> try level=3",
+  "dwarfs-l1-S24": "dw-preset: best level=2 is the low edge of the tested values -> try level=1"
  }
 }
