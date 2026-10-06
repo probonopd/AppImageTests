@@ -24,6 +24,7 @@ GROUP_TARGET_S = 1500       # ~25 min of estimated work per job -> lots of paral
 HEAVY_S = 3000
 MAX_PER_GROUP = 6          # keep groups small: more parallel jobs, faster results
 MAX_JOBS = 250
+MAX_JOB_MINUTES = 350        # hosted-runner job limit is 360 min
 
 
 def app_mb(app):
@@ -209,7 +210,7 @@ def flags_all():
 
 
 def entry(app, variants, group, flags, load, name):
-    minutes = min(350, max(30, math.ceil(load * 2.5 / 60) + 15))
+    minutes = MAX_JOB_MINUTES        # GitHub-hosted jobs may run up to 360 min; use the maximum
     return {"app": name, "arch": app.get("arch", "x86_64"), "group": group,
             "runner": RUNNER[app.get("arch", "x86_64")], "variants": ",".join(variants),
             "cache_key": corpus_cache_key(app), "timeout": minutes,
