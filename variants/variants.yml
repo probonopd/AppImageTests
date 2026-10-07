@@ -34,7 +34,7 @@ families:
     id: "squashfs-gzip9-b128K"
     params: {codec: gzip, level: 9, block: 128K}
     levers: []
-    compat: {kernel: "2.6.29", fuse: "2.9", static_reader: true}
+    compat: {kernel: "n/a (FUSE; in-kernel mount would need 2.6.29)", fuse: "2.9", static_reader: true}
 
   # ---- SquashFS --------------------------------------------------------
   - name: sq-gzip
@@ -43,7 +43,7 @@ families:
     params: {codec: gzip, level: [3, 5, 7], block: [32K, 128K, 256K]}
     levers: [level, block]
     lever_ranges: {level: {min: 1, max: 9}, block: {min: 4K, max: 1M, scale: log2}}
-    compat: {kernel: "2.6.29", fuse: "2.9", static_reader: true}
+    compat: {kernel: "n/a (FUSE; in-kernel mount would need 2.6.29)", fuse: "2.9", static_reader: true}
 
   - name: sq-xz
     kind: squashfs
@@ -51,7 +51,7 @@ families:
     params: {codec: xz, bcj: [none, auto], block: [32K, 128K, 256K]}
     levers: [block]
     lever_ranges: {block: {min: 4K, max: 1M, scale: log2}}
-    compat: {kernel: "2.6.38", fuse: "2.9", static_reader: true}
+    compat: {kernel: "n/a (FUSE; in-kernel mount would need 2.6.38)", fuse: "2.9", static_reader: true}
 
   - name: sq-zstd
     kind: squashfs
@@ -59,14 +59,14 @@ families:
     params: {codec: zstd, level: [7, 12, 17], block: [32K, 128K, 256K]}
     levers: [level, block]
     lever_ranges: {level: {min: 1, max: 22}, block: {min: 4K, max: 1M, scale: log2}}
-    compat: {kernel: "4.14", fuse: "2.9", static_reader: true}
+    compat: {kernel: "n/a (FUSE; in-kernel mount would need 4.14)", fuse: "2.9", static_reader: true}
 
   - name: sq-lz4
     kind: squashfs
     id: "squashfs-lz4hc-b{block}"
     params: {codec: lz4, level: 0, block: 128K}
     levers: []
-    compat: {kernel: "3.19", fuse: "2.9", static_reader: true}
+    compat: {kernel: "n/a (FUSE; in-kernel mount would need 3.19)", fuse: "2.9", static_reader: true}
 
   - name: sq-lzo
     kind: squashfs
@@ -74,7 +74,7 @@ families:
     params: {codec: lzo, level: 0, block: 128K}
     levers: []
     reference_only: true
-    compat: {kernel: "2.6.36", fuse: "2.9", static_reader: true}
+    compat: {kernel: "n/a (FUSE; in-kernel mount would need 2.6.36)", fuse: "2.9", static_reader: true}
 
   # ---- DwarFS ----------------------------------------------------------
   # preset level x block bits, 3 x 3 (S: 16=64K, 20=1M, 24=16M)
