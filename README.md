@@ -106,7 +106,7 @@ to `corpus/corpus.yml` (each needs at least one older release for the delta test
 <!-- RESULTS:START -->
 # AppImage compression benchmark results
 
-365 (app, arch, variant) records from 6 app/arch pairs. Lower is better; baseline = `squashfs-gzip9-b128K` = 1.00. Measured on GitHub-hosted runners (AMD EPYC 7763 64-Core Processor, AMD EPYC 9V45 96-Core Processor, AMD EPYC 9V74 80-Core Processor, INTEL(R) XEON(R) PLATINUM 8573C, Intel(R) Xeon(R) 6973P-C, Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz); real hardware (HDD, slow ARM) shifts startup conclusions toward higher ratio at lower CPU cost.
+377 (app, arch, variant) records from 6 app/arch pairs. Lower is better; baseline = `squashfs-gzip9-b128K` = 1.00. Measured on GitHub-hosted runners (AMD EPYC 7763 64-Core Processor, AMD EPYC 9V45 96-Core Processor, AMD EPYC 9V74 80-Core Processor, INTEL(R) XEON(R) PLATINUM 8573C, Intel(R) Xeon(R) 6973P-C, Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz); real hardware (HDD, slow ARM) shifts startup conclusions toward higher ratio at lower CPU cost.
 
 ## Metric weights (variants/weights.yml)
 
@@ -177,8 +177,10 @@ Weighted score = weighted geometric mean of metric/baseline (lower is better); m
 | dwarfs-l1-S24 | 1.262 | 1.43 | 4.61 | 0.51 | 0.65 | 0.96 | 0.08 | 13.15 | 6 | 100% |
 | dwarfs-zstd7-S20 | 1.283 | 0.95 | 4.35 | 1.13 | 0.37 | 1.65 | 0.30 | 14.87 | 5 | 100% |
 | dwarfs-zstd12-S20 | 1.325 | 0.95 | 4.58 | 0.96 | 0.48 | 1.63 | 0.44 | 14.81 | 5 | 100% |
+| dwarfs-user-S26-B6-plain | 1.341 | 0.77 | 5.26 | 1.98 | 0.42 | 1.51 | 6.01 | 11.94 | 6 | 100% |
 | dwarfs-l5-S20 | 1.380 | 0.87 | 4.69 | 1.31 | 0.48 | 1.65 | 2.56 | 12.86 | 6 | 100% |
 | dwarfs-l5-S24 | 1.383 | 0.81 | 4.77 | 2.63 | 0.39 | 1.56 | 3.55 | 14.04 | 5 | 100% |
+| dwarfs-user-S26-B6-hot | 1.388 | 0.74 | 5.09 | 1.68 | 0.52 | 1.49 | 5.75 | 16.37 | 6 | 100% |
 | dwarfs-zstd17-S20 | 1.408 | 0.90 | 5.23 | 1.08 | 0.58 | 1.68 | 1.55 | 12.95 | 6 | 100% |
 | dwarfs-zstd4-S20 | 1.412 | 1.00 | 4.57 | 1.00 | 0.58 | 1.92 | 0.24 | 12.95 | 6 | 100% |
 | dwarfs-l7-S20 | 1.439 | 0.86 | 5.29 | 1.21 | 0.51 | 1.87 | 3.12 | 13.07 | 6 | 100% |
@@ -244,6 +246,8 @@ Weighted score = weighted geometric mean of metric/baseline (lower is better); m
 | squashfs-gzip7-b256K | 1.040 | 0.99 | 1.17 |  | 1.16 | 0.99 | 0.65 | 1.26 | 1 | 92% |
 | squashfs-xz-bcjauto-b32K | 1.043 | 0.91 |  |  |  |  | 4.89 |  | 1 | 38% |
 | squashfs-gzip3-b256K | 1.062 | 1.05 | 1.02 |  | 1.22 | 1.09 | 0.27 | 1.26 | 1 | 92% |
+| dwarfs-user-S26-B6-plain | 1.103 | 0.76 | 7.01 |  | 0.48 | 0.67 | 6.49 | 14.13 | 1 | 92% |
+| dwarfs-user-S26-B6-hot | 1.127 | 0.76 | 6.57 |  | 0.56 | 0.67 | 5.80 | 14.06 | 1 | 92% |
 | squashfs-lzo-b128K | 1.128 | 1.08 |  |  |  |  | 1.80 |  | 1 | 38% |
 | squashfs-lz4hc-b128K | 1.144 | 1.15 |  |  |  |  | 1.06 |  | 1 | 38% |
 | dwarfs-zstd7-S20 | 1.209 | 0.92 | 3.40 |  | 0.49 | 1.05 | 0.39 | 17.00 | 1 | 92% |
@@ -318,8 +322,10 @@ Weighted score = weighted geometric mean of metric/baseline (lower is better); m
 | dwarfs-l3-S26 | 1.246 | 1.11 | 6.09 | 0.84 | 0.39 | 0.91 | 0.50 | 23.68 | 1 | 100% |
 | dwarfs-zstd12-S20 | 1.396 | 0.93 | 5.22 | 0.98 | 0.36 | 1.97 | 0.42 | 24.70 | 1 | 100% |
 | dwarfs-zstd7-S20 | 1.426 | 0.94 | 5.79 | 1.14 | 0.39 | 1.99 | 0.30 | 24.30 | 1 | 100% |
+| dwarfs-user-S26-B6-hot | 1.449 | 0.76 | 5.04 | 2.16 | 0.41 | 1.59 | 6.05 | 23.38 | 1 | 100% |
 | dwarfs-zstd4-S20 | 1.453 | 0.98 | 5.47 | 1.02 | 0.38 | 2.18 | 0.25 | 24.74 | 1 | 100% |
 | dwarfs-zstd17-S20 | 1.456 | 0.89 | 5.54 | 1.11 | 0.38 | 1.96 | 1.43 | 24.44 | 1 | 100% |
+| dwarfs-user-S26-B6-plain | 1.460 | 0.76 | 5.74 | 2.55 | 0.39 | 1.59 | 5.26 | 23.42 | 1 | 100% |
 | dwarfs-l5-S24 | 1.464 | 0.80 | 5.28 | 2.04 | 0.40 | 1.79 | 2.91 | 23.15 | 1 | 100% |
 | dwarfs-l1-S24 | 1.488 | 1.33 | 4.78 | 0.72 | 0.78 | 1.28 | 0.08 | 23.64 | 1 | 100% |
 | dwarfs-l5-S20 | 1.509 | 0.87 | 5.38 | 1.35 | 0.40 | 1.99 | 2.89 | 24.26 | 1 | 100% |
@@ -386,8 +392,10 @@ Weighted score = weighted geometric mean of metric/baseline (lower is better); m
 | dwarfs-l3-S24 | 1.650 | 1.11 | 5.74 | 1.00 |  | 1.07 | 0.39 | 25.84 | 2 | 84% |
 | dwarfs-l1-S24 | 1.694 | 1.39 | 5.25 | 0.57 |  | 1.28 | 0.06 | 28.04 | 2 | 84% |
 | dwarfs-zstd12-S20 | 1.711 | 0.91 | 4.82 | 0.95 |  | 1.75 | 0.37 | 24.99 | 2 | 84% |
+| dwarfs-user-S26-B6-hot | 1.712 | 0.71 | 4.97 | 2.27 |  | 1.38 | 4.44 | 24.25 | 2 | 84% |
 | dwarfs-zstd7-S20 | 1.718 | 0.92 | 4.40 | 1.12 |  | 1.77 | 0.24 | 25.22 | 2 | 84% |
 | dwarfs-l7-S24 | 1.722 | 0.75 | 4.91 | 2.15 |  | 1.37 | 3.82 | 24.30 | 2 | 84% |
+| dwarfs-user-S26-B6-plain | 1.747 | 0.71 | 4.80 | 2.92 |  | 1.38 | 4.29 | 24.06 | 2 | 84% |
 | dwarfs-l7-S20 | 1.764 | 0.81 | 5.88 | 1.35 |  | 1.51 | 2.98 | 25.02 | 2 | 84% |
 | dwarfs-zstd17-S20 | 1.804 | 0.86 | 5.48 | 1.38 |  | 1.67 | 1.33 | 25.02 | 2 | 84% |
 | dwarfs-l5-S20 | 1.805 | 0.83 | 5.07 | 1.49 |  | 1.66 | 2.21 | 24.66 | 2 | 84% |
@@ -445,6 +453,8 @@ Weighted score = weighted geometric mean of metric/baseline (lower is better); m
 | dwarfs-zstd17-S20 | 1.460 | 0.91 | 4.43 | 0.65 | 0.84 | 2.39 | 1.65 | 6.68 | 1 | 100% |
 | dwarfs-l5-S20 | 1.470 | 0.87 | 3.41 | 1.00 | 0.82 | 2.31 | 2.43 | 6.56 | 1 | 100% |
 | dwarfs-l7-S20 | 1.510 | 0.87 | 4.37 | 0.96 | 0.77 | 2.55 | 2.96 | 6.72 | 1 | 100% |
+| dwarfs-user-S26-B6-hot | 1.523 | 0.77 | 4.17 | 0.71 | 0.62 | 3.66 | 9.10 | 6.09 | 1 | 100% |
+| dwarfs-user-S26-B6-plain | 1.551 | 0.77 | 4.95 | 0.71 | 0.70 | 3.66 | 7.65 | 6.01 | 1 | 100% |
 | dwarfs-l3-S16 | 1.575 | 1.28 | 4.17 | 0.45 | 0.70 | 3.04 | 0.35 | 7.18 | 1 | 100% |
 | dwarfs-brotli6-S20 | 1.575 | 0.92 | 4.02 | 1.81 | 0.89 | 2.54 | 0.48 | 7.14 | 1 | 100% |
 | dwarfs-brotli8-S20 | 1.591 | 0.92 | 4.97 | 1.50 | 0.93 | 2.52 | 0.76 | 7.17 | 1 | 100% |
@@ -501,6 +511,7 @@ Weighted score = weighted geometric mean of metric/baseline (lower is better); m
 | dwarfs-l3-S20 | 1.063 | 1.34 | 4.18 |  | 0.28 | 1.10 | 0.49 | 2.74 | 1 | 92% |
 | dwarfs-l3-S24 | 1.066 | 1.33 | 4.24 |  | 0.28 | 1.06 | 0.73 | 2.79 | 1 | 92% |
 | squashfs-gzip5-b256K | 1.080 | 1.01 | 1.13 |  | 1.42 | 1.08 | 0.29 | 1.29 | 1 | 92% |
+| dwarfs-user-S26-B6-plain | 1.092 | 0.94 | 4.61 |  | 0.24 | 1.58 | 9.80 | 2.52 | 1 | 92% |
 | squashfs-gzip7-b256K | 1.093 | 1.00 | 1.29 |  | 1.43 | 1.05 | 0.48 | 1.30 | 1 | 92% |
 | dwarfs-l5-S24 | 1.109 | 0.95 | 4.02 |  | 0.28 | 1.59 | 5.76 | 2.71 | 1 | 92% |
 | dwarfs-zstd7-S20 | 1.117 | 1.09 | 4.09 |  | 0.28 | 1.88 | 0.34 | 2.77 | 1 | 92% |
@@ -524,17 +535,18 @@ Weighted score = weighted geometric mean of metric/baseline (lower is better); m
 | dwarfs-lzma7-S20 | 1.360 | 0.96 | 5.88 |  | 0.56 | 1.62 | 2.89 | 5.56 | 1 | 92% |
 | dwarfs-l7-S24 | 1.388 | 0.94 | 4.47 |  | 0.99 | 1.59 | 5.87 | 2.66 | 1 | 92% |
 | dwarfs-l7-S16 | 1.398 | 1.11 | 5.14 |  | 0.56 | 1.98 | 3.37 | 2.69 | 1 | 92% |
+| dwarfs-user-S26-B6-hot |  |  |  |  |  |  |  |  | 1 | 0% |
 
 ## Table 2 - Total size per app (MB)
 
 | app | uncompressed | squashfs-zstd7-b128K+nofrag | squashfs-zstd7-b32K+nofrag | squashfs-zstd4-b32K | squashfs-zstd7-b32K+sorttype | squashfs-zstd7-b32K+notail | squashfs-zstd7-b128K+sorttype | squashfs-gzip9-b128K | best |
 |---|---|---|---|---|---|---|---|---|---|
-| kdenlive/x86_64 | 658.6 | 219.4 | 228.8 | 235.3 |  | 226.5 |  | 218.4 | dwarfs-l7-S24 |
-| keepassxc/x86_64 | 110.3 | 41.3 | 42.9 | 44.4 | 42.9 | 42.9 | 41.2 | 41.4 | dwarfs-l7-S24 |
-| krita/x86_64 | 1003.6 | 367.4 | 379.6 | 388.6 |  | 376.1 |  | 368.4 | dwarfs-l7-S24 |
-| libreoffice/x86_64 | 732.8 | 299.0 | 308.2 | 315.8 | 305.1 | 305.3 | 294.1 | 300.0 | dwarfs-l7-S24 |
+| kdenlive/x86_64 | 658.6 | 219.4 | 228.8 | 235.3 |  | 226.5 |  | 218.4 | dwarfs-user-S26-B6-plain |
+| keepassxc/x86_64 | 110.3 | 41.3 | 42.9 | 44.4 | 42.9 | 42.9 | 41.2 | 41.4 | dwarfs-user-S26-B6-plain |
+| krita/x86_64 | 1003.6 | 367.4 | 379.6 | 388.6 |  | 376.1 |  | 368.4 | dwarfs-user-S26-B6-plain |
+| libreoffice/x86_64 | 732.8 | 299.0 | 308.2 | 315.8 | 305.1 | 305.3 | 294.1 | 300.0 | dwarfs-user-S26-B6-plain |
 | neovim/x86_64 | 38.0 | 13.2 | 13.7 | 13.9 | 13.3 | 13.3 | 12.6 | 12.9 | squashfs-xz-bcjauto-b256K |
-| obsidian/x86_64 | 291.3 | 111.0 | 118.5 | 122.9 | 118.5 | 118.5 | 111.0 | 113.9 | dwarfs-l7-S24 |
+| obsidian/x86_64 | 291.3 | 111.0 | 118.5 | 122.9 | 118.5 | 118.5 | 111.0 | 113.9 | dwarfs-user-S26-B6-plain |
 
 ## Table 3 - zsync update cost (median over patch pairs)
 
@@ -594,6 +606,12 @@ Weighted score = weighted geometric mean of metric/baseline (lower is better); m
 | dwarfs-lzma7-S20 | 1024 | 836.9K | 82.8M | 83.4M | 76.5% | 1 |
 | dwarfs-lzma7-S20 | 2048 | 418.6K | 82.8M | 83.1M | 76.4% | 1 |
 | dwarfs-lzma7-S20 | 4096 | 209.4K | 82.9M | 83.0M | 76.7% | 1 |
+| dwarfs-user-S26-B6-hot | 1024 | 1010.3K | 139.2M | 140.1M | 82.9% | 19 |
+| dwarfs-user-S26-B6-hot | 2048 | 505.3K | 139.9M | 140.4M | 87.1% | 6 |
+| dwarfs-user-S26-B6-hot | 4096 | 252.8K | 140.3M | 140.5M | 88.7% | 2 |
+| dwarfs-user-S26-B6-plain | 1024 | 796.1K | 82.9M | 83.5M | 78.8% | 12 |
+| dwarfs-user-S26-B6-plain | 2048 | 398.2K | 83.3M | 83.6M | 80.8% | 4 |
+| dwarfs-user-S26-B6-plain | 4096 | 199.2K | 83.6M | 83.7M | 81.6% | 2 |
 | dwarfs-zstd12-S20 | 1024 | 1.3M | 179.8M | 181.1M | 75.9% | 18 |
 | dwarfs-zstd12-S20 | 2048 | 654.8K | 180.4M | 181.0M | 75.9% | 11 |
 | dwarfs-zstd12-S20 | 4096 | 327.5K | 181.0M | 181.3M | 76.0% | 6 |
@@ -715,9 +733,9 @@ Weighted score = weighted geometric mean of metric/baseline (lower is better); m
 | squashfs-zstd7-b32K+sorttype | 2048 | 269.6K | 7.7M | 7.9M | 26.1% | 2 |
 | squashfs-zstd7-b32K+sorttype | 4096 | 134.9K | 7.7M | 7.9M | 27.5% | 1 |
 
-No-change rebuild: 321 variants tested; 0 downloaded >1% (non-determinism / unstable layout): none
+No-change rebuild: 332 variants tested; 0 downloaded >1% (non-determinism / unstable layout): none
 
-Ideal references on raw AppDir tars: kdenlive/patch xdelta3=92.3M, keepassxc/patch xdelta3=2.1M, krita/patch xdelta3=38.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, neovim/patch xdelta3=1.5M, obsidian/patch xdelta3=69.5K, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, keepassxc/patch xdelta3=2.1M, keepassxc/patch xdelta3=2.1M, keepassxc/patch xdelta3=2.1M, keepassxc/patch xdelta3=2.1M, keepassxc/patch xdelta3=2.1M, keepassxc/patch xdelta3=2.1M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, neovim/patch xdelta3=1.5M, neovim/patch xdelta3=1.5M, neovim/patch xdelta3=1.5M, neovim/patch xdelta3=1.5M, neovim/patch xdelta3=1.5M, neovim/patch xdelta3=1.5M, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, keepassxc/patch xdelta3=2.1M, keepassxc/patch xdelta3=2.1M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, neovim/patch xdelta3=1.5M, neovim/patch xdelta3=1.5M, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, keepassxc/patch xdelta3=2.1M, keepassxc/patch xdelta3=2.1M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, neovim/patch xdelta3=1.5M, neovim/patch xdelta3=1.5M, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K
+Ideal references on raw AppDir tars: kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, keepassxc/patch xdelta3=2.1M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, neovim/patch xdelta3=1.5M, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, keepassxc/patch xdelta3=2.1M, keepassxc/patch xdelta3=2.1M, keepassxc/patch xdelta3=2.1M, keepassxc/patch xdelta3=2.1M, keepassxc/patch xdelta3=2.1M, keepassxc/patch xdelta3=2.1M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, neovim/patch xdelta3=1.5M, neovim/patch xdelta3=1.5M, neovim/patch xdelta3=1.5M, neovim/patch xdelta3=1.5M, neovim/patch xdelta3=1.5M, neovim/patch xdelta3=1.5M, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, keepassxc/patch xdelta3=2.1M, keepassxc/patch xdelta3=2.1M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, neovim/patch xdelta3=1.5M, neovim/patch xdelta3=1.5M, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, keepassxc/patch xdelta3=2.1M, keepassxc/patch xdelta3=2.1M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, neovim/patch xdelta3=1.5M, neovim/patch xdelta3=1.5M, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, kdenlive/patch xdelta3=92.3M, keepassxc/patch xdelta3=2.1M, krita/patch xdelta3=38.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, neovim/patch xdelta3=1.5M, obsidian/patch xdelta3=69.5K
 
 ## Table 3b - Compression block x zsync block (update cost, % of image; best per row bold)
 
@@ -816,6 +834,7 @@ dwarfs zstd level 12 (median over apps)
 | dwarfs-lzma3 | n/a (FUSE3) | 3.x | True |
 | dwarfs-lzma5 | n/a (FUSE3) | 3.x | True |
 | dwarfs-lzma7 | n/a (FUSE3) | 3.x | True |
+| dwarfs-user | n/a (FUSE3) | 3.x | True |
 | dwarfs-zstd12 | n/a (FUSE3) | 3.x | True |
 | dwarfs-zstd17 | n/a (FUSE3) | 3.x | True |
 | dwarfs-zstd4 |  |  |  |
@@ -861,7 +880,7 @@ Best by weighted score: `squashfs-zstd7-b128K+nofrag` (0.792, coverage 100%), `s
 
 _no candidate satisfies the rule yet (need stage 2 data)_
 
-- smallest: `dwarfs-l7-S24` (0.80), runner-up `dwarfs-l5-S24`
+- smallest: `dwarfs-user-S26-B6-hot` (0.74), runner-up `dwarfs-user-S26-B6-plain`
 - fastest startup (CPU): `squashfs-zstd7-b128K+sorttype` (0.33), runner-up `squashfs-zstd7-b256K+sorttype`
 - cheapest update: `dwarfs-l2-S24` (0.72), runner-up `dwarfs-l3-S24`
 - fastest build: `squashfs-zstd3-b32K` (0.07), runner-up `dwarfs-l1-S24`
@@ -870,8 +889,8 @@ _no candidate satisfies the rule yet (need stage 2 data)_
 
 _no lever has its best value at an edge: all optima are interior (or at the range extreme)_
 
-Shortlist for the next stage: `squashfs-zstd4-b32K`, `squashfs-zstd3-b32K`, `squashfs-zstd7-b256K`, `squashfs-xz-bcjnone-b256K`, `dwarfs-zstd7-S20`, `dwarfs-brotli6-S20`, `dwarfs-l7-S24`, `dwarfs-brotli8-S20`, `dwarfs-lzma5-S20`, `dwarfs-lzma7-S20`, `dwarfs-lzma3-S20`, `squashfs-gzip9-b128K`
+Shortlist for the next stage: `squashfs-zstd4-b32K`, `squashfs-zstd3-b32K`, `squashfs-zstd7-b256K`, `squashfs-xz-bcjnone-b256K`, `dwarfs-zstd7-S20`, `dwarfs-user-S26-B6-hot`, `dwarfs-brotli6-S20`, `dwarfs-l7-S24`, `dwarfs-brotli8-S20`, `dwarfs-lzma5-S20`, `dwarfs-lzma7-S20`, `squashfs-gzip9-b128K`
 
-Noisy (CV>10%) variants queued for retry: 250
+Noisy (CV>10%) variants queued for retry: 256
 
 <!-- RESULTS:END -->
