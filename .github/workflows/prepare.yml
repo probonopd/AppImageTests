@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       stage:
-        description: "1 = screen (size+build), 2 = shortlist (startup+zsync), 3 = option axes, ext = edge extension of levers, full = everything"
+        description: "1 = screen (size+build), 2 = shortlist (startup+zsync), 3 = option axes, ext = edge extension of levers, fine = fine zstd level x block grid around the optimum, full = everything"
         type: choice
-        options: ["1", "2", "3", "ext", "full"]
+        options: ["1", "2", "3", "ext", "fine", "full"]
         default: "1"
       apps:
         description: "Comma list of apps (default: stage rules)"

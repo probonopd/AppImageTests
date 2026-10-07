@@ -79,6 +79,8 @@ def pack(vs, mb, flags, canary):
 
 
 WIDE = False
+FINE_LEVELS = (5, 7, 9)
+FINE_BLOCKS = ("64K", "128K", "256K", "512K")
 
 
 def select_variants(stage, results, only):
@@ -95,6 +97,10 @@ def select_variants(stage, results, only):
         ep = Path(results) / "extensions.json" if results else None
         ids = json.loads(ep.read_text())["variants"] if ep and ep.exists() else []
         vs = [get_variant(i) for i in ids]
+    elif stage == "fine":
+        # Fine grid around the stage 2/3 optimum, all in the same jobs (and next to the canary)
+        # so the points can be compared directly. Not a 3-point lever scan: it refines it.
+        vs = [get_variant(f"squashfs-zstd{lv}-b{bk}") for lv in FINE_LEVELS for bk in FINE_BLOCKS]
     elif stage == "2" and WIDE:
         bad = set(load_variant_table().get("runtime_unsupported_codecs", []))
         vs = [v for v in allv if v["codec"] not in bad and not v["reference_only"] and v["codec"] not in ("lz4", "lzo")]
