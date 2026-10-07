@@ -18,12 +18,18 @@ git clone https://github.com/AppImage/type2-runtime.git
 cd type2-runtime
 git checkout "$TYPE2_COMMIT"
 
+# Alpine's liblz4.a holds LTO objects that clang's linker cannot read: build a plain static one.
+git clone --depth 1 --branch v1.10.0 https://github.com/lz4/lz4.git /tmp/lz4
+make -C /tmp/lz4 -j"$(nproc)" lib BUILD_SHARED=no CFLAGS="-O2 -fno-lto"
+make -C /tmp/lz4 install PREFIX=/usr/local BUILD_SHARED=no
+ls -l /usr/local/lib/liblz4.a
+
 # 1) squashfuse: enable every codec
-sed -i 's|./configure LDFLAGS="-static"|./configure LDFLAGS="-static" --with-zlib=/usr --with-zstd=/usr --with-xz=/usr --with-lzo=/usr --with-lz4=/usr|' \
+sed -i 's|./configure LDFLAGS="-static"|./configure LDFLAGS="-static" --with-zlib=/usr --with-zstd=/usr --with-xz=/usr --with-lzo=/usr --with-lz4=/usr/local|' \
     scripts/common/install-dependencies.sh
 grep -q -- '--with-xz' scripts/common/install-dependencies.sh
 # 2) runtime: link the extra codec libraries
-sed -i 's|-lzstd -lz |-lzstd -lz -llzma -llzo2 -llz4 |' src/runtime/Makefile
+sed -i 's|^LIBS .*= -lsquashfuse|LIBS          = -L/usr/local/lib -lsquashfuse|; s|-lzstd -lz |-lzstd -lz -llzma -llzo2 -llz4 |' src/runtime/Makefile
 grep -q -- '-llzma' src/runtime/Makefile
 
 bash scripts/common/install-dependencies.sh
