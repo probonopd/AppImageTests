@@ -1,0 +1,53 @@
+name: Build full-codec runtime
+# Builds the AppImage type2-runtime with squashfuse linked against every squashfs codec
+# (zlib, zstd, xz, lzo, lz4), tests that it reads each codec, and publishes it as the release
+# asset `runtime-full-x86_64` (tag `runtime-full`). Put the printed sha256 into
+# corpus/runtimes.yml (`squashfs_full`).
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build in Alpine
+        run: |
+          mkdir -p out
+          docker run --rm -v "$PWD/tools:/tools:ro" -v "$PWD/out:/out" alpine:3.21 sh /tools/build_full_runtime.sh
+      - name: Test every codec (extract + compare)
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq squashfs-tools
+          rt="$PWD/out/runtime-x86_64"; chmod +x "$rt"
+          mkdir -p t/src/sub && head -c 3000000 /dev/urandom | base64 > t/src/big.txt
+          seq 1 200000 > t/src/sub/seq.txt; cp /bin/ls t/src/ls
+          fail=0
+          for opt in "gzip" "zstd -Xcompression-level 7" "xz" "xz -Xbcj x86" "lzo" "lz4 -Xhc"; do
+            name=$(echo "$opt" | tr -c 'a-z0-9\n' '_')
+            mksquashfs t/src "t/$name.sq" -comp $opt -b 256K -noappend -no-progress >/dev/null
+            cat "$rt" "t/$name.sq" > "t/$name.AppImage"; chmod +x "t/$name.AppImage"
+            rm -rf squashfs-root
+            if "t/$name.AppImage" --appimage-extract >/dev/null 2>t/err.txt && diff -r squashfs-root t/src >/dev/null; then
+              echo "OK   $opt"
+            else
+              echo "FAIL $opt: $(head -c 200 t/err.txt)"; fail=1
+            fi
+          done
+          exit $fail
+      - uses: actions/upload-artifact@v4
+        with:
+          name: runtime-full-x86_64
+          path: out/
+      - name: Publish release asset
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view runtime-full >/dev/null 2>&1 || gh release create runtime-full --title "Full-codec type2 runtime" \
+            --notes "type2-runtime with squashfuse built for zlib, zstd, xz, lzo and lz4 (benchmark only)."
+          cp out/runtime-x86_64 runtime-full-x86_64
+          gh release upload runtime-full runtime-full-x86_64 --clobber
+          echo "## Full-codec runtime" >> "$GITHUB_STEP_SUMMARY"
+          sha256sum runtime-full-x86_64 | tee -a "$GITHUB_STEP_SUMMARY"
+          cat out/build-info.txt >> "$GITHUB_STEP_SUMMARY"
