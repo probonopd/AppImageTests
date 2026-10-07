@@ -1,8 +1,10 @@
 {
  "variants": [
-  "dwarfs-brotli9-S20"
+  "dwarfs-lzma8-S20",
+  "squashfs-xz-bcjnone-b16K"
  ],
  "reasons": {
-  "dwarfs-brotli9-S20": "dw-brotli: best level=8 is the high edge of the tested values -> try level=9"
+  "squashfs-xz-bcjnone-b16K": "sq-xz: best block=32K is the low edge of the tested values -> try block=16K",
+  "dwarfs-lzma8-S20": "dw-lzma: best level=7 is the high edge of the tested values -> try level=8"
  }
 }

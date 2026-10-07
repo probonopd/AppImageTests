@@ -1,0 +1,2797 @@
+{
+  "records": [
+    {
+      "run_id": "37581057391",
+      "app": "neovim",
+      "arch": "x86_64",
+      "category": "tiny-cli",
+      "variant": "squashfs-gzip9-b128K",
+      "container": "squashfs",
+      "codec": "gzip",
+      "level": 9,
+      "block_bytes": 131072,
+      "family_key": "sq-baseline",
+      "stage": "2",
+      "retry": false,
+      "runtime": "type2-runtime@156f4bdbde9c",
+      "size": {
+        "payload": 11931648,
+        "runtime": 944632,
+        "total": 12876280,
+        "uncompressed": 38000417,
+        "ratio": 0.3388457552978958
+      },
+      "build": {
+        "wall_s": 1.1,
+        "cpu_s": 4.05,
+        "rss_mb": 82.77734375,
+        "timeout": false,
+        "deterministic": true
+      },
+      "env": {
+        "cpu": "AMD EPYC 9V74 80-Core Processor",
+        "cores": 4,
+        "ram_gb": 15.6,
+        "kernel": "6.17.0-1022-azure",
+        "image": "20261004.327.1",
+        "runner": "GitHub Actions 1000009474",
+        "tools": {
+          "mksquashfs": "mksquashfs version 4.6.1 (2023/03/25)",
+          "mkdwarfs": "___                  ___ ___",
+          "zsync": "zsync v0.6.2 (compiled Apr 18 2024 17:54:59)"
+        }
+      },
+      "startup": {
+        "mount": {
+          "warm": [
+            {
+              "mount_ms": 8.756762999979628,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 90.56653400000414,
+              "rand4k_ms": 0.3217086699999072,
+              "seq_mb_s": 148.69859309563122,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.25,
+              "fuse_rss_mb": 29.75
+            },
+            {
+              "mount_ms": 8.095851000007315,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 81.00031700001864,
+              "rand4k_ms": 0.2915395499999818,
+              "seq_mb_s": 151.87830331446867,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.24000000000000002,
+              "fuse_rss_mb": 29.76171875
+            },
+            {
+              "mount_ms": 7.238584999981867,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 80.40179299999295,
+              "rand4k_ms": 0.3133378549999577,
+              "seq_mb_s": 143.21782479771187,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.25,
+              "fuse_rss_mb": 29.734375
+            },
+            {
+              "mount_ms": 5.879988000003777,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 81.81515200001854,
+              "rand4k_ms": 0.29029807000000574,
+              "seq_mb_s": 142.77709303195206,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.25,
+              "fuse_rss_mb": 29.6484375
+            },
+            {
+              "mount_ms": 6.801119999977345,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 79.43894300001375,
+              "rand4k_ms": 0.28997563000004334,
+              "seq_mb_s": 151.6904875727678,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.24000000000000002,
+              "fuse_rss_mb": 29.671875
+            },
+            {
+              "mount_ms": 8.839127999976881,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 82.18979099999046,
+              "rand4k_ms": 0.28990757500011455,
+              "seq_mb_s": 150.43206960090868,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.24000000000000002,
+              "fuse_rss_mb": 29.76171875
+            },
+            {
+              "mount_ms": 6.2923149999960515,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 83.38999599999397,
+              "rand4k_ms": 0.292102150000062,
+              "seq_mb_s": 150.724099541432,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.24,
+              "fuse_rss_mb": 29.703125
+            }
+          ],
+          "cold": [
+            {
+              "mount_ms": 148.0007819999969,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 82.66207200000508,
+              "rand4k_ms": 1.414638305000011,
+              "seq_mb_s": 104.20958209589526,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.24000000000000002,
+              "fuse_rss_mb": 29.6484375
+            },
+            {
+              "mount_ms": 30.085262000000057,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 84.15440899997861,
+              "rand4k_ms": 0.47123603000002845,
+              "seq_mb_s": 127.47921942448134,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.24,
+              "fuse_rss_mb": 29.56640625
+            },
+            {
+              "mount_ms": 389.6506610000188,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 93.35002599999598,
+              "rand4k_ms": 0.388947130000048,
+              "seq_mb_s": 121.34253658876723,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.26,
+              "fuse_rss_mb": 29.6015625
+            },
+            {
+              "mount_ms": 23.982869999997547,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 90.11347099999512,
+              "rand4k_ms": 0.7074944000000016,
+              "seq_mb_s": 93.31057435278187,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.27,
+              "fuse_rss_mb": 29.64453125
+            },
+            {
+              "mount_ms": 24.60998099999756,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 84.28410799999142,
+              "rand4k_ms": 0.4225224999999,
+              "seq_mb_s": 126.50800075398482,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.27,
+              "fuse_rss_mb": 29.62890625
+            }
+          ],
+          "tmpfs": [
+            {
+              "mount_ms": 50.39667699998063,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 87.42693599998574,
+              "rand4k_ms": 0.293587805000044,
+              "seq_mb_s": 141.86771897596242,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.26,
+              "fuse_rss_mb": 29.046875
+            },
+            {
+              "mount_ms": 163.09877099999426,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 92.82961599998885,
+              "rand4k_ms": 0.3219737299998826,
+              "seq_mb_s": 139.35977330035345,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.27,
+              "fuse_rss_mb": 28.8984375
+            },
+            {
+              "mount_ms": 25.03948200001105,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 83.29193299999815,
+              "rand4k_ms": 0.2928863549999505,
+              "seq_mb_s": 147.28121880057196,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.24000000000000002,
+              "fuse_rss_mb": 29.0546875
+            },
+            {
+              "mount_ms": 103.74701300000311,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 84.08657600000424,
+              "rand4k_ms": 0.32772385000001236,
+              "seq_mb_s": 134.1825358795301,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.27,
+              "fuse_rss_mb": 29.05078125
+            },
+            {
+              "mount_ms": 561.604994999982,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 80.7315840000058,
+              "rand4k_ms": 0.29097496999995087,
+              "seq_mb_s": 147.3359203820802,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.24000000000000002,
+              "fuse_rss_mb": 29.04296875
+            }
+          ]
+        },
+        "launch": {
+          "warm": [
+            {
+              "launch_ms": 447.70085999999765,
+              "ok": true
+            },
+            {
+              "launch_ms": 63.938335999978335,
+              "ok": true
+            },
+            {
+              "launch_ms": 63.89598600000568,
+              "ok": true
+            }
+          ],
+          "cold": [
+            {
+              "launch_ms": 115.82242099999007,
+              "ok": true
+            },
+            {
+              "launch_ms": 115.78981999997495,
+              "ok": true
+            },
+            {
+              "launch_ms": 115.78525099997705,
+              "ok": true
+            }
+          ],
+          "tmpfs": [
+            {
+              "launch_ms": 114.01328499999863,
+              "ok": true
+            },
+            {
+              "launch_ms": 113.99800599997434,
+              "ok": true
+            },
+            {
+              "launch_ms": 114.08402399996476,
+              "ok": true
+            }
+          ]
+        }
+      },
+      "zsync": [
+        {
+          "zsync_block": 1024,
+          "zsync_file": 88260,
+          "control_served": 88260,
+          "downloaded": 5614008,
+          "requests": 2,
+          "ok": true,
+          "update_cost": 5702268,
+          "update_ratio": 0.4428505748554707,
+          "pair": "patch"
+        },
+        {
+          "zsync_block": 2048,
+          "zsync_file": 44251,
+          "control_served": 44251,
+          "downloaded": 5638900,
+          "requests": 2,
+          "ok": true,
+          "update_cost": 5683151,
+          "update_ratio": 0.4413659069234282,
+          "pair": "patch"
+        },
+        {
+          "zsync_block": 4096,
+          "zsync_file": 19099,
+          "control_served": 19099,
+          "downloaded": 5698796,
+          "requests": 2,
+          "ok": true,
+          "update_cost": 5717895,
+          "update_ratio": 0.4440642017725616,
+          "pair": "patch"
+        },
+        {
+          "zsync_block": 2048,
+          "zsync_file": 44251,
+          "control_served": 44251,
+          "downloaded": 45286,
+          "requests": 1,
+          "ok": true,
+          "update_cost": 89537,
+          "update_ratio": 0.006953638783872361,
+          "pair": "rebuild"
+        }
+      ],
+      "summary": {
+        "build_wall_s": 1.1,
+        "build_cpu_s": 4.05,
+        "build_rss_mb": 82.77734375,
+        "mount_ms_warm": 7.238584999981867,
+        "workset_ms_warm": null,
+        "rand4k_ms_warm": 0.2915395499999818,
+        "cpu_s_startup_warm": 0.0,
+        "seq_mb_s_warm": 150.43206960090868,
+        "fuse_rss_mb_warm": 29.734375,
+        "cpu_s_total_warm": 0.24000000000000002,
+        "walk_ms_warm": 81.81515200001854,
+        "mount_ms_cold": 30.085262000000057,
+        "workset_ms_cold": null,
+        "rand4k_ms_cold": 0.47123603000002845,
+        "cpu_s_startup_cold": 0.0,
+        "seq_mb_s_cold": 121.34253658876723,
+        "fuse_rss_mb_cold": 29.62890625,
+        "cpu_s_total_cold": 0.26,
+        "walk_ms_cold": 84.28410799999142,
+        "mount_ms_tmpfs": 103.74701300000311,
+        "workset_ms_tmpfs": null,
+        "rand4k_ms_tmpfs": 0.293587805000044,
+        "cpu_s_startup_tmpfs": 0.0,
+        "seq_mb_s_tmpfs": 141.86771897596242,
+        "fuse_rss_mb_tmpfs": 29.046875,
+        "cpu_s_total_tmpfs": 0.26,
+        "walk_ms_tmpfs": 84.08657600000424,
+        "launch_ms_warm": 63.938335999978335,
+        "launch_ms_cold": 115.78981999997495,
+        "launch_ms_tmpfs": 114.01328499999863
+      },
+      "canary": {
+        "build_wall_s": 1.1,
+        "build_cpu_s": 4.05,
+        "build_rss_mb": 82.77734375,
+        "mount_ms_warm": 7.238584999981867,
+        "workset_ms_warm": null,
+        "rand4k_ms_warm": 0.2915395499999818,
+        "cpu_s_startup_warm": 0.0,
+        "seq_mb_s_warm": 150.43206960090868,
+        "fuse_rss_mb_warm": 29.734375,
+        "cpu_s_total_warm": 0.24000000000000002,
+        "walk_ms_warm": 81.81515200001854,
+        "mount_ms_cold": 30.085262000000057,
+        "workset_ms_cold": null,
+        "rand4k_ms_cold": 0.47123603000002845,
+        "cpu_s_startup_cold": 0.0,
+        "seq_mb_s_cold": 121.34253658876723,
+        "fuse_rss_mb_cold": 29.62890625,
+        "cpu_s_total_cold": 0.26,
+        "walk_ms_cold": 84.28410799999142,
+        "mount_ms_tmpfs": 103.74701300000311,
+        "workset_ms_tmpfs": null,
+        "rand4k_ms_tmpfs": 0.293587805000044,
+        "cpu_s_startup_tmpfs": 0.0,
+        "seq_mb_s_tmpfs": 141.86771897596242,
+        "fuse_rss_mb_tmpfs": 29.046875,
+        "cpu_s_total_tmpfs": 0.26,
+        "walk_ms_tmpfs": 84.08657600000424,
+        "launch_ms_warm": 63.938335999978335,
+        "launch_ms_cold": 115.78981999997495,
+        "launch_ms_tmpfs": 114.01328499999863
+      },
+      "noisy": [
+        "mount_ms_warm",
+        "mount_ms_cold",
+        "mount_ms_tmpfs"
+      ]
+    },
+    {
+      "run_id": "37581057391",
+      "app": "neovim",
+      "arch": "x86_64",
+      "category": "tiny-cli",
+      "variant": "squashfs-xz-bcjnone-b32K",
+      "container": "squashfs",
+      "codec": "xz",
+      "level": null,
+      "block_bytes": 32768,
+      "family_key": "sq-xz/bcj=none",
+      "stage": "2",
+      "retry": false,
+      "runtime": "type2-runtime-full@6c881190831e",
+      "size": {
+        "payload": 11190272,
+        "runtime": 1092280,
+        "total": 12282552,
+        "uncompressed": 38000417,
+        "ratio": 0.32322150570084535
+      },
+      "build": {
+        "wall_s": 2.22,
+        "cpu_s": 8.4,
+        "rss_mb": 80.15234375,
+        "timeout": false,
+        "deterministic": true
+      },
+      "env": {
+        "cpu": "AMD EPYC 9V74 80-Core Processor",
+        "cores": 4,
+        "ram_gb": 15.6,
+        "kernel": "6.17.0-1022-azure",
+        "image": "20261004.327.1",
+        "runner": "GitHub Actions 1000009474",
+        "tools": {
+          "mksquashfs": "mksquashfs version 4.6.1 (2023/03/25)",
+          "mkdwarfs": "___                  ___ ___",
+          "zsync": "zsync v0.6.2 (compiled Apr 18 2024 17:54:59)"
+        }
+      },
+      "startup": {
+        "mount": {
+          "warm": [
+            {
+              "mount_ms": 8.523345000014615,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 81.92101399998819,
+              "rand4k_ms": 0.2996268599999041,
+              "seq_mb_s": 72.38104149127693,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.5,
+              "fuse_rss_mb": 17.37109375
+            },
+            {
+              "mount_ms": 7.779633000012609,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 81.11866100000498,
+              "rand4k_ms": 0.302416905000058,
+              "seq_mb_s": 71.1233488883491,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.5,
+              "fuse_rss_mb": 15.703125
+            },
+            {
+              "mount_ms": 8.011092999993252,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 91.53013900001383,
+              "rand4k_ms": 0.3278965650000032,
+              "seq_mb_s": 70.68914605449449,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.52,
+              "fuse_rss_mb": 17.11328125
+            },
+            {
+              "mount_ms": 6.492444000002706,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 81.25249099998655,
+              "rand4k_ms": 0.29877980499989576,
+              "seq_mb_s": 73.43424550052512,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.49,
+              "fuse_rss_mb": 15.69921875
+            },
+            {
+              "mount_ms": 7.881180999987691,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 80.15541000000326,
+              "rand4k_ms": 0.29707169999994676,
+              "seq_mb_s": 73.12712427333595,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.49,
+              "fuse_rss_mb": 15.51953125
+            },
+            {
+              "mount_ms": 7.977717000017037,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 80.51850799998306,
+              "rand4k_ms": 0.3008610650000776,
+              "seq_mb_s": 69.88852221492716,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.51,
+              "fuse_rss_mb": 15.58984375
+            },
+            {
+              "mount_ms": 10.375503999995317,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 82.07303699998647,
+              "rand4k_ms": 0.29811327999993864,
+              "seq_mb_s": 72.00020982093562,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.5,
+              "fuse_rss_mb": 15.421875
+            }
+          ],
+          "cold": [
+            {
+              "mount_ms": 35.791200000005574,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 88.92271600001322,
+              "rand4k_ms": 2.4226309249999645,
+              "seq_mb_s": 29.49237962706298,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.52,
+              "fuse_rss_mb": 14.875
+            },
+            {
+              "mount_ms": 59.74849199998289,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 83.01751600001239,
+              "rand4k_ms": 0.7924210849999724,
+              "seq_mb_s": 49.9858481178149,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.5,
+              "fuse_rss_mb": 15.38671875
+            },
+            {
+              "mount_ms": 23.095717999979115,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 84.60374499998125,
+              "rand4k_ms": 0.6954658449998874,
+              "seq_mb_s": 28.164290869069696,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.5,
+              "fuse_rss_mb": 15.21875
+            },
+            {
+              "mount_ms": 24.68512100000453,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 83.23175399999627,
+              "rand4k_ms": 0.47128250499994806,
+              "seq_mb_s": 64.88430373867533,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.5,
+              "fuse_rss_mb": 15.140625
+            },
+            {
+              "mount_ms": 39.988501999999926,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 161.65738600000168,
+              "rand4k_ms": 2.9759492549999322,
+              "seq_mb_s": 35.94087405817545,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.51,
+              "fuse_rss_mb": 14.5390625
+            }
+          ],
+          "tmpfs": [
+            {
+              "mount_ms": 128.25768900000867,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 85.7895989999804,
+              "rand4k_ms": 0.31027184999999236,
+              "seq_mb_s": 72.5022997322096,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.5,
+              "fuse_rss_mb": 15.0546875
+            },
+            {
+              "mount_ms": 208.37124599998447,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 79.92608399999312,
+              "rand4k_ms": 0.30692677499999377,
+              "seq_mb_s": 67.98606804519272,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.52,
+              "fuse_rss_mb": 15.0546875
+            },
+            {
+              "mount_ms": 20.026565999984314,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 81.43035599999848,
+              "rand4k_ms": 0.3116850499999657,
+              "seq_mb_s": 71.64677508159116,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.5,
+              "fuse_rss_mb": 16.58203125
+            },
+            {
+              "mount_ms": 19.189955000001646,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 92.33834399998386,
+              "rand4k_ms": 0.3320972049999682,
+              "seq_mb_s": 73.45358041871118,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.51,
+              "fuse_rss_mb": 16.44921875
+            },
+            {
+              "mount_ms": 20.21110900000167,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 91.3432430000114,
+              "rand4k_ms": 0.32948323499994103,
+              "seq_mb_s": 69.62640653206502,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.52,
+              "fuse_rss_mb": 16.6875
+            }
+          ]
+        },
+        "launch": {
+          "warm": [
+            {
+              "launch_ms": 565.2919110000028,
+              "ok": true
+            },
+            {
+              "launch_ms": 164.20865899999626,
+              "ok": true
+            },
+            {
+              "launch_ms": 164.11627000002227,
+              "ok": true
+            }
+          ],
+          "cold": [
+            {
+              "launch_ms": 466.5263919999916,
+              "ok": true
+            },
+            {
+              "launch_ms": 316.21821299998487,
+              "ok": true
+            },
+            {
+              "launch_ms": 165.8133640000301,
+              "ok": true
+            }
+          ],
+          "tmpfs": [
+            {
+              "launch_ms": 165.03256000004285,
+              "ok": true
+            },
+            {
+              "launch_ms": 314.50377900000603,
+              "ok": true
+            },
+            {
+              "launch_ms": 464.81140800000276,
+              "ok": true
+            }
+          ]
+        }
+      },
+      "zsync": [
+        {
+          "zsync_block": 1024,
+          "zsync_file": 84204,
+          "control_served": 84204,
+          "downloaded": 4990171,
+          "requests": 3,
+          "ok": true,
+          "update_cost": 5074375,
+          "update_ratio": 0.41313686276272227,
+          "pair": "patch"
+        },
+        {
+          "zsync_block": 2048,
+          "zsync_file": 42225,
+          "control_served": 42225,
+          "downloaded": 5050775,
+          "requests": 2,
+          "ok": true,
+          "update_cost": 5093000,
+          "update_ratio": 0.41465324144363486,
+          "pair": "patch"
+        },
+        {
+          "zsync_block": 4096,
+          "zsync_file": 18233,
+          "control_served": 18233,
+          "downloaded": 5150115,
+          "requests": 2,
+          "ok": true,
+          "update_cost": 5168348,
+          "update_ratio": 0.4207877971939382,
+          "pair": "patch"
+        },
+        {
+          "zsync_block": 2048,
+          "zsync_file": 42225,
+          "control_served": 42225,
+          "downloaded": 41888,
+          "requests": 1,
+          "ok": true,
+          "update_cost": 84113,
+          "update_ratio": 0.006848169663763687,
+          "pair": "rebuild"
+        }
+      ],
+      "summary": {
+        "build_wall_s": 2.22,
+        "build_cpu_s": 8.4,
+        "build_rss_mb": 80.15234375,
+        "mount_ms_warm": 7.977717000017037,
+        "workset_ms_warm": null,
+        "rand4k_ms_warm": 0.2996268599999041,
+        "cpu_s_startup_warm": 0.0,
+        "seq_mb_s_warm": 72.00020982093562,
+        "fuse_rss_mb_warm": 15.69921875,
+        "cpu_s_total_warm": 0.5,
+        "walk_ms_warm": 81.25249099998655,
+        "mount_ms_cold": 35.791200000005574,
+        "workset_ms_cold": null,
+        "rand4k_ms_cold": 0.7924210849999724,
+        "cpu_s_startup_cold": 0.0,
+        "seq_mb_s_cold": 35.94087405817545,
+        "fuse_rss_mb_cold": 15.140625,
+        "cpu_s_total_cold": 0.5,
+        "walk_ms_cold": 84.60374499998125,
+        "mount_ms_tmpfs": 20.21110900000167,
+        "workset_ms_tmpfs": null,
+        "rand4k_ms_tmpfs": 0.3116850499999657,
+        "cpu_s_startup_tmpfs": 0.0,
+        "seq_mb_s_tmpfs": 71.64677508159116,
+        "fuse_rss_mb_tmpfs": 16.44921875,
+        "cpu_s_total_tmpfs": 0.51,
+        "walk_ms_tmpfs": 85.7895989999804,
+        "launch_ms_warm": 164.20865899999626,
+        "launch_ms_cold": 316.21821299998487,
+        "launch_ms_tmpfs": 314.50377900000603
+      },
+      "canary": {
+        "build_wall_s": 1.1,
+        "build_cpu_s": 4.05,
+        "build_rss_mb": 82.77734375,
+        "mount_ms_warm": 7.238584999981867,
+        "workset_ms_warm": null,
+        "rand4k_ms_warm": 0.2915395499999818,
+        "cpu_s_startup_warm": 0.0,
+        "seq_mb_s_warm": 150.43206960090868,
+        "fuse_rss_mb_warm": 29.734375,
+        "cpu_s_total_warm": 0.24000000000000002,
+        "walk_ms_warm": 81.81515200001854,
+        "mount_ms_cold": 30.085262000000057,
+        "workset_ms_cold": null,
+        "rand4k_ms_cold": 0.47123603000002845,
+        "cpu_s_startup_cold": 0.0,
+        "seq_mb_s_cold": 121.34253658876723,
+        "fuse_rss_mb_cold": 29.62890625,
+        "cpu_s_total_cold": 0.26,
+        "walk_ms_cold": 84.28410799999142,
+        "mount_ms_tmpfs": 103.74701300000311,
+        "workset_ms_tmpfs": null,
+        "rand4k_ms_tmpfs": 0.293587805000044,
+        "cpu_s_startup_tmpfs": 0.0,
+        "seq_mb_s_tmpfs": 141.86771897596242,
+        "fuse_rss_mb_tmpfs": 29.046875,
+        "cpu_s_total_tmpfs": 0.26,
+        "walk_ms_tmpfs": 84.08657600000424,
+        "launch_ms_warm": 63.938335999978335,
+        "launch_ms_cold": 115.78981999997495,
+        "launch_ms_tmpfs": 114.01328499999863
+      },
+      "noisy": [
+        "mount_ms_warm",
+        "mount_ms_cold",
+        "mount_ms_tmpfs"
+      ]
+    },
+    {
+      "run_id": "37581057391",
+      "app": "neovim",
+      "arch": "x86_64",
+      "category": "tiny-cli",
+      "variant": "squashfs-xz-bcjnone-b128K",
+      "container": "squashfs",
+      "codec": "xz",
+      "level": null,
+      "block_bytes": 131072,
+      "family_key": "sq-xz/bcj=none",
+      "stage": "2",
+      "retry": false,
+      "runtime": "type2-runtime-full@6c881190831e",
+      "size": {
+        "payload": 10145792,
+        "runtime": 1092280,
+        "total": 11238072,
+        "uncompressed": 38000417,
+        "ratio": 0.2957354915342113
+      },
+      "build": {
+        "wall_s": 2.37,
+        "cpu_s": 8.83,
+        "rss_mb": 94.11328125,
+        "timeout": false,
+        "deterministic": true
+      },
+      "env": {
+        "cpu": "AMD EPYC 9V74 80-Core Processor",
+        "cores": 4,
+        "ram_gb": 15.6,
+        "kernel": "6.17.0-1022-azure",
+        "image": "20261004.327.1",
+        "runner": "GitHub Actions 1000009474",
+        "tools": {
+          "mksquashfs": "mksquashfs version 4.6.1 (2023/03/25)",
+          "mkdwarfs": "___                  ___ ___",
+          "zsync": "zsync v0.6.2 (compiled Apr 18 2024 17:54:59)"
+        }
+      },
+      "startup": {
+        "mount": {
+          "warm": [
+            {
+              "mount_ms": 7.283096000008982,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 82.09830199999146,
+              "rand4k_ms": 0.6255176550000385,
+              "seq_mb_s": 82.34186678417701,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.5,
+              "fuse_rss_mb": 31.484375
+            },
+            {
+              "mount_ms": 9.296695000017507,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 79.48920900000189,
+              "rand4k_ms": 0.6302746250000268,
+              "seq_mb_s": 82.10638499723026,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.51,
+              "fuse_rss_mb": 31.38671875
+            },
+            {
+              "mount_ms": 7.790038999985427,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 80.97438199999374,
+              "rand4k_ms": 0.6279431099999044,
+              "seq_mb_s": 78.86012738520068,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.52,
+              "fuse_rss_mb": 31.38671875
+            },
+            {
+              "mount_ms": 6.969959000002746,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 82.47888500000045,
+              "rand4k_ms": 0.6445717549999586,
+              "seq_mb_s": 82.39090989826211,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.51,
+              "fuse_rss_mb": 31.5
+            },
+            {
+              "mount_ms": 6.031799000027149,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 91.76214699999719,
+              "rand4k_ms": 0.6577075299999535,
+              "seq_mb_s": 79.54705413328921,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.53,
+              "fuse_rss_mb": 31.46875
+            },
+            {
+              "mount_ms": 7.169274999995423,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 86.81940799999666,
+              "rand4k_ms": 0.6634244150001223,
+              "seq_mb_s": 78.27602705905235,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.53,
+              "fuse_rss_mb": 31.484375
+            },
+            {
+              "mount_ms": 6.836783000011337,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 81.38289999999415,
+              "rand4k_ms": 0.6223631199999602,
+              "seq_mb_s": 82.10111066884032,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.5,
+              "fuse_rss_mb": 31.40234375
+            }
+          ],
+          "cold": [
+            {
+              "mount_ms": 26.096219000010024,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 83.6970640000061,
+              "rand4k_ms": 1.1971559750000438,
+              "seq_mb_s": 54.86250305443349,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.51,
+              "fuse_rss_mb": 31.30859375
+            },
+            {
+              "mount_ms": 26.37875299998882,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 84.59861000000046,
+              "rand4k_ms": 1.2926055100000156,
+              "seq_mb_s": 59.60367887308129,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.51,
+              "fuse_rss_mb": 31.3046875
+            },
+            {
+              "mount_ms": 23.627496000017345,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 90.05852499998923,
+              "rand4k_ms": 0.908591779999881,
+              "seq_mb_s": 62.325866282765446,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.53,
+              "fuse_rss_mb": 31.3828125
+            },
+            {
+              "mount_ms": 28.376524999998765,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 93.05511799999522,
+              "rand4k_ms": 0.8456199799999808,
+              "seq_mb_s": 49.84882391113953,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.54,
+              "fuse_rss_mb": 31.3046875
+            },
+            {
+              "mount_ms": 42.353658999985555,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 84.51002399999652,
+              "rand4k_ms": 1.4196834400000569,
+              "seq_mb_s": 62.13352518047087,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.53,
+              "fuse_rss_mb": 31.29296875
+            }
+          ],
+          "tmpfs": [
+            {
+              "mount_ms": 23.51849300001163,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 93.76384099999768,
+              "rand4k_ms": 0.6582018149998703,
+              "seq_mb_s": 78.3290416737914,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.54,
+              "fuse_rss_mb": 30.703125
+            },
+            {
+              "mount_ms": 33.12598600001593,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 92.27679999997918,
+              "rand4k_ms": 0.6618160950000629,
+              "seq_mb_s": 80.24170049036961,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.53,
+              "fuse_rss_mb": 30.6953125
+            },
+            {
+              "mount_ms": 19.752350000004526,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 88.68486299999745,
+              "rand4k_ms": 0.6626707549999367,
+              "seq_mb_s": 78.62066210946858,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.53,
+              "fuse_rss_mb": 30.6953125
+            },
+            {
+              "mount_ms": 161.02613099999985,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 83.25901599999952,
+              "rand4k_ms": 0.6293123950000279,
+              "seq_mb_s": 80.07866165007988,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.52,
+              "fuse_rss_mb": 30.6953125
+            },
+            {
+              "mount_ms": 31.70896099999254,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 81.15127800002142,
+              "rand4k_ms": 0.6425696750000043,
+              "seq_mb_s": 77.83508545996985,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.52,
+              "fuse_rss_mb": 30.703125
+            }
+          ]
+        },
+        "launch": {
+          "warm": [
+            {
+              "launch_ms": 264.68275999999946,
+              "ok": true
+            },
+            {
+              "launch_ms": 164.09908400001427,
+              "ok": true
+            },
+            {
+              "launch_ms": 164.09967399999914,
+              "ok": true
+            }
+          ],
+          "cold": [
+            {
+              "launch_ms": 366.40522799999076,
+              "ok": true
+            },
+            {
+              "launch_ms": 416.21727299997247,
+              "ok": true
+            },
+            {
+              "launch_ms": 165.74569100004055,
+              "ok": true
+            }
+          ],
+          "tmpfs": [
+            {
+              "launch_ms": 164.27164499998526,
+              "ok": true
+            },
+            {
+              "launch_ms": 164.13585300000477,
+              "ok": true
+            },
+            {
+              "launch_ms": 164.09994399998595,
+              "ok": true
+            }
+          ]
+        }
+      },
+      "zsync": [
+        {
+          "zsync_block": 1024,
+          "zsync_file": 77065,
+          "control_served": 77065,
+          "downloaded": 4735674,
+          "requests": 2,
+          "ok": true,
+          "update_cost": 4812739,
+          "update_ratio": 0.4282530846928192,
+          "pair": "patch"
+        },
+        {
+          "zsync_block": 2048,
+          "zsync_file": 38656,
+          "control_served": 38656,
+          "downloaded": 4778480,
+          "requests": 2,
+          "ok": true,
+          "update_cost": 4817136,
+          "update_ratio": 0.4286443439764401,
+          "pair": "patch"
+        },
+        {
+          "zsync_block": 4096,
+          "zsync_file": 16704,
+          "control_served": 16704,
+          "downloaded": 4868188,
+          "requests": 2,
+          "ok": true,
+          "update_cost": 4884892,
+          "update_ratio": 0.43467349203671235,
+          "pair": "patch"
+        },
+        {
+          "zsync_block": 2048,
+          "zsync_file": 38656,
+          "control_served": 38656,
+          "downloaded": 37792,
+          "requests": 1,
+          "ok": true,
+          "update_cost": 76448,
+          "update_ratio": 0.0068025903375596814,
+          "pair": "rebuild"
+        }
+      ],
+      "summary": {
+        "build_wall_s": 2.37,
+        "build_cpu_s": 8.83,
+        "build_rss_mb": 94.11328125,
+        "mount_ms_warm": 7.169274999995423,
+        "workset_ms_warm": null,
+        "rand4k_ms_warm": 0.6302746250000268,
+        "cpu_s_startup_warm": 0.0,
+        "seq_mb_s_warm": 82.10111066884032,
+        "fuse_rss_mb_warm": 31.46875,
+        "cpu_s_total_warm": 0.51,
+        "walk_ms_warm": 82.09830199999146,
+        "mount_ms_cold": 26.37875299998882,
+        "workset_ms_cold": null,
+        "rand4k_ms_cold": 1.1971559750000438,
+        "cpu_s_startup_cold": 0.0,
+        "seq_mb_s_cold": 59.60367887308129,
+        "fuse_rss_mb_cold": 31.3046875,
+        "cpu_s_total_cold": 0.53,
+        "walk_ms_cold": 84.59861000000046,
+        "mount_ms_tmpfs": 31.70896099999254,
+        "workset_ms_tmpfs": null,
+        "rand4k_ms_tmpfs": 0.6582018149998703,
+        "cpu_s_startup_tmpfs": 0.0,
+        "seq_mb_s_tmpfs": 78.62066210946858,
+        "fuse_rss_mb_tmpfs": 30.6953125,
+        "cpu_s_total_tmpfs": 0.53,
+        "walk_ms_tmpfs": 88.68486299999745,
+        "launch_ms_warm": 164.09967399999914,
+        "launch_ms_cold": 366.40522799999076,
+        "launch_ms_tmpfs": 164.13585300000477
+      },
+      "canary": {
+        "build_wall_s": 1.1,
+        "build_cpu_s": 4.05,
+        "build_rss_mb": 82.77734375,
+        "mount_ms_warm": 7.238584999981867,
+        "workset_ms_warm": null,
+        "rand4k_ms_warm": 0.2915395499999818,
+        "cpu_s_startup_warm": 0.0,
+        "seq_mb_s_warm": 150.43206960090868,
+        "fuse_rss_mb_warm": 29.734375,
+        "cpu_s_total_warm": 0.24000000000000002,
+        "walk_ms_warm": 81.81515200001854,
+        "mount_ms_cold": 30.085262000000057,
+        "workset_ms_cold": null,
+        "rand4k_ms_cold": 0.47123603000002845,
+        "cpu_s_startup_cold": 0.0,
+        "seq_mb_s_cold": 121.34253658876723,
+        "fuse_rss_mb_cold": 29.62890625,
+        "cpu_s_total_cold": 0.26,
+        "walk_ms_cold": 84.28410799999142,
+        "mount_ms_tmpfs": 103.74701300000311,
+        "workset_ms_tmpfs": null,
+        "rand4k_ms_tmpfs": 0.293587805000044,
+        "cpu_s_startup_tmpfs": 0.0,
+        "seq_mb_s_tmpfs": 141.86771897596242,
+        "fuse_rss_mb_tmpfs": 29.046875,
+        "cpu_s_total_tmpfs": 0.26,
+        "walk_ms_tmpfs": 84.08657600000424,
+        "launch_ms_warm": 63.938335999978335,
+        "launch_ms_cold": 115.78981999997495,
+        "launch_ms_tmpfs": 114.01328499999863
+      },
+      "noisy": [
+        "mount_ms_warm",
+        "mount_ms_cold",
+        "mount_ms_tmpfs"
+      ]
+    },
+    {
+      "run_id": "37581057391",
+      "app": "neovim",
+      "arch": "x86_64",
+      "category": "tiny-cli",
+      "variant": "squashfs-xz-bcjnone-b256K",
+      "container": "squashfs",
+      "codec": "xz",
+      "level": null,
+      "block_bytes": 262144,
+      "family_key": "sq-xz/bcj=none",
+      "stage": "2",
+      "retry": false,
+      "runtime": "type2-runtime-full@6c881190831e",
+      "size": {
+        "payload": 9781248,
+        "runtime": 1092280,
+        "total": 10873528,
+        "uncompressed": 38000417,
+        "ratio": 0.2861423336486018
+      },
+      "build": {
+        "wall_s": 2.44,
+        "cpu_s": 9.15,
+        "rss_mb": 117.39453125,
+        "timeout": false,
+        "deterministic": true
+      },
+      "env": {
+        "cpu": "AMD EPYC 9V74 80-Core Processor",
+        "cores": 4,
+        "ram_gb": 15.6,
+        "kernel": "6.17.0-1022-azure",
+        "image": "20261004.327.1",
+        "runner": "GitHub Actions 1000009474",
+        "tools": {
+          "mksquashfs": "mksquashfs version 4.6.1 (2023/03/25)",
+          "mkdwarfs": "___                  ___ ___",
+          "zsync": "zsync v0.6.2 (compiled Apr 18 2024 17:54:59)"
+        }
+      },
+      "startup": {
+        "mount": {
+          "warm": [
+            {
+              "mount_ms": 7.454735999999684,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 132.82163400000968,
+              "rand4k_ms": 0.6590654899999038,
+              "seq_mb_s": 88.10113666425184,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.53,
+              "fuse_rss_mb": 38.7734375
+            },
+            {
+              "mount_ms": 7.343714999990425,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 118.85077600001637,
+              "rand4k_ms": 0.640470800000088,
+              "seq_mb_s": 87.09049499575653,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.52,
+              "fuse_rss_mb": 38.9375
+            },
+            {
+              "mount_ms": 6.225183999987394,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 120.67457799997783,
+              "rand4k_ms": 0.6417446849999919,
+              "seq_mb_s": 88.15472591419888,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.51,
+              "fuse_rss_mb": 38.96875
+            },
+            {
+              "mount_ms": 8.585871000008183,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 120.05611400002181,
+              "rand4k_ms": 0.6446988249999208,
+              "seq_mb_s": 84.48728217276565,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.53,
+              "fuse_rss_mb": 38.98046875
+            },
+            {
+              "mount_ms": 7.3327229999904375,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 145.9837650000111,
+              "rand4k_ms": 0.642934170000018,
+              "seq_mb_s": 88.57594381174546,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.51,
+              "fuse_rss_mb": 38.9140625
+            },
+            {
+              "mount_ms": 7.837534999993068,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 120.04155900001479,
+              "rand4k_ms": 0.6393219649999082,
+              "seq_mb_s": 85.31205760875798,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.52,
+              "fuse_rss_mb": 38.93359375
+            },
+            {
+              "mount_ms": 6.158983999995371,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 125.67354899999827,
+              "rand4k_ms": 0.6374712950000117,
+              "seq_mb_s": 87.52827632151052,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.52,
+              "fuse_rss_mb": 38.9609375
+            }
+          ],
+          "cold": [
+            {
+              "mount_ms": 24.83300500000496,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 120.87764300000003,
+              "rand4k_ms": 1.8441684350000287,
+              "seq_mb_s": 63.20940295263947,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.5499999999999999,
+              "fuse_rss_mb": 38.8203125
+            },
+            {
+              "mount_ms": 24.389552999991793,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 132.829313000002,
+              "rand4k_ms": 0.7601130049999938,
+              "seq_mb_s": 56.49157327931721,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.53,
+              "fuse_rss_mb": 38.7578125
+            },
+            {
+              "mount_ms": 27.50018500000806,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 121.80683699997985,
+              "rand4k_ms": 0.7127410900000086,
+              "seq_mb_s": 68.84082758301318,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.52,
+              "fuse_rss_mb": 38.7265625
+            },
+            {
+              "mount_ms": 23.586786999999276,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 121.73037400000908,
+              "rand4k_ms": 1.217285784999973,
+              "seq_mb_s": 87.45652797330479,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.51,
+              "fuse_rss_mb": 38.76171875
+            },
+            {
+              "mount_ms": 57.770812000001115,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 132.73367499999722,
+              "rand4k_ms": 2.2256380500000716,
+              "seq_mb_s": 51.5461588302318,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.55,
+              "fuse_rss_mb": 38.66015625
+            }
+          ],
+          "tmpfs": [
+            {
+              "mount_ms": 44.325729999997066,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 122.26281799999583,
+              "rand4k_ms": 0.6444731599999898,
+              "seq_mb_s": 87.90243767073488,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.51,
+              "fuse_rss_mb": 38.08203125
+            },
+            {
+              "mount_ms": 62.545432000007395,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 122.02476299998466,
+              "rand4k_ms": 0.6401221249998912,
+              "seq_mb_s": 88.22297766229619,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.51,
+              "fuse_rss_mb": 38.21484375
+            },
+            {
+              "mount_ms": 420.0258680000104,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 120.68395200000737,
+              "rand4k_ms": 0.6397284549998972,
+              "seq_mb_s": 87.5656414346938,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.51,
+              "fuse_rss_mb": 38.21484375
+            },
+            {
+              "mount_ms": 21.739905999993425,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 122.26043399999753,
+              "rand4k_ms": 0.659348139999878,
+              "seq_mb_s": 87.01684524248579,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.52,
+              "fuse_rss_mb": 38.21484375
+            },
+            {
+              "mount_ms": 21.005408999997144,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 121.7181649999759,
+              "rand4k_ms": 0.6425298399999235,
+              "seq_mb_s": 84.34931908372684,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.53,
+              "fuse_rss_mb": 38.08203125
+            }
+          ]
+        },
+        "launch": {
+          "warm": [
+            {
+              "launch_ms": 264.6029859999999,
+              "ok": true
+            },
+            {
+              "launch_ms": 164.06689900000515,
+              "ok": true
+            },
+            {
+              "launch_ms": 164.11275499999078,
+              "ok": true
+            }
+          ],
+          "cold": [
+            {
+              "launch_ms": 516.6819680000003,
+              "ok": true
+            },
+            {
+              "launch_ms": 356.05119199999535,
+              "ok": true
+            },
+            {
+              "launch_ms": 316.11434799998506,
+              "ok": true
+            }
+          ],
+          "tmpfs": [
+            {
+              "launch_ms": 364.5711860000347,
+              "ok": true
+            },
+            {
+              "launch_ms": 464.90435799995566,
+              "ok": true
+            },
+            {
+              "launch_ms": 264.31675400004906,
+              "ok": true
+            }
+          ]
+        }
+      },
+      "zsync": [
+        {
+          "zsync_block": 1024,
+          "zsync_file": 74573,
+          "control_served": 74573,
+          "downloaded": 4865862,
+          "requests": 2,
+          "ok": true,
+          "update_cost": 4940435,
+          "update_ratio": 0.4543543732999998,
+          "pair": "patch"
+        },
+        {
+          "zsync_block": 2048,
+          "zsync_file": 37410,
+          "control_served": 37410,
+          "downloaded": 4897606,
+          "requests": 2,
+          "ok": true,
+          "update_cost": 4935016,
+          "update_ratio": 0.45385600699239476,
+          "pair": "patch"
+        },
+        {
+          "zsync_block": 4096,
+          "zsync_file": 16170,
+          "control_served": 16170,
+          "downloaded": 4961790,
+          "requests": 2,
+          "ok": true,
+          "update_cost": 4977960,
+          "update_ratio": 0.45780541513297246,
+          "pair": "patch"
+        },
+        {
+          "zsync_block": 2048,
+          "zsync_file": 37410,
+          "control_served": 37410,
+          "downloaded": 37096,
+          "requests": 1,
+          "ok": true,
+          "update_cost": 74506,
+          "update_ratio": 0.0068520539055953135,
+          "pair": "rebuild"
+        }
+      ],
+      "summary": {
+        "build_wall_s": 2.44,
+        "build_cpu_s": 9.15,
+        "build_rss_mb": 117.39453125,
+        "mount_ms_warm": 7.343714999990425,
+        "workset_ms_warm": null,
+        "rand4k_ms_warm": 0.6417446849999919,
+        "cpu_s_startup_warm": 0.0,
+        "seq_mb_s_warm": 87.52827632151052,
+        "fuse_rss_mb_warm": 38.9375,
+        "cpu_s_total_warm": 0.52,
+        "walk_ms_warm": 120.67457799997783,
+        "mount_ms_cold": 24.83300500000496,
+        "workset_ms_cold": null,
+        "rand4k_ms_cold": 1.217285784999973,
+        "cpu_s_startup_cold": 0.0,
+        "seq_mb_s_cold": 63.20940295263947,
+        "fuse_rss_mb_cold": 38.7578125,
+        "cpu_s_total_cold": 0.53,
+        "walk_ms_cold": 121.80683699997985,
+        "mount_ms_tmpfs": 44.325729999997066,
+        "workset_ms_tmpfs": null,
+        "rand4k_ms_tmpfs": 0.6425298399999235,
+        "cpu_s_startup_tmpfs": 0.0,
+        "seq_mb_s_tmpfs": 87.5656414346938,
+        "fuse_rss_mb_tmpfs": 38.21484375,
+        "cpu_s_total_tmpfs": 0.51,
+        "walk_ms_tmpfs": 122.02476299998466,
+        "launch_ms_warm": 164.11275499999078,
+        "launch_ms_cold": 356.05119199999535,
+        "launch_ms_tmpfs": 364.5711860000347
+      },
+      "canary": {
+        "build_wall_s": 1.1,
+        "build_cpu_s": 4.05,
+        "build_rss_mb": 82.77734375,
+        "mount_ms_warm": 7.238584999981867,
+        "workset_ms_warm": null,
+        "rand4k_ms_warm": 0.2915395499999818,
+        "cpu_s_startup_warm": 0.0,
+        "seq_mb_s_warm": 150.43206960090868,
+        "fuse_rss_mb_warm": 29.734375,
+        "cpu_s_total_warm": 0.24000000000000002,
+        "walk_ms_warm": 81.81515200001854,
+        "mount_ms_cold": 30.085262000000057,
+        "workset_ms_cold": null,
+        "rand4k_ms_cold": 0.47123603000002845,
+        "cpu_s_startup_cold": 0.0,
+        "seq_mb_s_cold": 121.34253658876723,
+        "fuse_rss_mb_cold": 29.62890625,
+        "cpu_s_total_cold": 0.26,
+        "walk_ms_cold": 84.28410799999142,
+        "mount_ms_tmpfs": 103.74701300000311,
+        "workset_ms_tmpfs": null,
+        "rand4k_ms_tmpfs": 0.293587805000044,
+        "cpu_s_startup_tmpfs": 0.0,
+        "seq_mb_s_tmpfs": 141.86771897596242,
+        "fuse_rss_mb_tmpfs": 29.046875,
+        "cpu_s_total_tmpfs": 0.26,
+        "walk_ms_tmpfs": 84.08657600000424,
+        "launch_ms_warm": 63.938335999978335,
+        "launch_ms_cold": 115.78981999997495,
+        "launch_ms_tmpfs": 114.01328499999863
+      },
+      "noisy": [
+        "mount_ms_warm",
+        "mount_ms_cold",
+        "mount_ms_tmpfs"
+      ]
+    },
+    {
+      "run_id": "37581057391",
+      "app": "neovim",
+      "arch": "x86_64",
+      "category": "tiny-cli",
+      "variant": "squashfs-xz-bcjauto-b32K",
+      "container": "squashfs",
+      "codec": "xz",
+      "level": null,
+      "block_bytes": 32768,
+      "family_key": "sq-xz/bcj=auto",
+      "stage": "2",
+      "retry": false,
+      "runtime": "type2-runtime-full@6c881190831e",
+      "size": {
+        "payload": 11001856,
+        "runtime": 1092280,
+        "total": 12094136,
+        "uncompressed": 38000417,
+        "ratio": 0.3182632443217663
+      },
+      "build": {
+        "wall_s": 4.12,
+        "cpu_s": 15.63,
+        "rss_mb": 85.90234375,
+        "timeout": false,
+        "deterministic": true
+      },
+      "env": {
+        "cpu": "AMD EPYC 9V74 80-Core Processor",
+        "cores": 4,
+        "ram_gb": 15.6,
+        "kernel": "6.17.0-1022-azure",
+        "image": "20261004.327.1",
+        "runner": "GitHub Actions 1000009474",
+        "tools": {
+          "mksquashfs": "mksquashfs version 4.6.1 (2023/03/25)",
+          "mkdwarfs": "___                  ___ ___",
+          "zsync": "zsync v0.6.2 (compiled Apr 18 2024 17:54:59)"
+        }
+      },
+      "startup": {
+        "mount": {
+          "warm": [
+            {
+              "mount_ms": 8.799453999984053,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 91.28128999998353,
+              "rand4k_ms": 0.33554092499997523,
+              "seq_mb_s": 73.10119405267912,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.51,
+              "fuse_rss_mb": 15.31640625
+            },
+            {
+              "mount_ms": 8.064192999995612,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 90.3452100000095,
+              "rand4k_ms": 0.2954561650000187,
+              "seq_mb_s": 74.32864955025208,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.49,
+              "fuse_rss_mb": 17.3984375
+            },
+            {
+              "mount_ms": 8.424211999994213,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 94.08694600000445,
+              "rand4k_ms": 0.31064755999992144,
+              "seq_mb_s": 71.56924673605951,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.51,
+              "fuse_rss_mb": 17.3984375
+            },
+            {
+              "mount_ms": 8.256734000013921,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 96.4208980000194,
+              "rand4k_ms": 0.3102761950000854,
+              "seq_mb_s": 73.63807309782148,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.5,
+              "fuse_rss_mb": 15.36328125
+            },
+            {
+              "mount_ms": 8.172231000003194,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 91.66167399999381,
+              "rand4k_ms": 0.3058649749999631,
+              "seq_mb_s": 69.91863976691647,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.52,
+              "fuse_rss_mb": 15.37109375
+            },
+            {
+              "mount_ms": 9.70371399998271,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 88.26803499999869,
+              "rand4k_ms": 0.29894433999999137,
+              "seq_mb_s": 69.36792737674868,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.51,
+              "fuse_rss_mb": 17.3984375
+            },
+            {
+              "mount_ms": 6.900774999991199,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 90.72712000002525,
+              "rand4k_ms": 0.29813833999995154,
+              "seq_mb_s": 72.32725786519507,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.51,
+              "fuse_rss_mb": 17.484375
+            }
+          ],
+          "cold": [
+            {
+              "mount_ms": 35.12817899999732,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 137.20559000000776,
+              "rand4k_ms": 1.802245844999959,
+              "seq_mb_s": 63.81861044735232,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.52,
+              "fuse_rss_mb": 14.94140625
+            },
+            {
+              "mount_ms": 24.359368000006043,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 93.23702499997921,
+              "rand4k_ms": 0.5046963450000419,
+              "seq_mb_s": 49.10135217784564,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.51,
+              "fuse_rss_mb": 15.26171875
+            },
+            {
+              "mount_ms": 25.90637800000195,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 91.60970199999952,
+              "rand4k_ms": 0.6169010150000531,
+              "seq_mb_s": 40.357167787541435,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.51,
+              "fuse_rss_mb": 15.078125
+            },
+            {
+              "mount_ms": 22.850105000003396,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 92.21500900000024,
+              "rand4k_ms": 0.42298572500001796,
+              "seq_mb_s": 69.2568674456668,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.51,
+              "fuse_rss_mb": 17.19921875
+            },
+            {
+              "mount_ms": 30.55469999998195,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 93.89458000001127,
+              "rand4k_ms": 1.7414816900000574,
+              "seq_mb_s": 29.836436199507734,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.52,
+              "fuse_rss_mb": 15.109375
+            }
+          ],
+          "tmpfs": [
+            {
+              "mount_ms": 202.6713319999942,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 96.25330899999085,
+              "rand4k_ms": 0.32151427499997,
+              "seq_mb_s": 72.10386213228234,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.51,
+              "fuse_rss_mb": 16.58203125
+            },
+            {
+              "mount_ms": 61.04116399998816,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 100.38406500001429,
+              "rand4k_ms": 0.3026596499999812,
+              "seq_mb_s": 73.94818448843098,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.51,
+              "fuse_rss_mb": 16.6328125
+            },
+            {
+              "mount_ms": 19.980225000011842,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 92.16348300000732,
+              "rand4k_ms": 0.30128874500007896,
+              "seq_mb_s": 73.522958191586,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.5,
+              "fuse_rss_mb": 16.6875
+            },
+            {
+              "mount_ms": 20.033267999991722,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 95.51141200000757,
+              "rand4k_ms": 0.3307184199999824,
+              "seq_mb_s": 69.06554192055667,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.54,
+              "fuse_rss_mb": 16.6875
+            },
+            {
+              "mount_ms": 169.43076399999768,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 98.3990409999933,
+              "rand4k_ms": 0.3344385149999596,
+              "seq_mb_s": 68.37950927498677,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.54,
+              "fuse_rss_mb": 16.6875
+            }
+          ]
+        },
+        "launch": {
+          "warm": [
+            {
+              "launch_ms": 214.5262989999992,
+              "ok": true
+            },
+            {
+              "launch_ms": 164.0844970000046,
+              "ok": true
+            },
+            {
+              "launch_ms": 164.18463799999472,
+              "ok": true
+            }
+          ],
+          "cold": [
+            {
+              "launch_ms": 316.62089099998525,
+              "ok": true
+            },
+            {
+              "launch_ms": 265.88361000000305,
+              "ok": true
+            },
+            {
+              "launch_ms": 215.95914400000993,
+              "ok": true
+            }
+          ],
+          "tmpfs": [
+            {
+              "launch_ms": 364.54859799999895,
+              "ok": true
+            },
+            {
+              "launch_ms": 214.22915499999817,
+              "ok": true
+            },
+            {
+              "launch_ms": 165.24239500000704,
+              "ok": true
+            }
+          ]
+        }
+      },
+      "zsync": [
+        {
+          "zsync_block": 1024,
+          "zsync_file": 82916,
+          "control_served": 82916,
+          "downloaded": 4861366,
+          "requests": 3,
+          "ok": true,
+          "update_cost": 4944282,
+          "update_ratio": 0.4088164710567171,
+          "pair": "patch"
+        },
+        {
+          "zsync_block": 2048,
+          "zsync_file": 41581,
+          "control_served": 41581,
+          "downloaded": 4915599,
+          "requests": 2,
+          "ok": true,
+          "update_cost": 4957180,
+          "update_ratio": 0.409882938309938,
+          "pair": "patch"
+        },
+        {
+          "zsync_block": 4096,
+          "zsync_file": 17957,
+          "control_served": 17957,
+          "downloaded": 5019340,
+          "requests": 2,
+          "ok": true,
+          "update_cost": 5037297,
+          "update_ratio": 0.4165073883740021,
+          "pair": "patch"
+        },
+        {
+          "zsync_block": 2048,
+          "zsync_file": 41581,
+          "control_served": 41581,
+          "downloaded": 41888,
+          "requests": 1,
+          "ok": true,
+          "update_cost": 83469,
+          "update_ratio": 0.0069016091765463855,
+          "pair": "rebuild"
+        }
+      ],
+      "summary": {
+        "build_wall_s": 4.12,
+        "build_cpu_s": 15.63,
+        "build_rss_mb": 85.90234375,
+        "mount_ms_warm": 8.256734000013921,
+        "workset_ms_warm": null,
+        "rand4k_ms_warm": 0.3058649749999631,
+        "cpu_s_startup_warm": 0.0,
+        "seq_mb_s_warm": 72.32725786519507,
+        "fuse_rss_mb_warm": 17.3984375,
+        "cpu_s_total_warm": 0.51,
+        "walk_ms_warm": 91.28128999998353,
+        "mount_ms_cold": 25.90637800000195,
+        "workset_ms_cold": null,
+        "rand4k_ms_cold": 0.6169010150000531,
+        "cpu_s_startup_cold": 0.0,
+        "seq_mb_s_cold": 49.10135217784564,
+        "fuse_rss_mb_cold": 15.109375,
+        "cpu_s_total_cold": 0.51,
+        "walk_ms_cold": 93.23702499997921,
+        "mount_ms_tmpfs": 61.04116399998816,
+        "workset_ms_tmpfs": null,
+        "rand4k_ms_tmpfs": 0.32151427499997,
+        "cpu_s_startup_tmpfs": 0.0,
+        "seq_mb_s_tmpfs": 72.10386213228234,
+        "fuse_rss_mb_tmpfs": 16.6875,
+        "cpu_s_total_tmpfs": 0.51,
+        "walk_ms_tmpfs": 96.25330899999085,
+        "launch_ms_warm": 164.18463799999472,
+        "launch_ms_cold": 265.88361000000305,
+        "launch_ms_tmpfs": 214.22915499999817
+      },
+      "canary": {
+        "build_wall_s": 1.1,
+        "build_cpu_s": 4.05,
+        "build_rss_mb": 82.77734375,
+        "mount_ms_warm": 7.238584999981867,
+        "workset_ms_warm": null,
+        "rand4k_ms_warm": 0.2915395499999818,
+        "cpu_s_startup_warm": 0.0,
+        "seq_mb_s_warm": 150.43206960090868,
+        "fuse_rss_mb_warm": 29.734375,
+        "cpu_s_total_warm": 0.24000000000000002,
+        "walk_ms_warm": 81.81515200001854,
+        "mount_ms_cold": 30.085262000000057,
+        "workset_ms_cold": null,
+        "rand4k_ms_cold": 0.47123603000002845,
+        "cpu_s_startup_cold": 0.0,
+        "seq_mb_s_cold": 121.34253658876723,
+        "fuse_rss_mb_cold": 29.62890625,
+        "cpu_s_total_cold": 0.26,
+        "walk_ms_cold": 84.28410799999142,
+        "mount_ms_tmpfs": 103.74701300000311,
+        "workset_ms_tmpfs": null,
+        "rand4k_ms_tmpfs": 0.293587805000044,
+        "cpu_s_startup_tmpfs": 0.0,
+        "seq_mb_s_tmpfs": 141.86771897596242,
+        "fuse_rss_mb_tmpfs": 29.046875,
+        "cpu_s_total_tmpfs": 0.26,
+        "walk_ms_tmpfs": 84.08657600000424,
+        "launch_ms_warm": 63.938335999978335,
+        "launch_ms_cold": 115.78981999997495,
+        "launch_ms_tmpfs": 114.01328499999863
+      },
+      "noisy": [
+        "mount_ms_cold",
+        "mount_ms_tmpfs"
+      ]
+    },
+    {
+      "run_id": "37581057391",
+      "app": "neovim",
+      "arch": "x86_64",
+      "category": "tiny-cli",
+      "variant": "squashfs-xz-bcjauto-b128K",
+      "container": "squashfs",
+      "codec": "xz",
+      "level": null,
+      "block_bytes": 131072,
+      "family_key": "sq-xz/bcj=auto",
+      "stage": "2",
+      "retry": false,
+      "runtime": "type2-runtime-full@6c881190831e",
+      "size": {
+        "payload": 9949184,
+        "runtime": 1092280,
+        "total": 11041464,
+        "uncompressed": 38000417,
+        "ratio": 0.29056165357343317
+      },
+      "build": {
+        "wall_s": 4.64,
+        "cpu_s": 17.35,
+        "rss_mb": 107.97265625,
+        "timeout": false,
+        "deterministic": true
+      },
+      "env": {
+        "cpu": "AMD EPYC 9V74 80-Core Processor",
+        "cores": 4,
+        "ram_gb": 15.6,
+        "kernel": "6.17.0-1022-azure",
+        "image": "20261004.327.1",
+        "runner": "GitHub Actions 1000009474",
+        "tools": {
+          "mksquashfs": "mksquashfs version 4.6.1 (2023/03/25)",
+          "mkdwarfs": "___                  ___ ___",
+          "zsync": "zsync v0.6.2 (compiled Apr 18 2024 17:54:59)"
+        }
+      },
+      "startup": {
+        "mount": {
+          "warm": [
+            {
+              "mount_ms": 7.60926600000289,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 140.21196699999905,
+              "rand4k_ms": 0.6325108249998834,
+              "seq_mb_s": 79.22193219586295,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.5800000000000001,
+              "fuse_rss_mb": 31.453125
+            },
+            {
+              "mount_ms": 7.7641700000015135,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 145.49879500000884,
+              "rand4k_ms": 0.6672675349999224,
+              "seq_mb_s": 78.16996597606165,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.59,
+              "fuse_rss_mb": 31.4375
+            },
+            {
+              "mount_ms": 8.208039999999528,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 147.35932299998922,
+              "rand4k_ms": 0.6657042549998948,
+              "seq_mb_s": 79.08746084712384,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.59,
+              "fuse_rss_mb": 31.5078125
+            },
+            {
+              "mount_ms": 7.388206000001674,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 139.26362099999778,
+              "rand4k_ms": 0.6323731550000389,
+              "seq_mb_s": 82.04958998091197,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.5599999999999999,
+              "fuse_rss_mb": 31.44140625
+            },
+            {
+              "mount_ms": 5.931737999986808,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 148.12868300001014,
+              "rand4k_ms": 0.6340979250001055,
+              "seq_mb_s": 82.66237378292018,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.57,
+              "fuse_rss_mb": 31.43359375
+            },
+            {
+              "mount_ms": 11.411920000000464,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 141.21324999999274,
+              "rand4k_ms": 0.633006475000002,
+              "seq_mb_s": 81.66658400250093,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.5700000000000001,
+              "fuse_rss_mb": 31.35546875
+            },
+            {
+              "mount_ms": 9.542254999985289,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 140.4579080000019,
+              "rand4k_ms": 0.6312917849999167,
+              "seq_mb_s": 82.66091688019624,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.56,
+              "fuse_rss_mb": 31.5
+            }
+          ],
+          "cold": [
+            {
+              "mount_ms": 57.526303000003054,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 142.38287800000649,
+              "rand4k_ms": 0.9304336849999117,
+              "seq_mb_s": 45.3224614105151,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.5700000000000001,
+              "fuse_rss_mb": 31.21484375
+            },
+            {
+              "mount_ms": 24.524221000007174,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 142.22452500001737,
+              "rand4k_ms": 1.2630983950000996,
+              "seq_mb_s": 50.04597226006811,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.5800000000000001,
+              "fuse_rss_mb": 31.3203125
+            },
+            {
+              "mount_ms": 25.086825000016688,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 150.46916400001464,
+              "rand4k_ms": 0.917272545000003,
+              "seq_mb_s": 73.72287844058201,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.59,
+              "fuse_rss_mb": 31.34375
+            },
+            {
+              "mount_ms": 29.130297999984123,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 141.99851400002217,
+              "rand4k_ms": 0.9881402849998722,
+              "seq_mb_s": 34.605752647967996,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.5700000000000001,
+              "fuse_rss_mb": 31.23046875
+            },
+            {
+              "mount_ms": 39.59583300002123,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 142.11918600000217,
+              "rand4k_ms": 1.6213348450000353,
+              "seq_mb_s": 33.05449292362993,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.58,
+              "fuse_rss_mb": 31.23046875
+            }
+          ],
+          "tmpfs": [
+            {
+              "mount_ms": 252.84114300001193,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 147.62940299999627,
+              "rand4k_ms": 0.6453265399998998,
+              "seq_mb_s": 76.77844292446595,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.5900000000000001,
+              "fuse_rss_mb": 30.5546875
+            },
+            {
+              "mount_ms": 19.600590999999667,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 152.78886100000477,
+              "rand4k_ms": 0.6688933300000599,
+              "seq_mb_s": 81.31450824978951,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.58,
+              "fuse_rss_mb": 30.6875
+            },
+            {
+              "mount_ms": 19.166460999997526,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 145.98188100001153,
+              "rand4k_ms": 0.6351757849999728,
+              "seq_mb_s": 81.45787230328027,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.5700000000000001,
+              "fuse_rss_mb": 30.45703125
+            },
+            {
+              "mount_ms": 27.785853000011684,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 146.51552499998388,
+              "rand4k_ms": 0.6677715649999527,
+              "seq_mb_s": 76.48605838991668,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.6000000000000001,
+              "fuse_rss_mb": 30.6796875
+            },
+            {
+              "mount_ms": 289.5828540000025,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 148.02272800000082,
+              "rand4k_ms": 0.6559230650000814,
+              "seq_mb_s": 76.71755440677393,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.5900000000000001,
+              "fuse_rss_mb": 30.6796875
+            }
+          ]
+        },
+        "launch": {
+          "warm": [
+            {
+              "launch_ms": 273.32153699998685,
+              "ok": true
+            },
+            {
+              "launch_ms": 164.1506070000105,
+              "ok": true
+            },
+            {
+              "launch_ms": 164.23978700001385,
+              "ok": true
+            }
+          ],
+          "cold": [
+            {
+              "launch_ms": 516.6707650000149,
+              "ok": true
+            },
+            {
+              "launch_ms": 466.3908450000065,
+              "ok": true
+            },
+            {
+              "launch_ms": 266.1381980000215,
+              "ok": true
+            }
+          ],
+          "tmpfs": [
+            {
+              "launch_ms": 464.82619500000055,
+              "ok": true
+            },
+            {
+              "launch_ms": 164.22325500002444,
+              "ok": true
+            },
+            {
+              "launch_ms": 164.16769199997816,
+              "ok": true
+            }
+          ]
+        }
+      },
+      "zsync": [
+        {
+          "zsync_block": 1024,
+          "zsync_file": 75721,
+          "control_served": 75721,
+          "downloaded": 4595386,
+          "requests": 2,
+          "ok": true,
+          "update_cost": 4671107,
+          "update_ratio": 0.4230514178192312,
+          "pair": "patch"
+        },
+        {
+          "zsync_block": 2048,
+          "zsync_file": 37984,
+          "control_served": 37984,
+          "downloaded": 4637269,
+          "requests": 2,
+          "ok": true,
+          "update_cost": 4675253,
+          "update_ratio": 0.4234269115037644,
+          "pair": "patch"
+        },
+        {
+          "zsync_block": 4096,
+          "zsync_file": 16416,
+          "control_served": 16416,
+          "downloaded": 4720833,
+          "requests": 2,
+          "ok": true,
+          "update_cost": 4737249,
+          "update_ratio": 0.42904174663794586,
+          "pair": "patch"
+        },
+        {
+          "zsync_block": 2048,
+          "zsync_file": 37984,
+          "control_served": 37984,
+          "downloaded": 39840,
+          "requests": 1,
+          "ok": true,
+          "update_cost": 77824,
+          "update_ratio": 0.007048340691053288,
+          "pair": "rebuild"
+        }
+      ],
+      "summary": {
+        "build_wall_s": 4.64,
+        "build_cpu_s": 17.35,
+        "build_rss_mb": 107.97265625,
+        "mount_ms_warm": 7.7641700000015135,
+        "workset_ms_warm": null,
+        "rand4k_ms_warm": 0.633006475000002,
+        "cpu_s_startup_warm": 0.0,
+        "seq_mb_s_warm": 81.66658400250093,
+        "fuse_rss_mb_warm": 31.44140625,
+        "cpu_s_total_warm": 0.5700000000000001,
+        "walk_ms_warm": 141.21324999999274,
+        "mount_ms_cold": 29.130297999984123,
+        "workset_ms_cold": null,
+        "rand4k_ms_cold": 0.9881402849998722,
+        "cpu_s_startup_cold": 0.0,
+        "seq_mb_s_cold": 45.3224614105151,
+        "fuse_rss_mb_cold": 31.23046875,
+        "cpu_s_total_cold": 0.58,
+        "walk_ms_cold": 142.22452500001737,
+        "mount_ms_tmpfs": 27.785853000011684,
+        "workset_ms_tmpfs": null,
+        "rand4k_ms_tmpfs": 0.6559230650000814,
+        "cpu_s_startup_tmpfs": 0.0,
+        "seq_mb_s_tmpfs": 76.77844292446595,
+        "fuse_rss_mb_tmpfs": 30.6796875,
+        "cpu_s_total_tmpfs": 0.5900000000000001,
+        "walk_ms_tmpfs": 147.62940299999627,
+        "launch_ms_warm": 164.23978700001385,
+        "launch_ms_cold": 466.3908450000065,
+        "launch_ms_tmpfs": 164.22325500002444
+      },
+      "canary": {
+        "build_wall_s": 1.1,
+        "build_cpu_s": 4.05,
+        "build_rss_mb": 82.77734375,
+        "mount_ms_warm": 7.238584999981867,
+        "workset_ms_warm": null,
+        "rand4k_ms_warm": 0.2915395499999818,
+        "cpu_s_startup_warm": 0.0,
+        "seq_mb_s_warm": 150.43206960090868,
+        "fuse_rss_mb_warm": 29.734375,
+        "cpu_s_total_warm": 0.24000000000000002,
+        "walk_ms_warm": 81.81515200001854,
+        "mount_ms_cold": 30.085262000000057,
+        "workset_ms_cold": null,
+        "rand4k_ms_cold": 0.47123603000002845,
+        "cpu_s_startup_cold": 0.0,
+        "seq_mb_s_cold": 121.34253658876723,
+        "fuse_rss_mb_cold": 29.62890625,
+        "cpu_s_total_cold": 0.26,
+        "walk_ms_cold": 84.28410799999142,
+        "mount_ms_tmpfs": 103.74701300000311,
+        "workset_ms_tmpfs": null,
+        "rand4k_ms_tmpfs": 0.293587805000044,
+        "cpu_s_startup_tmpfs": 0.0,
+        "seq_mb_s_tmpfs": 141.86771897596242,
+        "fuse_rss_mb_tmpfs": 29.046875,
+        "cpu_s_total_tmpfs": 0.26,
+        "walk_ms_tmpfs": 84.08657600000424,
+        "launch_ms_warm": 63.938335999978335,
+        "launch_ms_cold": 115.78981999997495,
+        "launch_ms_tmpfs": 114.01328499999863
+      },
+      "noisy": [
+        "mount_ms_warm",
+        "mount_ms_cold",
+        "mount_ms_tmpfs"
+      ]
+    },
+    {
+      "run_id": "37581057391",
+      "app": "neovim",
+      "arch": "x86_64",
+      "category": "tiny-cli",
+      "variant": "squashfs-xz-bcjauto-b256K",
+      "container": "squashfs",
+      "codec": "xz",
+      "level": null,
+      "block_bytes": 262144,
+      "family_key": "sq-xz/bcj=auto",
+      "stage": "2",
+      "retry": false,
+      "runtime": "type2-runtime-full@6c881190831e",
+      "size": {
+        "payload": 9576448,
+        "runtime": 1092280,
+        "total": 10668728,
+        "uncompressed": 38000417,
+        "ratio": 0.28075291910612454
+      },
+      "build": {
+        "wall_s": 4.91,
+        "cpu_s": 18.509999999999998,
+        "rss_mb": 127.48046875,
+        "timeout": false,
+        "deterministic": true
+      },
+      "env": {
+        "cpu": "AMD EPYC 9V74 80-Core Processor",
+        "cores": 4,
+        "ram_gb": 15.6,
+        "kernel": "6.17.0-1022-azure",
+        "image": "20261004.327.1",
+        "runner": "GitHub Actions 1000009474",
+        "tools": {
+          "mksquashfs": "mksquashfs version 4.6.1 (2023/03/25)",
+          "mkdwarfs": "___                  ___ ___",
+          "zsync": "zsync v0.6.2 (compiled Apr 18 2024 17:54:59)"
+        }
+      },
+      "startup": {
+        "mount": {
+          "warm": [
+            {
+              "mount_ms": 6.7070929999886175,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 108.36849899999379,
+              "rand4k_ms": 0.9317005799999833,
+              "seq_mb_s": 85.8598687172752,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.56,
+              "fuse_rss_mb": 38.6796875
+            },
+            {
+              "mount_ms": 8.890350999990915,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 115.32969100002788,
+              "rand4k_ms": 0.9535646600001257,
+              "seq_mb_s": 88.4297500995273,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.5700000000000001,
+              "fuse_rss_mb": 38.6796875
+            },
+            {
+              "mount_ms": 7.191034000015861,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 109.14955199999099,
+              "rand4k_ms": 0.9220606449999025,
+              "seq_mb_s": 89.20624789854453,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.55,
+              "fuse_rss_mb": 38.52734375
+            },
+            {
+              "mount_ms": 6.475123000001304,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 110.99782399998048,
+              "rand4k_ms": 0.9195154200000388,
+              "seq_mb_s": 87.04910370133364,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.5599999999999999,
+              "fuse_rss_mb": 38.6875
+            },
+            {
+              "mount_ms": 7.198815999998942,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 114.37421200000131,
+              "rand4k_ms": 0.9195924900001273,
+              "seq_mb_s": 88.65290057299367,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.56,
+              "fuse_rss_mb": 38.703125
+            },
+            {
+              "mount_ms": 9.033297000001994,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 114.85170500000663,
+              "rand4k_ms": 0.9484947250000175,
+              "seq_mb_s": 85.85881074693437,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.5800000000000001,
+              "fuse_rss_mb": 38.59765625
+            },
+            {
+              "mount_ms": 6.831199999993487,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 108.21882999999843,
+              "rand4k_ms": 0.918995765000119,
+              "seq_mb_s": 88.38606465952674,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.55,
+              "fuse_rss_mb": 38.7109375
+            }
+          ],
+          "cold": [
+            {
+              "mount_ms": 54.33161700000255,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 114.73689700000023,
+              "rand4k_ms": 1.3455971199999794,
+              "seq_mb_s": 59.14343618896976,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.58,
+              "fuse_rss_mb": 38.30078125
+            },
+            {
+              "mount_ms": 294.3914950000135,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 117.31183099999498,
+              "rand4k_ms": 1.660078244999994,
+              "seq_mb_s": 56.11896970654816,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.5700000000000001,
+              "fuse_rss_mb": 38.484375
+            },
+            {
+              "mount_ms": 29.40103100002034,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 113.40960900000141,
+              "rand4k_ms": 1.9200203949999661,
+              "seq_mb_s": 83.31301496778413,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.5700000000000001,
+              "fuse_rss_mb": 38.5859375
+            },
+            {
+              "mount_ms": 25.776113000006262,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 119.91717099999732,
+              "rand4k_ms": 1.0562646099999995,
+              "seq_mb_s": 80.02127457409178,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.6,
+              "fuse_rss_mb": 38.40625
+            },
+            {
+              "mount_ms": 325.9898850000127,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 121.60989699998481,
+              "rand4k_ms": 1.0335554400001001,
+              "seq_mb_s": 42.212717560173424,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.5900000000000001,
+              "fuse_rss_mb": 38.3515625
+            }
+          ],
+          "tmpfs": [
+            {
+              "mount_ms": 28.963788999988083,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 116.3489239999933,
+              "rand4k_ms": 0.9593267149999463,
+              "seq_mb_s": 82.84687256804531,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.5900000000000001,
+              "fuse_rss_mb": 37.99609375
+            },
+            {
+              "mount_ms": 99.51506699999868,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 110.28964199999791,
+              "rand4k_ms": 0.9208582799999476,
+              "seq_mb_s": 86.86838894113869,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.5599999999999999,
+              "fuse_rss_mb": 37.99609375
+            },
+            {
+              "mount_ms": 19.05101099998774,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 111.66553000001045,
+              "rand4k_ms": 0.9625811300000464,
+              "seq_mb_s": 82.20242042574714,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.59,
+              "fuse_rss_mb": 37.99609375
+            },
+            {
+              "mount_ms": 67.05254799999238,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 118.10996100001603,
+              "rand4k_ms": 0.9364411900000391,
+              "seq_mb_s": 87.32109707748269,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.5700000000000001,
+              "fuse_rss_mb": 38.07421875
+            },
+            {
+              "mount_ms": 27.509827999978143,
+              "workset_ms": null,
+              "cpu_s_startup": 0.0,
+              "walk_ms": 119.23416199999792,
+              "rand4k_ms": 0.95483148999989,
+              "seq_mb_s": 84.83867808755217,
+              "uncompressed_bytes": 38000417,
+              "cpu_s_total": 0.5800000000000001,
+              "fuse_rss_mb": 38.08203125
+            }
+          ]
+        },
+        "launch": {
+          "warm": [
+            {
+              "launch_ms": 264.6092949999854,
+              "ok": true
+            },
+            {
+              "launch_ms": 164.1463599999895,
+              "ok": true
+            },
+            {
+              "launch_ms": 165.57871300000215,
+              "ok": true
+            }
+          ],
+          "cold": [
+            {
+              "launch_ms": 265.9536019999962,
+              "ok": true
+            },
+            {
+              "launch_ms": 716.9392950000315,
+              "ok": true
+            },
+            {
+              "launch_ms": 216.02365100000043,
+              "ok": true
+            }
+          ],
+          "tmpfs": [
+            {
+              "launch_ms": 264.8992179999823,
+              "ok": true
+            },
+            {
+              "launch_ms": 214.26264999996647,
+              "ok": true
+            },
+            {
+              "launch_ms": 214.23383000001195,
+              "ok": true
+            }
+          ]
+        }
+      },
+      "zsync": [
+        {
+          "zsync_block": 1024,
+          "zsync_file": 73173,
+          "control_served": 73173,
+          "downloaded": 4721251,
+          "requests": 2,
+          "ok": true,
+          "update_cost": 4794424,
+          "update_ratio": 0.44939040530417496,
+          "pair": "patch"
+        },
+        {
+          "zsync_block": 2048,
+          "zsync_file": 36710,
+          "control_served": 36710,
+          "downloaded": 4752894,
+          "requests": 2,
+          "ok": true,
+          "update_cost": 4789604,
+          "update_ratio": 0.44893861761214643,
+          "pair": "patch"
+        },
+        {
+          "zsync_block": 4096,
+          "zsync_file": 15870,
+          "control_served": 15870,
+          "downloaded": 4814334,
+          "requests": 2,
+          "ok": true,
+          "update_cost": 4830204,
+          "update_ratio": 0.45274413219645304,
+          "pair": "patch"
+        },
+        {
+          "zsync_block": 2048,
+          "zsync_file": 36710,
+          "control_served": 36710,
+          "downloaded": 37792,
+          "requests": 1,
+          "ok": true,
+          "update_cost": 74502,
+          "update_ratio": 0.006983212994088893,
+          "pair": "rebuild"
+        }
+      ],
+      "summary": {
+        "build_wall_s": 4.91,
+        "build_cpu_s": 18.509999999999998,
+        "build_rss_mb": 127.48046875,
+        "mount_ms_warm": 7.191034000015861,
+        "workset_ms_warm": null,
+        "rand4k_ms_warm": 0.9220606449999025,
+        "cpu_s_startup_warm": 0.0,
+        "seq_mb_s_warm": 88.38606465952674,
+        "fuse_rss_mb_warm": 38.6796875,
+        "cpu_s_total_warm": 0.56,
+        "walk_ms_warm": 110.99782399998048,
+        "mount_ms_cold": 54.33161700000255,
+        "workset_ms_cold": null,
+        "rand4k_ms_cold": 1.3455971199999794,
+        "cpu_s_startup_cold": 0.0,
+        "seq_mb_s_cold": 59.14343618896976,
+        "fuse_rss_mb_cold": 38.40625,
+        "cpu_s_total_cold": 0.58,
+        "walk_ms_cold": 117.31183099999498,
+        "mount_ms_tmpfs": 28.963788999988083,
+        "workset_ms_tmpfs": null,
+        "rand4k_ms_tmpfs": 0.95483148999989,
+        "cpu_s_startup_tmpfs": 0.0,
+        "seq_mb_s_tmpfs": 84.83867808755217,
+        "fuse_rss_mb_tmpfs": 37.99609375,
+        "cpu_s_total_tmpfs": 0.5800000000000001,
+        "walk_ms_tmpfs": 116.3489239999933,
+        "launch_ms_warm": 165.57871300000215,
+        "launch_ms_cold": 265.9536019999962,
+        "launch_ms_tmpfs": 214.26264999996647
+      },
+      "canary": {
+        "build_wall_s": 1.1,
+        "build_cpu_s": 4.05,
+        "build_rss_mb": 82.77734375,
+        "mount_ms_warm": 7.238584999981867,
+        "workset_ms_warm": null,
+        "rand4k_ms_warm": 0.2915395499999818,
+        "cpu_s_startup_warm": 0.0,
+        "seq_mb_s_warm": 150.43206960090868,
+        "fuse_rss_mb_warm": 29.734375,
+        "cpu_s_total_warm": 0.24000000000000002,
+        "walk_ms_warm": 81.81515200001854,
+        "mount_ms_cold": 30.085262000000057,
+        "workset_ms_cold": null,
+        "rand4k_ms_cold": 0.47123603000002845,
+        "cpu_s_startup_cold": 0.0,
+        "seq_mb_s_cold": 121.34253658876723,
+        "fuse_rss_mb_cold": 29.62890625,
+        "cpu_s_total_cold": 0.26,
+        "walk_ms_cold": 84.28410799999142,
+        "mount_ms_tmpfs": 103.74701300000311,
+        "workset_ms_tmpfs": null,
+        "rand4k_ms_tmpfs": 0.293587805000044,
+        "cpu_s_startup_tmpfs": 0.0,
+        "seq_mb_s_tmpfs": 141.86771897596242,
+        "fuse_rss_mb_tmpfs": 29.046875,
+        "cpu_s_total_tmpfs": 0.26,
+        "walk_ms_tmpfs": 84.08657600000424,
+        "launch_ms_warm": 63.938335999978335,
+        "launch_ms_cold": 115.78981999997495,
+        "launch_ms_tmpfs": 114.01328499999863
+      },
+      "noisy": [
+        "mount_ms_warm",
+        "mount_ms_cold",
+        "mount_ms_tmpfs"
+      ]
+    }
+  ],
+  "reference": [
+    {
+      "pair": "patch",
+      "xdelta3_bytes": 1563501
+    }
+  ],
+  "app": "neovim",
+  "arch": "x86_64"
+}
