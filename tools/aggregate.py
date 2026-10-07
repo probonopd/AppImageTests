@@ -393,13 +393,18 @@ def main():
         d = dict(zip([m for _, m in HEAD], cells))
         cand[v] = {k: float(x) if x else None for k, x in d.items()}
     ok = []
-    best_up = min((c["update_cost"] for c in cand.values() if c["update_cost"]), default=None)
-    best_cpu = min((c["cpu_s_startup_warm"] for c in cand.values() if c["cpu_s_startup_warm"]), default=None)
+    # The +5% / +10% bounds are relative to the best of the top-scoring pool, not the global
+    # best: the global bests come from different variants and no variant is within both.
+    pool_ids = [v for _, v, _ in scored[:10]]
+    pool = [cand[v] for v in pool_ids if v in cand and cand[v].get("launch_ms_cold") is not None
+            and cand[v].get("update_cost") is not None]
+    best_up = min((c["update_cost"] for c in pool if c["update_cost"]), default=None)
+    best_cpu = min((c["cpu_s_startup_warm"] for c in pool if c["cpu_s_startup_warm"]), default=None)
     nondet = {r["variant"] for r in recs if r.get("build", {}).get("deterministic") is False}
     zfail = {r["variant"] for r in recs for z in r.get("zsync", []) if not z["ok"]}
     for v, c in cand.items():
-        if cand[v].get("launch_ms_cold") is None or cand[v].get("update_cost") is None:
-            continue                       # need real startup + zsync data to be a winner
+        if v not in pool_ids or cand[v].get("launch_ms_cold") is None or cand[v].get("update_cost") is None:
+            continue                       # need real startup + zsync data and a top-10 score
         if v in nondet or v in zfail or v in unsup or v.split("+")[0] in {x["id"] for x in expand_variants() if x["reference_only"]}:
             continue
         if best_up and c["update_cost"] and c["update_cost"] > 1.05 * best_up:
@@ -407,8 +412,8 @@ def main():
         if best_cpu and c["cpu_s_startup_warm"] and c["cpu_s_startup_warm"] > 1.10 * best_cpu:
             continue
         ok.append(v)
-    md.append("1. keep variants within +5% of the best update cost and +10% of the best warm startup CPU "
-              "(when those metrics exist);\n2. choose the smallest total size;\n"
+    md.append("1. among the 10 best weighted scores, keep variants within +5% of the best update cost and "
+              "+10% of the best warm startup CPU (when those metrics exist);\n2. choose the smallest total size;\n"
               "3. reject non-deterministic builds, zsync verification failures, reference-only variants.\n")
     if ok:
         win = min(ok, key=lambda v: cand[v]["total size"] if "total size" in cand[v] else cand[v]["size_total"])
