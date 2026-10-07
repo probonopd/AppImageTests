@@ -17,6 +17,7 @@ jobs:
         run: |
           mkdir -p out
           docker run --rm -v "$PWD/tools:/tools:ro" -v "$PWD/out:/out" alpine:3.21 sh /tools/build_full_runtime.sh
+          sudo chown -R "$(id -u):$(id -g)" out
       - name: Test every codec (extract + compare)
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq squashfs-tools
