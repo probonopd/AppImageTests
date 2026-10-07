@@ -81,7 +81,13 @@ def build_once(v, appdir, out, arch="x86_64", epoch=0, timeout=2400, hotness=Non
     payload = out.with_suffix(".payload")
     if payload.exists():
         payload.unlink()
-    rt_kind = "dwarfs" if v["kind"] == "dwarfs" else "squashfs"
+    if v["kind"] == "dwarfs":
+        rt_kind = "dwarfs"
+    elif (v["codec"] in load_variant_table().get("full_runtime_codecs", [])
+          or v.get("params", {}).get("runtime") == "full"):
+        rt_kind = "squashfs_full"
+    else:
+        rt_kind = "squashfs"
     rt_path, rt_name, rt_sha = get_runtime(rt_kind, arch)
     cmd = payload_cmd(v, appdir, payload, arch, epoch, out.parent, hotness)
     t = timed(cmd, timeout=timeout)

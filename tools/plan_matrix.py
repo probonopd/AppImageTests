@@ -103,7 +103,7 @@ def select_variants(stage, results, only):
         vs = [get_variant(f"squashfs-zstd{lv}-b{bk}") for lv in FINE_LEVELS for bk in FINE_BLOCKS]
     elif stage == "2" and WIDE:
         bad = set(load_variant_table().get("runtime_unsupported_codecs", []))
-        vs = [v for v in allv if v["codec"] not in bad and not v["reference_only"] and v["codec"] not in ("lz4", "lzo")]
+        vs = [v for v in allv if v["codec"] not in bad and not v["reference_only"]]
     elif stage == "2":
         if shortlist is None:
             sys.exit("stage 2 needs results/shortlist.json from a stage 1 run")

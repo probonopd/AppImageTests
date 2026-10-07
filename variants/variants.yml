@@ -21,8 +21,11 @@
 canary: squashfs-gzip9-b128K     # in EVERY job; also the "current default"
 default: squashfs-gzip9-b128K
 
-# zsync block sizes (low / mid / high); xz is not mountable by the current type2-runtime
-runtime_unsupported_codecs: [xz]
+# The stock type2-runtime mounts only zlib and zstd. These codecs are mounted with the
+# full-codec runtime built by build-runtime.yml (corpus/runtimes.yml: squashfs_full).
+full_runtime_codecs: [xz, lz4, lzo]
+# codecs no available runtime can mount (excluded from ranking)
+runtime_unsupported_codecs: []
 # zsync block sizes
 zsync_blocks: [1024, 2048, 4096]   # stage 2 found the optimum at the old low edge (2048)
 
@@ -73,8 +76,16 @@ families:
     id: "squashfs-lzo-b{block}"
     params: {codec: lzo, level: 0, block: 128K}
     levers: []
-    reference_only: true
     compat: {kernel: "n/a (FUSE; in-kernel mount would need 2.6.36)", fuse: "2.9", static_reader: true}
+
+  # Control: the same variant as squashfs-zstd7-b256K but with the full-codec runtime, to show
+  # that the extra codecs do not change zstd results (size differs by the runtime's size only).
+  - name: sq-fullrt-control
+    kind: squashfs
+    id: "squashfs-zstd7-b256K-fullrt"
+    params: {codec: zstd, level: 7, block: 256K, runtime: full}
+    levers: []
+    compat: {kernel: "n/a (FUSE; in-kernel mount would need 4.14)", fuse: "2.9", static_reader: true}
 
   # ---- DwarFS ----------------------------------------------------------
   # preset level x block bits, 3 x 3 (S: 16=64K, 20=1M, 24=16M)
