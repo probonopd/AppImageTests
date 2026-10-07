@@ -7,139 +7,147 @@ Everything runs on GitHub Actions.
 
 ## Recommendation
 
-**Use SquashFS with zstd level 7 and a 256K block size**
-(`mksquashfs ... -comp zstd -Xcompression-level 7 -b 256K`) as the default AppImage
-container, with the existing type2 runtime. Block 128K is a near-equal alternative that uses
-about a quarter less FUSE RAM.
+**Use SquashFS with zstd level 7 and a 128K block size**
+(`mksquashfs ... -comp zstd -Xcompression-level 7 -b 128K`) as the default AppImage
+container, with the existing type2 runtime.
 
 Compared with today's default (gzip level 9, 128K blocks). Figures are geometric means over
 a 6-app corpus; 1.00 is today's default, lower is better:
 
-| Metric | zstd 7 / 256K | What it means |
+| Metric | zstd 7 / 128K | What it means |
 |---|---|---|
-| Download size | 0.96 | 4% smaller |
-| App start: mount + launch, cold cache | 0.54 | about 45% faster first start (one measurement: `./app.AppImage` to first window) |
-| Startup CPU (mount + working set) | 0.33 | one third of the CPU |
-| zsync update cost | 0.91 | 9% less to download per update |
-| Build time | 0.18 | 5x faster to create |
-| FUSE process RAM | 1.38 | the one cost; 128K blocks: 1.02 |
+| Download size | 0.98 | 2% smaller |
+| App start: mount + launch, cold cache | 0.57 | about 40% faster first start |
+| Startup CPU (mount + working set) | 0.34 | one third of the CPU |
+| zsync update cost | 0.94 | 6% less to download per update |
+| Build time | 0.19 | 5x faster to create |
+| FUSE process RAM | 1.01 | unchanged |
 
-Every one of these metrics is equal or better than today except memory at 256K blocks. The
-automatic decision rule ([full report](https://github.com/probonopd/AppImageTests/blob/results/latest/report.md))
-selects this variant. All measurements go through the runtime's own FUSE mount (squashfuse in
-the type2 runtime, `--appimage-mount`), exactly as users run AppImages, so no kernel squashfs
-support is involved: the only requirement is FUSE, as for every AppImage today. zstd needs a
-runtime built with zstd support (the pinned type2 runtime has it).
+Every metric is equal or better than today, none is worse. All measurements go through the
+runtime's own FUSE mount (squashfuse in the type2 runtime, `--appimage-mount`), exactly as
+users run AppImages, so no kernel squashfs support is involved: the only requirement is FUSE,
+as for every AppImage today. zstd needs a runtime built with zstd support (the pinned type2
+runtime has it).
 
 ### Why we are confident
 
-1. **It is the only family that is never bad.** Whatever mix of priorities is used, the
-   winner is SquashFS + zstd (see the sensitivity table). Level and block size move the score by
-   a few percent; leaving the family costs 20-80%.
-2. **It improves the metrics people actually feel** (first-start time, CPU, bytes
-   downloaded per update) while keeping the proven SquashFS format and the
-   current runtime. Nothing else we tested improves startup without a large penalty elsewhere.
-3. **The result is measured on real AppImages, not synthetic data**: neovim, KeePassXC,
-   Obsidian, Krita, Kdenlive and LibreOffice, with the update cost computed from real older
-   releases using real zsync over an HTTP range server.
-4. **The measurement is controlled.** Variants being compared run interleaved in the same
-   job on the same runner, every job also contains the current default as a canary to
-   normalise runner differences, and every image was built twice and verified bit-identical.
-5. **Level 7 is not a guess**: the grid around it (levels 5/7/9 x blocks 64K-512K, plus
-   automatic edge extension up to the range limits) was searched and the optimum is
-   interior; 512K blocks and levels 5 and 9 are worse.
+1. **It ranks near the top under every weighting that cares about both size and speed**
+   (sensitivity table below): 2nd of 79 with our weights, 5th with all metrics weighted
+   equally, 3rd for speed, 3rd for a mix of size and speed. It has the best mean rank of every
+   variant we tried.
+2. **It improves what people feel** (first-start time, CPU, bytes per update) with no
+   penalty elsewhere, while keeping the proven SquashFS format and the current runtime.
+3. **Measured on real AppImages**: neovim, KeePassXC, Obsidian, Krita, Kdenlive and LibreOffice,
+   with update cost computed from real older releases using real zsync over an HTTP range server.
+4. **Controlled measurement.** Variants being compared run interleaved in the same job on the
+   same runner, every job also contains the current default as a canary to normalise runner
+   differences, and every image was built twice and verified bit-identical.
+5. **Level and block size were searched around**: levels 5/7/9 x blocks 64K-512K plus automatic
+   edge extension up to the range limits. The optimum is interior; 512K blocks and levels 5 and
+   9 are worse overall, and 64K and 128K are within noise of each other (128K keeps FUSE RAM at
+   today's level; 64K uses about a quarter less).
 
 ### Robust to different priorities
 
-The weights are a judgement call, so we re-ranked all 70 fully measured variants under other
-priorities (best three each; score vs today's default):
+The weights are a judgement call, so we re-ranked all 79 fully measured variants under other
+priorities (best variant for each; score vs today's default):
 
-| If you only care about... | Winner | Is zstd7 / 256K good enough? |
+| If you weigh ... | Winner | zstd 7 / 128K |
 |---|---|---|
-| Our weights (size 35, app start 20, startup CPU 8, updates 24, RAM 10, build 3) | squashfs-zstd12-b32K 0.73; zstd7-b256K 0.77 | yes: 5th of 70, 0.04 behind (128K is 3rd) |
-| Speed (app start incl. mount, CPU) | squashfs-zstd12-b32K 0.41 | yes: 4th of 70 (0.42 vs 0.41) |
-| Bandwidth (size + updates) | squashfs-zstd17-b256K 0.87 | 0.94 (10th of 70), but builds about 10x faster |
-| All six metrics equally | squashfs-zstd3-b32K 0.49 | 0.58 (13th of 70); 128K: 0.56 (6th) |
-| Download size alone | DwarFS (mkdwarfs zstd22 -S26 -B6, hotness list) 0.74 | no: 0.96 (see below) |
-| Cold launch alone | DwarFS zstd7 -S20 0.29 | no: 0.54 (see below) |
-| Update cost alone | DwarFS -l2 -S24 0.72 | no: 0.91 (see below) |
-| Memory alone | squashfs-gzip7-b16K 0.49 | no: 1.38 (use 128K or 64K) |
-| Build time alone | squashfs-zstd3-b32K 0.07 | no: 0.18 |
+| Our weights (size 35, app start 20, startup CPU 8, updates 24, RAM 10, build 3) | squashfs zstd7 / 64K 0.74 | 0.76 (2nd) |
+| All six metrics equally | squashfs zstd3 / 32K 0.50 | 0.57 (5th) |
+| Speed (app start incl. mount, CPU) | squashfs lz4hc 0.34 | 0.44 (3rd) |
+| Download size and updates only | squashfs xz 0.81 | 0.96 (26th) |
+| Download size alone | DwarFS (mkdwarfs zstd22 -S26 -B6, hotness list) 0.74 | 0.98 |
+| App start alone | DwarFS (same, hotness list) 0.52 | 0.57 (4th) |
+| Update cost alone | DwarFS -l2 -S24 0.72 | 0.94 |
+| Memory alone | squashfs gzip7 / 16K 0.49 | 1.01 |
+| Build time alone | squashfs zstd3 / 32K 0.08 | 0.19 |
 
-Only one-dimensional preferences point somewhere else, and each of those gives up a lot
-elsewhere (below). Any balanced weighting lands on SquashFS + zstd.
+Only weightings that ignore one side entirely point elsewhere: size and updates only picks xz,
+speed only picks lz4, and each single-metric winner pays heavily on the other metrics (below).
+Every weighting that counts both size and speed lands on SquashFS + zstd.
 
 ### "But I prefer ..." answers
 
-**"DwarFS compresses better and starts faster."** True on two axes, and we say so: the best
-DwarFS configuration is 20-26% smaller than today's default (ours is 4% smaller), and cold
-launch is up to 2x faster than ours. It pays for that: mount is about 4-5x slower, the FUSE
-process uses 12-40x more RAM, startup CPU is up to 2.6x of today's for the small-size settings (ours is 0.33), builds are up to
-4x slower than today's, and zsync updates cost 1.4-2.0x of today's (ours 0.91). The one DwarFS setting with
-cheap updates (low level, large blocks) is 11-16% larger than today's default. DwarFS also
-needs a different runtime (uruntime) and FUSE3 instead of the current type2 runtime. We measured the
-project's own mkdwarfs setup (`zstd:level=22 -S26 -B6 --order=path`, with and without
-`--hotness-list`): size 0.74-0.77, but mount 5x, RAM 12-16x and updates 1.5x; the hotness list
-made images slightly smaller but did not speed up cold launch (0.52 vs 0.42), which may mean
-the recorded working set does not match what the launch measures. If DwarFS's memory and mount
-costs can be fixed, it deserves a re-test.
+**"xz compresses best."** It does: squashfs xz is 8-21% smaller than today's default and its
+updates are 6-17% cheaper. But xz decompression is slow: app start is 1.9-2.4x slower than
+today's, startup CPU 2.9-3.2x higher, and builds take 2-5x longer. That is an unattractive trade
+for a 10-20% size gain over zstd 7, and the stock type2 runtime cannot even mount xz (we built
+a full-codec runtime only for this measurement).
 
-**"xz / lzma compresses smallest."** xz squashfs is 7-19% smaller than today's default, but
-the type2 runtime cannot mount xz at all (it only supports zlib and zstd), builds are 2-5x
-slower, and zstd 17 gets within 5-8% of its size while being mountable. DwarFS-lzma costs 7x
-startup CPU and 35-40x RAM.
+**"lz4 / lzo are fastest."** lz4 has the lowest startup CPU of anything we tested (0.16), but
+images are 17% larger, app start is 0.72 (zstd 7: 0.57), builds are 6x slower than zstd 7, and
+the score is 0.85 vs 0.76. lzo is 10% larger and slower on every metric. Fine for CPU-starved
+machines; not a good default for downloads.
 
-**"gzip is the safe, compatible choice."** gzip is the most widely supported codec, but
-the runtime we ship already reads zstd, and the squashfs reader is the runtime's own FUSE
-code, not the user's kernel, so there is no kernel-version compatibility argument for gzip.
-It scores 0.92-1.05 against zstd's 0.75-0.85 and is never ahead of zstd on launch, CPU, size or
+**"DwarFS compresses better and starts as fast."** DwarFS can: with the project's mkdwarfs
+setup (`zstd:level=22 -S26 -B6 --order=path`) images are 23% smaller, and the `--hotness-list`
+variant starts in 0.52 (the same setup without it: 0.82), as fast as our recommendation.
+It pays for that: the FUSE process uses 12-40x the RAM, standalone mount is 4-5x slower,
+zsync updates cost 1.5x of today's (ours 0.94), and builds take 6x longer (ours 0.19).
+The one DwarFS setting with cheap updates (level 2, large blocks) is 18% larger than today's
+default. DwarFS also needs a different runtime (uruntime) and FUSE3 instead of the current
+type2 runtime. Its weighted score is 1.08-1.7 against our 0.76. The hotness list is the
+interesting result: if the memory and build costs can be fixed, it deserves a re-test.
+
+**"gzip is the safe, compatible choice."** gzip is the most widely supported codec, but the
+runtime we ship already reads zstd, and the squashfs reader is the runtime's own FUSE code,
+not the user's kernel, so there is no kernel-version compatibility argument for gzip. It
+scores 0.92-1.05 against zstd's 0.74-0.85 and is never ahead of zstd on launch, CPU, size or
 updates. Level 3 builds faster, but it is 5-9% larger than the default. The remaining risk is
-old AppImages' runtimes without zstd: images using zstd cannot be opened by an old runtime, so
-the runtime embedded in the image must be one that supports it (it is part of the AppImage).
+an image using zstd being opened by a runtime without zstd, but the runtime is embedded in
+each image, so that cannot happen.
 
-**"Use a higher zstd level; size matters most."** Level 17 is 12% smaller, but builds
-about 10x slower than level 7 and is not faster to launch; it is a reasonable choice if build
-time is free and only the download matters (score 0.83-0.86, third in the bandwidth ranking).
-Level 12 is in between and wins on neither.
+**"Use a higher zstd level; size matters most."** Level 17 is 10-12% smaller, but builds
+about 12x slower than level 7 and is slower to start (0.73); it is the best pure-zstd choice
+if build time is free and only the download matters (score 0.86). Level 9 builds 25% slower
+than level 7 for 1-3% size.
 
-**"Use a lower level / smaller block for speed and RAM."** zstd 3-5 builds 3-5x faster, but is
-4-8% larger and slower to launch than level 7; 16K blocks are worse in every way (score 0.84).
-Smaller blocks (64K) do reduce FUSE RAM a lot (0.74), and 64K scored best in one run; the
-difference to 128K/256K is within noise, which is why 128K is listed as an equal alternative.
+**"Use a lower level or smaller block."** zstd 3-5 builds 2-3x faster but is 2-8% larger and
+slower to start; 64K blocks use less RAM and score about the same as 128K (within noise);
+16K blocks are worse in every way (score 0.84) and 512K blocks triple FUSE RAM (score 0.87+).
+256K blocks are 2% smaller than 128K but use 1.37x the RAM, and in the latest re-measurement
+start slower (0.72 vs 0.57).
 
-**"lz4 / lzo are fastest."** They are 9-17% larger than today's default, and we could not measure
-their startup (no startup data for them), so they offer a size penalty with no demonstrated benefit.
+**"Fancy squashfs flags (-no-fragments, -sort, ...)."** None beat the same variant without a
+flag on the weighted score (0.80-0.83 vs 0.76); `-no-fragments` reduces RAM (0.79) at the cost
+of a slower start.
 
-**"Fancy squashfs flags (-no-fragments, -sort, ...)."** All within about 0.01-0.03 of the
-same variant without a flag, inside the noise. `-no-fragments` was the most promising and may
-be worth adding after repeated runs; it is not part of the recommendation.
-
-**"Your weights are wrong."** Change them: they are one file, `variants/weights.yml`, and
-the report is recomputed from the stored raw data by `tools/aggregate.py`. The sensitivity
-table above shows what happens for the extreme choices.
+**"Your weights are wrong."** Change them: they are one file, `variants/weights.yml`, and the
+report is recomputed from the stored raw data by `tools/aggregate.py`. The sensitivity table
+above shows what happens for the extreme choices.
 
 ### What would change this recommendation
 
-- A DwarFS configuration with low mount time and RAM, or a runtime that makes the cost vanish.
+- A DwarFS configuration with low RAM and build cost, or a runtime that makes the cost vanish.
 - Real-disk or slow-ARM measurements that favour a different level or block size (not done yet).
-- Repeated runs showing 64K or 128K blocks beat 256K by more than the noise (the weighted
-  scores of the three are within about 0.03 today).
+- Repeated runs separating 64K, 128K and 256K by more than the noise (see below).
 - Apps with very different content (not tested: games, scientific, interpreted apps).
 
 ### Caveats we know about
 
-- SquashFS results are for squashfuse as built into the pinned type2 runtime (its sha256 is in
-  `corpus/runtimes.yml`; each record names the runtime build). A different squashfuse version
-  (caching, threading) could shift mount time, CPU and RAM. The RAM trend with block size
-  (64K: 0.74, 128K: 1.02, 256K: 1.38, 512K: 3.0) fits a per-block cache in the FUSE process.
+- **Timing noise is large.** Re-measuring variants flagged as noisy moved some results a lot:
+  app start for zstd 7 / 256K went from 0.54 to 0.72, and for DwarFS zstd 7 from 0.29 to 0.55.
+  We therefore treat differences below about 0.1 in a timing ratio, or 0.03 in the weighted
+  score, as ties. The family (SquashFS + zstd, level 7-9, block 64K-128K) is robust; the exact
+  block size inside it is not, which is why the recommendation uses the mean rank over several
+  weightings rather than one run. The automated decision rule's single "winner" flips
+  between near-equal candidates for the same reason.
 - Measured on GitHub-hosted runners with fast virtual disks; real hard disks or slow ARM CPUs
   shift startup results toward higher compression at lower CPU cost. A throttled-disk test and
   aarch64 apps are open items.
-- Differences of about 0.03 in the weighted score are within noise (many variants were flagged
-  for retry), especially between block sizes.
 - The corpus is 6 apps (neovim, KeePassXC, Obsidian, Krita, Kdenlive, LibreOffice); update cost
   uses 1-2 older releases per app and zsync blocks of 1K-4K.
-- Cold launch is a real GUI start under Xvfb with the page cache dropped; it measures
+- SquashFS results are for squashfuse as built into the pinned type2 runtime (its sha256 is in
+  `corpus/runtimes.yml`). xz, lz4 and lzo were measured with a runtime we rebuilt with those
+  codecs added; the same zstd 7 image measured with it (control `-fullrt`) was within about
+  10% on every timing metric (app start 0.79 vs 0.72), the same size as the stock runtime's.
+  That is within the noise above, so the xz and lz4 results are comparable, but not exact.
+  A different squashfuse version could shift mount time, CPU and RAM. The RAM trend with block
+  size (64K: 0.74, 128K: 1.01, 256K: 1.37, 512K: 3.0) fits a per-block cache in the FUSE
+  process.
+- Cold app start is a real GUI start under Xvfb with the page cache dropped; it measures
   decompression and I/O, not rendering.
 
 ## Test plan: three points per continuous lever
