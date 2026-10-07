@@ -18,7 +18,7 @@ a 6-app corpus; 1.00 is today's default, lower is better:
 | Metric | zstd 7 / 256K | What it means |
 |---|---|---|
 | Download size | 0.96 | 4% smaller |
-| Cold app launch | 0.54 | about 45% faster first start |
+| App start: mount + launch, cold cache | 0.54 | about 45% faster first start (one measurement: `./app.AppImage` to first window) |
 | Startup CPU (mount + working set) | 0.33 | one third of the CPU |
 | zsync update cost | 0.91 | 9% less to download per update |
 | Build time | 0.18 | 5x faster to create |
@@ -56,10 +56,10 @@ priorities (best three each; score vs today's default):
 
 | If you only care about... | Winner | Is zstd7 / 256K good enough? |
 |---|---|---|
-| Our weights (size 35, launch 28, updates 24, RAM 10, build 3) | squashfs-zstd7-b64K 0.75; 256K 0.79 | yes: 5th of 70, 0.04 behind (128K is 3rd) |
-| Speed (cold launch, CPU, mount) | squashfs-zstd7-b64K 0.55 | yes: 4th of 70 (0.57 vs 0.55) |
+| Our weights (size 35, app start 20, startup CPU 8, updates 24, RAM 10, build 3) | squashfs-zstd12-b32K 0.73; zstd7-b256K 0.77 | yes: 5th of 70, 0.04 behind (128K is 3rd) |
+| Speed (app start incl. mount, CPU) | squashfs-zstd12-b32K 0.41 | yes: 4th of 70 (0.42 vs 0.41) |
 | Bandwidth (size + updates) | squashfs-zstd17-b256K 0.87 | 0.94 (10th of 70), but builds about 10x faster |
-| All seven metrics equally | squashfs-zstd3-b32K 0.53 | 0.63 (14th of 70); 128K: 0.61 (6th) |
+| All six metrics equally | squashfs-zstd3-b32K 0.49 | 0.58 (13th of 70); 128K: 0.56 (6th) |
 | Download size alone | DwarFS (mkdwarfs zstd22 -S26 -B6, hotness list) 0.74 | no: 0.96 (see below) |
 | Cold launch alone | DwarFS zstd7 -S20 0.29 | no: 0.54 (see below) |
 | Update cost alone | DwarFS -l2 -S24 0.72 | no: 0.91 (see below) |
@@ -194,7 +194,7 @@ second, build time least):
 | Metric | Weight |
 |---|---|
 | Download size (total AppImage bytes) | 35% |
-| App launch speed: cold launch 16% + startup CPU 8% + mount 4% | 28% |
+| App start speed: mount + launch in one run (cold) 20% + startup CPU 8% | 28% |
 | zsync update cost (best tested `-b`) | 24% |
 | RAM of the FUSE/runtime process | 10% |
 | AppImage generation time | 3% |

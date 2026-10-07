@@ -18,8 +18,10 @@ from common import (load_variant_table, expand_variants, human, median, load_yam
 
 TIMING = ("mount_ms_warm", "cpu_s_startup_warm", "launch_ms_cold", "build_wall_s",
           "fuse_rss_mb_warm", "workset_ms_warm", "seq_mb_s_warm")
-HEAD = [("total size", "size_total"), ("mount (warm)", "mount_ms_warm"),
-        ("startup CPU", "cpu_s_startup_warm"), ("launch (cold)", "launch_ms_cold"),
+# "launch (cold)" times the whole ./app.AppImage run, so it already contains the runtime mount;
+# the standalone mount time is only a diagnostic (Table 4), not a headline metric.
+HEAD = [("total size", "size_total"),
+        ("startup CPU", "cpu_s_startup_warm"), ("app start: mount + launch (cold)", "launch_ms_cold"),
         ("update cost", "update_cost"), ("build time", "build_wall_s"),
         ("RAM (FUSE)", "fuse_rss_mb_warm")]
 
@@ -413,10 +415,12 @@ def main():
             continue
         ok.append(v)
     md.append("1. among the 10 best weighted scores, keep variants within +5% of the best update cost and "
-              "+10% of the best warm startup CPU (when those metrics exist);\n2. choose the smallest total size;\n"
+              "+10% of the best warm startup CPU (when those metrics exist);\n2. choose the smallest total size (sizes within 1.5% tie; the tie goes to the best weighted score);\n"
               "3. reject non-deterministic builds, zsync verification failures, reference-only variants.\n")
     if ok:
-        win = min(ok, key=lambda v: cand[v]["total size"] if "total size" in cand[v] else cand[v]["size_total"])
+        smallest = min(cand[v]["size_total"] for v in ok)
+        tied = [v for v in ok if cand[v]["size_total"] <= smallest * 1.015]   # sizes within 1.5% are a tie
+        win = min(tied, key=lambda v: next(sc for sc, vv, _ in scored if vv == v))   # tie -> best weighted score
         md.append(f"**Winner: `{win}`**; candidates: {', '.join(ok[:8])}\n")
     else:
         md.append("_no candidate satisfies the rule yet (need stage 2 data)_\n")

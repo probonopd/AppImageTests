@@ -71,7 +71,7 @@ class Weights(unittest.TestCase):
     def test_sum_and_order(self):
         w = {k: v["weight"] for k, v in common.load_yaml("variants/weights.yml")["weights"].items()}
         self.assertEqual(sum(w.values()), 100)
-        launch = w["launch_ms_cold"] + w["cpu_s_startup_warm"] + w["mount_ms_warm"]
+        launch = w["launch_ms_cold"] + w["cpu_s_startup_warm"]
         self.assertEqual(max(w, key=w.get), "size_total")                 # size most important
         self.assertGreater(launch, w["update_cost"])                      # launch second
         self.assertEqual(min(w, key=w.get), "build_wall_s")               # build time least
