@@ -1,6 +1,6 @@
 # AppImage compression benchmark results
 
-377 (app, arch, variant) records from 6 app/arch pairs. Lower is better; baseline = `squashfs-gzip9-b128K` = 1.00. Measured on GitHub-hosted runners (AMD EPYC 7763 64-Core Processor, AMD EPYC 9V45 96-Core Processor, AMD EPYC 9V74 80-Core Processor, INTEL(R) XEON(R) PLATINUM 8573C, Intel(R) Xeon(R) 6973P-C, Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz); real hardware (HDD, slow ARM) shifts startup conclusions toward higher ratio at lower CPU cost.
+437 (app, arch, variant) records from 6 app/arch pairs. Lower is better; baseline = `squashfs-gzip9-b128K` = 1.00. Measured on GitHub-hosted runners (AMD EPYC 7763 64-Core Processor, AMD EPYC 9V45 96-Core Processor, AMD EPYC 9V74 80-Core Processor, INTEL(R) XEON(R) PLATINUM 8573C, Intel(R) Xeon(R) 6973P-C, Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz); real hardware (HDD, slow ARM) shifts startup conclusions toward higher ratio at lower CPU cost.
 
 ## Metric weights (variants/weights.yml)
 
@@ -20,34 +20,44 @@ Weighted score = weighted geometric mean of metric/baseline (lower is better); m
 
 | variant | weighted score | total size | mount (warm) | startup CPU | launch (cold) | update cost | build time | RAM (FUSE) | apps | weight coverage |
 |---|---|---|---|---|---|---|---|---|---|---|
+| squashfs-zstd7-b64K | 0.754 | 1.00 | 0.93 | 0.32 | 0.54 | 0.95 | 0.19 | 0.74 | 6 | 100% |
 | squashfs-zstd12-b32K | 0.758 | 1.02 | 1.06 | 0.34 | 0.49 | 0.95 | 0.46 | 0.58 | 5 | 100% |
+| squashfs-zstd7-b128K | 0.774 | 0.98 | 1.05 | 0.33 | 0.54 | 0.94 | 0.19 | 1.02 | 6 | 100% |
 | squashfs-zstd7-b32K | 0.776 | 1.03 | 1.11 | 0.37 | 0.60 | 0.97 | 0.19 | 0.61 | 6 | 100% |
 | squashfs-zstd7-b256K | 0.786 | 0.96 | 1.05 | 0.33 | 0.54 | 0.91 | 0.18 | 1.38 | 6 | 100% |
 | squashfs-zstd17-b32K | 0.787 | 0.97 | 0.84 | 0.44 | 0.53 | 0.92 | 1.51 | 0.60 | 6 | 100% |
+| squashfs-zstd5-b64K | 0.789 | 1.02 | 0.95 | 0.36 | 0.68 | 0.97 | 0.13 | 0.73 | 6 | 100% |
+| squashfs-zstd9-b64K | 0.791 | 1.00 | 0.96 | 0.39 | 0.66 | 0.94 | 0.24 | 0.73 | 6 | 100% |
 | squashfs-zstd7-b128K+nofrag | 0.792 | 1.00 | 0.97 | 0.36 | 0.70 | 0.92 | 0.19 | 0.79 | 6 | 100% |
-| squashfs-zstd7-b128K | 0.795 | 0.98 | 1.07 | 0.33 | 0.65 | 0.92 | 0.19 | 1.01 | 6 | 100% |
 | squashfs-zstd7-b32K+nofrag | 0.796 | 1.04 | 1.01 | 0.43 | 0.69 | 0.97 | 0.20 | 0.56 | 6 | 100% |
 | squashfs-zstd4-b32K | 0.797 | 1.07 | 0.98 | 0.47 | 0.67 | 1.02 | 0.08 | 0.60 | 6 | 100% |
 | squashfs-zstd7-b32K+sorttype | 0.800 | 1.03 | 0.98 | 0.41 | 0.70 | 0.96 | 0.22 | 0.61 | 6 | 100% |
 | squashfs-zstd7-b32K+notail | 0.801 | 1.03 | 1.01 | 0.42 | 0.68 | 0.97 | 0.20 | 0.62 | 6 | 100% |
+| squashfs-zstd9-b256K | 0.801 | 0.95 | 1.02 | 0.33 | 0.59 | 0.91 | 0.24 | 1.40 | 6 | 100% |
 | squashfs-zstd7-b128K+sorttype | 0.805 | 0.98 | 0.95 | 0.33 | 0.70 | 0.92 | 0.21 | 1.03 | 6 | 100% |
 | squashfs-zstd3-b32K | 0.807 | 1.08 | 0.86 | 0.37 | 0.82 | 1.03 | 0.07 | 0.59 | 6 | 100% |
 | squashfs-zstd7-b32K+nodup | 0.807 | 1.04 | 0.94 | 0.45 | 0.70 | 0.98 | 0.20 | 0.60 | 6 | 100% |
 | squashfs-zstd7-b128K+notail | 0.809 | 0.98 | 1.02 | 0.36 | 0.69 | 0.94 | 0.19 | 1.01 | 6 | 100% |
 | squashfs-zstd7-b128K+nodup | 0.811 | 0.99 | 1.04 | 0.36 | 0.67 | 0.94 | 0.20 | 1.01 | 6 | 100% |
+| squashfs-zstd9-b128K | 0.811 | 0.98 | 1.03 | 0.36 | 0.67 | 0.93 | 0.24 | 1.02 | 6 | 100% |
 | squashfs-zstd7-b256K+sorttype | 0.814 | 0.96 | 1.01 | 0.33 | 0.69 | 0.89 | 0.20 | 1.40 | 6 | 100% |
 | squashfs-zstd7-b256K+nofrag | 0.817 | 0.98 | 1.04 | 0.35 | 0.79 | 0.89 | 0.18 | 1.03 | 6 | 100% |
+| squashfs-zstd5-b128K | 0.819 | 1.00 | 0.99 | 0.42 | 0.68 | 0.96 | 0.13 | 1.02 | 6 | 100% |
 | squashfs-zstd17-b128K | 0.822 | 0.91 | 0.99 | 0.42 | 0.60 | 0.87 | 1.83 | 1.03 | 6 | 100% |
+| squashfs-zstd5-b256K | 0.824 | 0.98 | 1.04 | 0.38 | 0.63 | 0.95 | 0.14 | 1.38 | 6 | 100% |
 | squashfs-zstd7-b256K+nodup | 0.825 | 0.96 | 1.05 | 0.36 | 0.68 | 0.92 | 0.18 | 1.38 | 6 | 100% |
 | squashfs-zstd7-b256K+notail | 0.826 | 0.96 | 1.06 | 0.36 | 0.70 | 0.91 | 0.18 | 1.38 | 6 | 100% |
 | squashfs-zstd17-b256K | 0.827 | 0.88 | 1.06 | 0.40 | 0.58 | 0.86 | 1.91 | 1.36 | 6 | 100% |
 | squashfs-zstd12-b128K | 0.828 | 0.97 | 1.07 | 0.27 | 0.77 | 0.91 | 0.61 | 1.02 | 5 | 100% |
 | squashfs-zstd12-b256K | 0.830 | 0.94 | 0.99 | 0.32 | 0.69 | 0.86 | 0.73 | 1.38 | 5 | 100% |
 | squashfs-zstd7-b16K | 0.840 | 1.06 | 1.03 | 0.51 | 0.80 | 1.01 | 0.23 | 0.52 | 6 | 100% |
+| squashfs-zstd7-b512K | 0.871 | 0.94 | 1.00 | 0.34 | 0.64 | 0.92 | 0.17 | 3.08 | 6 | 100% |
+| squashfs-zstd9-b512K | 0.878 | 0.94 | 1.04 | 0.33 | 0.68 | 0.91 | 0.20 | 3.00 | 6 | 100% |
 | squashfs-gzip7-b32K | 0.884 | 1.04 | 1.00 | 1.01 | 0.70 | 1.01 | 0.39 | 0.57 | 5 | 100% |
 | squashfs-gzip5-b32K | 0.884 | 1.04 | 1.09 | 1.08 | 0.71 | 1.02 | 0.26 | 0.57 | 5 | 100% |
 | squashfs-xz-bcjnone-b256K | 0.907 | 0.83 |  |  |  |  | 2.54 |  | 4 | 38% |
 | squashfs-gzip3-b32K | 0.908 | 1.09 | 1.06 | 1.07 | 0.76 | 1.08 | 0.19 | 0.57 | 6 | 100% |
+| squashfs-zstd5-b512K | 0.909 | 0.96 | 1.05 | 0.37 | 0.78 | 0.94 | 0.13 | 3.03 | 6 | 100% |
 | squashfs-gzip8-b32K | 0.926 | 1.04 | 0.91 | 1.02 | 0.89 | 1.02 | 0.56 | 0.57 | 6 | 100% |
 | squashfs-gzip7-b16K | 0.927 | 1.07 | 0.97 | 1.12 | 0.90 | 1.05 | 0.33 | 0.49 | 6 | 100% |
 | squashfs-xz-bcjnone-b128K | 0.929 | 0.86 |  |  |  |  | 2.37 |  | 4 | 38% |
@@ -94,18 +104,24 @@ Weighted score = weighted geometric mean of metric/baseline (lower is better); m
 | variant | weighted score | total size | mount (warm) | startup CPU | launch (cold) | update cost | build time | RAM (FUSE) | apps | weight coverage |
 |---|---|---|---|---|---|---|---|---|---|---|
 | dwarfs-l2-S24 | 0.732 | 1.13 | 4.39 |  | 0.38 | 0.13 | 0.46 | 15.30 | 1 | 92% |
+| squashfs-zstd7-b64K | 0.845 | 1.00 | 1.06 |  | 0.58 | 0.94 | 0.27 | 0.83 | 1 | 92% |
 | squashfs-zstd4-b32K | 0.850 | 1.08 | 0.94 |  | 0.66 | 1.03 | 0.09 | 0.66 | 1 | 92% |
+| squashfs-zstd5-b64K | 0.851 | 1.02 | 0.98 |  | 0.62 | 0.97 | 0.18 | 0.83 | 1 | 92% |
 | squashfs-zstd7-b256K+sorttype | 0.854 | 0.94 | 0.99 |  | 0.67 | 0.83 | 0.22 | 1.35 | 1 | 92% |
 | squashfs-zstd7-b256K+nodup | 0.854 | 0.94 | 0.98 |  | 0.67 | 0.83 | 0.22 | 1.34 | 1 | 92% |
 | squashfs-zstd7-b256K | 0.856 | 0.94 | 1.02 |  | 0.67 | 0.83 | 0.23 | 1.35 | 1 | 92% |
 | squashfs-zstd7-b256K+nofrag | 0.861 | 0.94 | 1.01 |  | 0.73 | 0.83 | 0.22 | 1.26 | 1 | 92% |
 | squashfs-zstd17-b32K | 0.864 | 0.98 | 0.71 |  | 0.59 | 0.97 | 1.86 | 0.66 | 1 | 92% |
+| squashfs-zstd9-b64K | 0.865 | 1.00 | 0.99 |  | 0.68 | 0.94 | 0.30 | 0.83 | 1 | 92% |
 | squashfs-zstd7-b128K | 0.865 | 0.97 | 1.26 |  | 0.64 | 0.92 | 0.23 | 1.00 | 1 | 92% |
 | squashfs-zstd7-b128K+nodup | 0.865 | 0.97 | 1.18 |  | 0.65 | 0.92 | 0.23 | 1.01 | 1 | 92% |
 | squashfs-zstd3-b32K | 0.867 | 1.10 | 0.84 |  | 0.71 | 1.04 | 0.10 | 0.66 | 1 | 92% |
 | squashfs-zstd7-b128K+sorttype | 0.870 | 0.97 | 0.92 |  | 0.72 | 0.92 | 0.24 | 1.01 | 1 | 92% |
+| squashfs-zstd9-b256K | 0.870 | 0.94 | 1.02 |  | 0.72 | 0.82 | 0.31 | 1.35 | 1 | 92% |
 | squashfs-zstd7-b256K+notail | 0.871 | 0.94 | 1.15 |  | 0.72 | 0.83 | 0.22 | 1.35 | 1 | 92% |
 | squashfs-zstd7-b128K+notail | 0.872 | 0.97 | 1.09 |  | 0.70 | 0.92 | 0.23 | 1.00 | 1 | 92% |
+| squashfs-zstd9-b128K | 0.872 | 0.97 | 1.05 |  | 0.70 | 0.91 | 0.29 | 1.01 | 1 | 92% |
+| squashfs-zstd5-b256K | 0.872 | 0.97 | 0.98 |  | 0.71 | 0.85 | 0.18 | 1.35 | 1 | 92% |
 | squashfs-zstd7-b32K+nofrag | 0.874 | 1.04 | 0.91 |  | 0.74 | 0.98 | 0.27 | 0.66 | 1 | 92% |
 | squashfs-zstd7-b128K+nofrag | 0.876 | 0.97 | 0.88 |  | 0.74 | 0.92 | 0.26 | 1.00 | 1 | 92% |
 | squashfs-zstd7-b32K+sorttype | 0.876 | 1.04 | 1.03 |  | 0.72 | 0.98 | 0.27 | 0.66 | 1 | 92% |
@@ -114,6 +130,7 @@ Weighted score = weighted geometric mean of metric/baseline (lower is better); m
 | squashfs-zstd17-b128K | 0.881 | 0.91 | 0.77 |  | 0.65 | 0.87 | 2.89 | 1.01 | 1 | 92% |
 | squashfs-zstd7-b32K+notail | 0.883 | 1.04 | 0.94 |  | 0.72 | 0.99 | 0.27 | 0.75 | 1 | 92% |
 | squashfs-zstd7-b32K+nodup | 0.883 | 1.04 | 0.93 |  | 0.72 | 0.99 | 0.27 | 0.74 | 1 | 92% |
+| squashfs-zstd5-b128K | 0.884 | 1.00 | 0.94 |  | 0.77 | 0.94 | 0.17 | 1.01 | 1 | 92% |
 | dwarfs-l1-S24 | 0.887 | 1.40 | 4.74 |  | 0.57 | 0.19 | 0.08 | 15.42 | 1 | 92% |
 | squashfs-zstd7-b16K | 0.887 | 1.08 | 0.99 |  | 0.66 | 1.04 | 0.28 | 0.66 | 1 | 92% |
 | squashfs-zstd12-b128K | 0.897 | 0.96 | 1.23 |  | 0.70 | 0.88 | 0.84 | 1.00 | 1 | 92% |
@@ -124,10 +141,13 @@ Weighted score = weighted geometric mean of metric/baseline (lower is better); m
 | squashfs-xz-bcjauto-b256K | 0.928 | 0.79 |  |  |  |  | 5.75 |  | 1 | 38% |
 | squashfs-xz-bcjnone-b128K | 0.931 | 0.85 |  |  |  |  | 2.81 |  | 1 | 38% |
 | squashfs-gzip8-b32K | 0.936 | 1.04 | 0.97 |  | 0.84 | 1.04 | 0.64 | 0.66 | 1 | 92% |
+| squashfs-zstd9-b512K | 0.944 | 0.93 | 0.99 |  | 0.75 | 0.76 | 0.24 | 3.51 | 1 | 92% |
+| squashfs-zstd7-b512K | 0.944 | 0.93 | 1.04 |  | 0.77 | 0.77 | 0.23 | 3.24 | 1 | 92% |
 | squashfs-gzip5-b32K | 0.945 | 1.05 | 1.15 |  | 0.92 | 1.05 | 0.34 | 0.66 | 1 | 92% |
 | squashfs-gzip7-b16K | 0.945 | 1.09 | 0.95 |  | 0.84 | 1.08 | 0.41 | 0.66 | 1 | 92% |
 | squashfs-gzip7-b32K | 0.953 | 1.05 | 1.21 |  | 0.92 | 1.04 | 0.50 | 0.66 | 1 | 92% |
 | squashfs-xz-bcjauto-b128K | 0.959 | 0.83 |  |  |  |  | 5.44 |  | 1 | 38% |
+| squashfs-zstd5-b512K | 0.959 | 0.95 | 0.94 |  | 0.83 | 0.80 | 0.17 | 3.31 | 1 | 92% |
 | squashfs-gzip3-b32K | 0.972 | 1.09 | 1.20 |  | 0.96 | 1.11 | 0.25 | 0.66 | 1 | 92% |
 | squashfs-gzip5-b128K | 0.974 | 1.01 | 0.97 |  | 1.01 | 1.01 | 0.37 | 1.00 | 1 | 92% |
 | dwarfs-l3-S26 | 0.976 | 1.11 | 5.34 |  | 0.78 | 0.24 | 0.69 | 14.64 | 1 | 92% |
@@ -168,12 +188,15 @@ Weighted score = weighted geometric mean of metric/baseline (lower is better); m
 |---|---|---|---|---|---|---|---|---|---|---|
 | squashfs-zstd4-b32K | 0.690 | 1.05 | 1.01 | 0.44 | 0.37 | 0.88 | 0.08 | 0.58 | 1 | 100% |
 | squashfs-zstd7-b32K+nofrag | 0.740 | 1.03 | 1.05 | 0.35 | 0.63 | 0.83 | 0.18 | 0.56 | 1 | 100% |
+| squashfs-zstd7-b64K | 0.744 | 1.00 | 0.91 | 0.35 | 0.64 | 0.81 | 0.19 | 0.70 | 1 | 100% |
 | squashfs-zstd7-b32K+notail | 0.746 | 1.02 | 1.22 | 0.35 | 0.63 | 0.83 | 0.18 | 0.58 | 1 | 100% |
 | squashfs-zstd7-b32K | 0.752 | 1.02 | 1.15 | 0.38 | 0.65 | 0.83 | 0.18 | 0.58 | 1 | 100% |
 | squashfs-zstd12-b32K | 0.760 | 1.01 | 1.01 | 0.38 | 0.65 | 0.81 | 0.43 | 0.57 | 1 | 100% |
 | squashfs-zstd7-b128K+nofrag | 0.763 | 1.00 | 0.97 | 0.39 | 0.67 | 0.80 | 0.20 | 0.75 | 1 | 100% |
 | squashfs-zstd7-b32K+sorttype | 0.765 | 1.02 | 0.86 | 0.46 | 0.71 | 0.82 | 0.21 | 0.56 | 1 | 100% |
 | squashfs-zstd7-b128K | 0.767 | 0.98 | 1.04 | 0.32 | 0.65 | 0.81 | 0.18 | 1.02 | 1 | 100% |
+| squashfs-zstd5-b64K | 0.768 | 1.02 | 1.02 | 0.43 | 0.67 | 0.82 | 0.14 | 0.71 | 1 | 100% |
+| squashfs-zstd9-b64K | 0.770 | 0.99 | 0.91 | 0.45 | 0.67 | 0.81 | 0.25 | 0.71 | 1 | 100% |
 | squashfs-zstd17-b32K | 0.774 | 0.97 | 0.88 | 0.41 | 0.69 | 0.77 | 1.40 | 0.56 | 1 | 100% |
 | squashfs-zstd7-b32K+nodup | 0.774 | 1.03 | 0.86 | 0.48 | 0.72 | 0.83 | 0.21 | 0.57 | 1 | 100% |
 | squashfs-zstd3-b32K | 0.776 | 1.06 | 0.92 | 0.43 | 0.75 | 0.90 | 0.08 | 0.57 | 1 | 100% |
@@ -182,14 +205,21 @@ Weighted score = weighted geometric mean of metric/baseline (lower is better); m
 | squashfs-zstd7-b128K+notail | 0.783 | 0.98 | 0.98 | 0.41 | 0.67 | 0.81 | 0.21 | 0.98 | 1 | 100% |
 | squashfs-zstd7-b256K+nofrag | 0.785 | 0.98 | 1.20 | 0.39 | 0.68 | 0.79 | 0.20 | 1.00 | 1 | 100% |
 | squashfs-zstd7-b128K+nodup | 0.788 | 0.99 | 0.95 | 0.42 | 0.68 | 0.80 | 0.21 | 0.98 | 1 | 100% |
+| squashfs-zstd5-b128K | 0.790 | 1.00 | 1.07 | 0.42 | 0.67 | 0.82 | 0.14 | 1.00 | 1 | 100% |
 | squashfs-zstd7-b16K | 0.791 | 1.04 | 1.08 | 0.48 | 0.76 | 0.86 | 0.23 | 0.49 | 1 | 100% |
 | squashfs-zstd7-b128K+sorttype | 0.797 | 0.98 | 0.96 | 0.43 | 0.74 | 0.80 | 0.20 | 0.98 | 1 | 100% |
 | squashfs-zstd17-b128K | 0.797 | 0.92 | 0.94 | 0.41 | 0.65 | 0.75 | 1.67 | 1.00 | 1 | 100% |
+| squashfs-zstd9-b128K | 0.797 | 0.98 | 0.98 | 0.43 | 0.70 | 0.80 | 0.25 | 0.99 | 1 | 100% |
+| squashfs-zstd9-b256K | 0.798 | 0.96 | 1.10 | 0.33 | 0.70 | 0.78 | 0.25 | 1.37 | 1 | 100% |
 | squashfs-zstd12-b256K | 0.806 | 0.95 | 1.00 | 0.35 | 0.65 | 0.77 | 0.60 | 1.39 | 1 | 100% |
 | squashfs-zstd7-b256K+notail | 0.809 | 0.96 | 1.04 | 0.43 | 0.69 | 0.79 | 0.20 | 1.37 | 1 | 100% |
 | squashfs-zstd7-b256K+sorttype | 0.821 | 0.96 | 1.14 | 0.43 | 0.75 | 0.79 | 0.19 | 1.38 | 1 | 100% |
 | squashfs-zstd7-b256K+nodup | 0.823 | 0.97 | 1.23 | 0.45 | 0.71 | 0.79 | 0.19 | 1.35 | 1 | 100% |
+| squashfs-zstd5-b256K | 0.832 | 0.99 | 1.22 | 0.43 | 0.72 | 0.83 | 0.15 | 1.40 | 1 | 100% |
 | squashfs-zstd17-b256K | 0.832 | 0.90 | 1.02 | 0.41 | 0.69 | 0.76 | 1.81 | 1.39 | 1 | 100% |
+| squashfs-zstd7-b512K | 0.856 | 0.96 | 1.28 | 0.32 | 0.65 | 0.80 | 0.16 | 3.28 | 1 | 100% |
+| squashfs-zstd9-b512K | 0.859 | 0.95 | 1.06 | 0.31 | 0.70 | 0.80 | 0.20 | 3.19 | 1 | 100% |
+| squashfs-zstd5-b512K | 0.894 | 0.97 | 1.07 | 0.39 | 0.76 | 0.83 | 0.14 | 3.31 | 1 | 100% |
 | squashfs-gzip5-b32K | 0.899 | 1.03 | 0.98 | 1.08 | 0.88 | 0.98 | 0.26 | 0.55 | 1 | 100% |
 | squashfs-gzip7-b32K | 0.907 | 1.03 | 1.04 | 1.05 | 0.88 | 0.98 | 0.40 | 0.55 | 1 | 100% |
 | squashfs-gzip7-b16K | 0.913 | 1.05 | 1.03 | 1.08 | 0.92 | 1.02 | 0.35 | 0.47 | 1 | 100% |
@@ -239,12 +269,15 @@ Weighted score = weighted geometric mean of metric/baseline (lower is better); m
 
 | variant | weighted score | total size | mount (warm) | startup CPU | launch (cold) | update cost | build time | RAM (FUSE) | apps | weight coverage |
 |---|---|---|---|---|---|---|---|---|---|---|
+| squashfs-zstd5-b64K | 0.797 | 1.02 | 0.86 | 0.34 |  | 1.00 | 0.11 | 0.68 | 2 | 84% |
 | squashfs-zstd3-b32K | 0.803 | 1.08 | 0.90 | 0.38 |  | 1.06 | 0.06 | 0.55 | 2 | 84% |
+| squashfs-zstd7-b64K | 0.803 | 1.00 | 0.90 | 0.36 |  | 0.98 | 0.17 | 0.68 | 2 | 84% |
 | squashfs-zstd7-b128K+nofrag | 0.804 | 1.00 | 0.92 | 0.35 |  | 0.96 | 0.16 | 0.73 | 2 | 84% |
 | squashfs-zstd7-b32K | 0.812 | 1.03 | 1.06 | 0.38 |  | 1.00 | 0.17 | 0.58 | 2 | 84% |
 | squashfs-zstd7-b32K+nofrag | 0.819 | 1.04 | 1.03 | 0.48 |  | 1.00 | 0.18 | 0.49 | 2 | 84% |
 | squashfs-zstd12-b32K | 0.819 | 1.02 | 1.01 | 0.33 |  | 1.00 | 0.43 | 0.55 | 2 | 84% |
 | squashfs-zstd7-b256K+nofrag | 0.823 | 0.98 | 1.12 | 0.36 |  | 0.94 | 0.16 | 0.91 | 2 | 84% |
+| squashfs-zstd9-b64K | 0.824 | 1.00 | 1.03 | 0.42 |  | 0.97 | 0.21 | 0.68 | 2 | 84% |
 | squashfs-zstd7-b32K+nodup | 0.827 | 1.04 | 1.01 | 0.47 |  | 1.00 | 0.17 | 0.55 | 2 | 84% |
 | squashfs-zstd7-b128K+notail | 0.827 | 0.98 | 0.99 | 0.34 |  | 0.96 | 0.16 | 0.97 | 2 | 84% |
 | squashfs-zstd4-b32K | 0.828 | 1.07 | 1.05 | 0.53 |  | 1.04 | 0.07 | 0.55 | 2 | 84% |
@@ -254,9 +287,13 @@ Weighted score = weighted geometric mean of metric/baseline (lower is better); m
 | squashfs-zstd17-b32K | 0.844 | 0.97 | 0.89 | 0.45 |  | 0.94 | 1.36 | 0.56 | 2 | 84% |
 | squashfs-zstd7-b16K | 0.844 | 1.06 | 1.02 | 0.53 |  | 1.03 | 0.20 | 0.48 | 2 | 84% |
 | squashfs-zstd7-b128K+nodup | 0.849 | 0.98 | 1.14 | 0.41 |  | 0.97 | 0.17 | 0.96 | 2 | 84% |
+| squashfs-zstd9-b128K | 0.851 | 0.97 | 1.01 | 0.42 |  | 0.96 | 0.21 | 1.00 | 2 | 84% |
 | squashfs-zstd7-b256K | 0.854 | 0.95 | 1.08 | 0.35 |  | 0.95 | 0.16 | 1.37 | 2 | 84% |
 | squashfs-zstd7-b256K+notail | 0.863 | 0.95 | 1.06 | 0.40 |  | 0.95 | 0.16 | 1.37 | 2 | 84% |
+| squashfs-zstd5-b128K | 0.864 | 1.00 | 1.07 | 0.50 |  | 0.99 | 0.11 | 0.99 | 2 | 84% |
 | squashfs-zstd7-b256K+nodup | 0.865 | 0.96 | 1.13 | 0.39 |  | 0.95 | 0.16 | 1.36 | 2 | 84% |
+| squashfs-zstd9-b256K | 0.870 | 0.95 | 1.05 | 0.40 |  | 0.94 | 0.22 | 1.39 | 2 | 84% |
+| squashfs-zstd5-b256K | 0.872 | 0.98 | 1.10 | 0.40 |  | 0.98 | 0.12 | 1.36 | 2 | 84% |
 | squashfs-zstd17-b128K | 0.876 | 0.90 | 1.13 | 0.42 |  | 0.89 | 1.62 | 1.03 | 2 | 84% |
 | squashfs-zstd12-b256K | 0.876 | 0.94 | 0.91 | 0.31 |  | 0.94 | 0.69 | 1.38 | 2 | 84% |
 | squashfs-zstd17-b256K | 0.890 | 0.88 | 1.09 | 0.41 |  | 0.88 | 1.79 | 1.34 | 2 | 84% |
@@ -268,6 +305,9 @@ Weighted score = weighted geometric mean of metric/baseline (lower is better); m
 | squashfs-xz-bcjnone-b128K | 0.920 | 0.85 |  |  |  |  | 2.27 |  | 1 | 38% |
 | squashfs-gzip7-b16K | 0.924 | 1.07 | 0.97 | 1.14 |  | 1.05 | 0.30 | 0.47 | 2 | 84% |
 | squashfs-xz-bcjauto-b256K | 0.931 | 0.81 |  |  |  |  | 4.63 |  | 1 | 38% |
+| squashfs-zstd7-b512K | 0.937 | 0.94 | 0.93 | 0.37 |  | 0.96 | 0.15 | 3.17 | 2 | 84% |
+| squashfs-zstd5-b512K | 0.949 | 0.96 | 1.09 | 0.40 |  | 0.98 | 0.11 | 3.01 | 2 | 84% |
+| squashfs-zstd9-b512K | 0.949 | 0.94 | 1.07 | 0.41 |  | 0.95 | 0.18 | 2.98 | 2 | 84% |
 | squashfs-xz-bcjauto-b128K | 0.955 | 0.84 |  |  |  |  | 4.46 |  | 1 | 38% |
 | squashfs-gzip5-b128K | 0.960 | 1.01 | 1.00 | 1.04 |  | 1.01 | 0.25 | 0.96 | 2 | 84% |
 | squashfs-gzip7-b128K | 0.967 | 1.00 | 1.03 | 0.99 |  | 1.00 | 0.42 | 0.96 | 2 | 84% |
@@ -314,17 +354,24 @@ Weighted score = weighted geometric mean of metric/baseline (lower is better); m
 |---|---|---|---|---|---|---|---|---|---|---|
 | squashfs-zstd7-b256K | 0.740 | 0.97 | 1.06 | 0.30 | 0.35 | 0.94 | 0.16 | 1.52 | 1 | 100% |
 | squashfs-zstd7-b32K | 0.757 | 1.04 | 1.11 | 0.35 | 0.45 | 1.03 | 0.17 | 0.69 | 1 | 100% |
+| squashfs-zstd7-b64K | 0.795 | 1.01 | 0.86 | 0.24 | 0.78 | 0.99 | 0.17 | 0.85 | 1 | 100% |
+| squashfs-zstd9-b64K | 0.799 | 1.01 | 0.81 | 0.29 | 0.78 | 0.98 | 0.21 | 0.77 | 1 | 100% |
 | squashfs-zstd17-b128K | 0.799 | 0.91 | 0.82 | 0.43 | 0.49 | 0.90 | 1.55 | 1.08 | 1 | 100% |
+| squashfs-zstd5-b256K | 0.805 | 1.00 | 0.96 | 0.30 | 0.56 | 0.98 | 0.12 | 1.54 | 1 | 100% |
 | squashfs-zstd7-b128K | 0.811 | 1.00 | 1.11 | 0.30 | 0.67 | 0.97 | 0.17 | 1.08 | 1 | 100% |
 | squashfs-zstd3-b32K | 0.812 | 1.09 | 0.81 | 0.29 | 0.84 | 1.09 | 0.06 | 0.69 | 1 | 100% |
+| squashfs-zstd5-b128K | 0.812 | 1.02 | 0.84 | 0.30 | 0.71 | 1.00 | 0.11 | 1.08 | 1 | 100% |
+| squashfs-zstd9-b128K | 0.813 | 0.99 | 0.96 | 0.24 | 0.78 | 0.96 | 0.21 | 1.08 | 1 | 100% |
 | squashfs-zstd7-b128K+sorttype | 0.814 | 1.00 | 0.93 | 0.25 | 0.79 | 0.97 | 0.17 | 1.08 | 1 | 100% |
 | squashfs-zstd7-b256K+nofrag | 0.819 | 0.97 | 1.02 | 0.30 | 0.79 | 0.93 | 0.16 | 1.16 | 1 | 100% |
+| squashfs-zstd9-b256K | 0.825 | 0.96 | 0.79 | 0.24 | 0.78 | 0.94 | 0.21 | 1.60 | 1 | 100% |
 | squashfs-zstd7-b128K+nodup | 0.827 | 1.02 | 0.97 | 0.25 | 0.79 | 0.98 | 0.17 | 1.08 | 1 | 100% |
 | squashfs-zstd17-b256K | 0.830 | 0.89 | 1.16 | 0.39 | 0.53 | 0.88 | 1.59 | 1.53 | 1 | 100% |
 | squashfs-zstd7-b128K+nofrag | 0.830 | 1.00 | 1.17 | 0.33 | 0.84 | 0.97 | 0.18 | 0.85 | 1 | 100% |
 | squashfs-zstd7-b32K+sorttype | 0.830 | 1.04 | 0.98 | 0.37 | 0.84 | 1.03 | 0.19 | 0.62 | 1 | 100% |
 | squashfs-zstd7-b256K+sorttype | 0.831 | 0.97 | 0.94 | 0.25 | 0.79 | 0.95 | 0.16 | 1.53 | 1 | 100% |
 | squashfs-zstd4-b32K | 0.835 | 1.07 | 0.99 | 0.41 | 0.82 | 1.08 | 0.07 | 0.69 | 1 | 100% |
+| squashfs-zstd5-b64K | 0.835 | 1.03 | 1.00 | 0.35 | 0.90 | 1.02 | 0.11 | 0.75 | 1 | 100% |
 | squashfs-zstd7-b32K+nofrag | 0.836 | 1.04 | 1.04 | 0.41 | 0.84 | 1.03 | 0.19 | 0.61 | 1 | 100% |
 | squashfs-zstd7-b32K+nodup | 0.839 | 1.07 | 0.90 | 0.37 | 0.84 | 1.04 | 0.19 | 0.63 | 1 | 100% |
 | squashfs-zstd7-b256K+notail | 0.845 | 0.97 | 1.12 | 0.25 | 0.85 | 0.94 | 0.17 | 1.52 | 1 | 100% |
@@ -334,8 +381,11 @@ Weighted score = weighted geometric mean of metric/baseline (lower is better); m
 | squashfs-zstd7-b128K+notail | 0.849 | 1.00 | 1.08 | 0.33 | 0.84 | 0.97 | 0.18 | 1.08 | 1 | 100% |
 | squashfs-zstd7-b16K | 0.851 | 1.06 | 1.07 | 0.48 | 0.82 | 1.06 | 0.21 | 0.53 | 1 | 100% |
 | squashfs-zstd17-b32K | 0.870 | 0.97 | 0.78 | 0.44 | 0.83 | 0.99 | 1.62 | 0.69 | 1 | 100% |
+| squashfs-zstd7-b512K | 0.870 | 0.95 | 0.89 | 0.30 | 0.60 | 0.94 | 0.16 | 3.65 | 1 | 100% |
+| squashfs-zstd9-b512K | 0.893 | 0.95 | 0.99 | 0.24 | 0.78 | 0.93 | 0.17 | 3.66 | 1 | 100% |
 | squashfs-gzip7-b16K | 0.915 | 1.06 | 0.84 | 1.13 | 0.86 | 1.09 | 0.32 | 0.47 | 1 | 100% |
 | squashfs-gzip8-b32K | 0.937 | 1.03 | 0.74 | 1.04 | 0.86 | 1.05 | 0.56 | 0.68 | 1 | 100% |
+| squashfs-zstd5-b512K | 0.955 | 0.97 | 1.02 | 0.30 | 1.02 | 0.97 | 0.11 | 3.61 | 1 | 100% |
 | **squashfs-gzip9-b128K** | 1.000 | 1.00 | 1.00 | 1.00 | 1.00 | 1.00 | 1.00 | 1.00 | 1 | 100% |
 | dwarfs-l3-S24 | 1.089 | 1.18 | 4.37 | 0.30 | 0.43 | 1.18 | 0.48 | 6.06 | 1 | 100% |
 | dwarfs-l2-S24 | 1.150 | 1.21 | 3.20 | 0.30 | 0.72 | 1.11 | 0.37 | 6.04 | 1 | 100% |
@@ -364,19 +414,25 @@ Weighted score = weighted geometric mean of metric/baseline (lower is better); m
 |---|---|---|---|---|---|---|---|---|---|---|
 | squashfs-zstd12-b32K | 0.721 | 1.03 | 1.15 |  | 0.24 | 1.00 | 0.46 | 0.52 | 1 | 92% |
 | squashfs-zstd17-b32K | 0.731 | 0.98 | 0.91 |  | 0.24 | 0.95 | 1.54 | 0.58 | 1 | 92% |
+| squashfs-zstd7-b64K | 0.746 | 1.01 | 0.94 |  | 0.30 | 1.00 | 0.21 | 0.72 | 1 | 92% |
+| squashfs-zstd7-b128K | 0.773 | 0.98 | 0.95 |  | 0.30 | 1.02 | 0.21 | 1.06 | 1 | 92% |
+| squashfs-zstd9-b256K | 0.797 | 0.95 | 1.12 |  | 0.31 | 1.04 | 0.26 | 1.31 | 1 | 92% |
 | squashfs-gzip5-b32K | 0.801 | 1.05 | 1.12 |  | 0.43 | 1.02 | 0.26 | 0.58 | 1 | 92% |
 | squashfs-gzip7-b32K | 0.815 | 1.04 | 1.40 |  | 0.43 | 1.01 | 0.38 | 0.58 | 1 | 92% |
 | squashfs-zstd7-b32K+notail | 0.821 | 1.03 | 0.91 |  | 0.57 | 1.01 | 0.21 | 0.59 | 1 | 92% |
 | squashfs-zstd7-b32K+nodup | 0.824 | 1.04 | 0.98 |  | 0.57 | 1.01 | 0.21 | 0.58 | 1 | 92% |
 | squashfs-zstd7-b32K+sorttype | 0.825 | 1.03 | 1.05 |  | 0.57 | 1.00 | 0.21 | 0.59 | 1 | 92% |
 | squashfs-zstd7-b128K+nofrag | 0.828 | 1.03 | 0.99 |  | 0.57 | 0.96 | 0.19 | 0.72 | 1 | 92% |
+| squashfs-zstd9-b64K | 0.828 | 1.00 | 1.00 |  | 0.54 | 1.00 | 0.25 | 0.72 | 1 | 92% |
 | squashfs-zstd7-b32K+nofrag | 0.830 | 1.06 | 1.01 |  | 0.57 | 1.00 | 0.20 | 0.59 | 1 | 92% |
+| squashfs-zstd5-b64K | 0.840 | 1.03 | 1.01 |  | 0.57 | 1.04 | 0.16 | 0.71 | 1 | 92% |
 | squashfs-gzip5-b128K | 0.847 | 1.01 | 1.10 |  | 0.43 | 1.03 | 0.28 | 1.06 | 1 | 92% |
 | squashfs-gzip7-b128K | 0.859 | 1.00 | 1.24 |  | 0.43 | 1.01 | 0.49 | 1.05 | 1 | 92% |
+| squashfs-zstd9-b128K | 0.863 | 0.97 | 1.14 |  | 0.54 | 1.01 | 0.26 | 1.06 | 1 | 92% |
 | squashfs-zstd7-b128K+notail | 0.864 | 0.98 | 1.00 |  | 0.57 | 1.02 | 0.21 | 1.06 | 1 | 92% |
 | squashfs-zstd7-b128K+nodup | 0.864 | 0.98 | 0.90 |  | 0.57 | 1.02 | 0.24 | 1.05 | 1 | 92% |
-| squashfs-zstd7-b128K | 0.867 | 0.98 |  |  |  |  | 0.21 |  | 1 | 38% |
 | squashfs-zstd17-b256K | 0.869 | 0.88 | 1.19 |  | 0.43 | 0.97 | 2.16 | 1.30 | 1 | 92% |
+| squashfs-zstd5-b128K | 0.869 | 1.01 | 0.94 |  | 0.57 | 1.05 | 0.16 | 1.06 | 1 | 92% |
 | squashfs-zstd7-b128K+sorttype | 0.870 | 0.98 | 1.00 |  | 0.57 | 1.02 | 0.25 | 1.06 | 1 | 92% |
 | squashfs-zstd7-b256K+nodup | 0.877 | 0.96 | 0.84 |  | 0.57 | 1.04 | 0.22 | 1.30 | 1 | 92% |
 | squashfs-gzip5-b256K | 0.878 | 1.01 | 1.17 |  | 0.43 | 1.08 | 0.28 | 1.29 | 1 | 92% |
@@ -384,6 +440,7 @@ Weighted score = weighted geometric mean of metric/baseline (lower is better); m
 | squashfs-zstd7-b256K+sorttype | 0.880 | 0.96 | 0.98 |  | 0.57 | 1.01 | 0.23 | 1.36 | 1 | 92% |
 | squashfs-zstd7-b256K | 0.880 | 0.96 | 0.98 |  | 0.57 | 1.05 | 0.21 | 1.30 | 1 | 92% |
 | squashfs-zstd7-b256K+notail | 0.881 | 0.96 | 0.95 |  | 0.57 | 1.05 | 0.22 | 1.30 | 1 | 92% |
+| squashfs-zstd5-b256K | 0.891 | 0.98 | 0.93 |  | 0.57 | 1.09 | 0.17 | 1.30 | 1 | 92% |
 | squashfs-zstd3-b32K | 0.899 | 1.10 | 0.78 |  | 1.00 | 1.07 | 0.10 | 0.52 | 1 | 92% |
 | squashfs-xz-bcjnone-b256K | 0.907 | 0.83 |  |  |  |  | 2.44 |  | 1 | 38% |
 | squashfs-zstd4-b32K | 0.908 | 1.08 | 0.87 |  | 1.00 | 1.05 | 0.10 | 0.59 | 1 | 92% |
@@ -392,12 +449,15 @@ Weighted score = weighted geometric mean of metric/baseline (lower is better); m
 | squashfs-gzip7-b16K | 0.918 | 1.08 | 1.08 |  | 1.00 | 1.03 | 0.32 | 0.45 | 1 | 92% |
 | squashfs-zstd7-b16K | 0.919 | 1.07 | 0.99 |  | 1.00 | 1.02 | 0.25 | 0.52 | 1 | 92% |
 | squashfs-gzip8-b32K | 0.921 | 1.04 | 0.82 |  | 1.00 | 1.01 | 0.55 | 0.52 | 1 | 92% |
+| squashfs-zstd9-b512K | 0.922 | 0.93 | 1.07 |  | 0.54 | 1.11 | 0.22 | 1.99 | 1 | 92% |
 | squashfs-zstd12-b256K | 0.927 | 0.94 |  |  |  |  | 0.78 |  | 1 | 38% |
 | squashfs-xz-bcjnone-b128K | 0.933 | 0.86 |  |  |  |  | 2.36 |  | 1 | 38% |
 | squashfs-zstd7-b256K+nofrag | 0.935 | 1.02 | 0.84 |  | 1.00 | 0.94 | 0.21 | 0.99 | 1 | 92% |
 | squashfs-gzip3-b256K | 0.936 | 1.07 |  |  |  |  | 0.20 |  | 1 | 38% |
+| squashfs-zstd7-b512K | 0.937 | 0.94 | 0.96 |  | 0.57 | 1.11 | 0.20 | 2.20 | 1 | 92% |
 | squashfs-xz-bcjauto-b256K | 0.940 | 0.82 |  |  |  |  | 4.80 |  | 1 | 38% |
 | squashfs-gzip3-b128K | 0.940 | 1.07 |  |  |  |  | 0.20 |  | 1 | 38% |
+| squashfs-zstd5-b512K | 0.950 | 0.96 | 1.09 |  | 0.57 | 1.14 | 0.16 | 2.16 | 1 | 92% |
 | dwarfs-l5-S24 | 0.953 | 0.95 | 3.85 |  | 0.12 | 1.59 | 5.07 | 2.71 | 1 | 92% |
 | squashfs-gzip3-b32K | 0.958 | 1.10 |  |  |  |  | 0.19 |  | 1 | 38% |
 | dwarfs-zstd7-S20 | 0.961 | 1.09 | 3.85 |  | 0.12 | 1.88 | 0.33 | 2.75 | 1 | 92% |
@@ -433,14 +493,14 @@ Weighted score = weighted geometric mean of metric/baseline (lower is better); m
 
 ## Table 2 - Total size per app (MB)
 
-| app | uncompressed | squashfs-zstd12-b32K | squashfs-zstd7-b32K | squashfs-zstd7-b256K | squashfs-zstd17-b32K | squashfs-zstd7-b128K+nofrag | squashfs-zstd7-b128K | squashfs-gzip9-b128K | best |
+| app | uncompressed | squashfs-zstd7-b64K | squashfs-zstd12-b32K | squashfs-zstd7-b128K | squashfs-zstd7-b32K | squashfs-zstd7-b256K | squashfs-zstd17-b32K | squashfs-gzip9-b128K | best |
 |---|---|---|---|---|---|---|---|---|---|
-| kdenlive/x86_64 | 658.6 | 225.0 | 226.5 | 209.2 | 211.7 | 219.4 | 214.9 | 218.4 | dwarfs-user-S26-B6-plain |
-| keepassxc/x86_64 | 110.3 |  | 42.9 | 40.2 | 40.4 | 41.3 | 41.3 | 41.4 | dwarfs-user-S26-B6-plain |
-| krita/x86_64 | 1003.6 | 374.1 | 376.1 | 350.6 | 356.9 | 367.4 | 358.9 | 368.4 | dwarfs-user-S26-B6-plain |
-| libreoffice/x86_64 | 732.8 | 303.9 | 305.3 | 289.3 | 290.9 | 299.0 | 294.4 | 300.0 | dwarfs-user-S26-B6-plain |
-| neovim/x86_64 | 38.0 | 13.2 | 13.3 | 12.3 | 12.7 | 13.2 | 12.6 | 12.9 | squashfs-xz-bcjauto-b256K |
-| obsidian/x86_64 | 291.3 | 117.6 | 118.5 | 107.4 | 112.1 | 111.0 | 111.0 | 113.9 | dwarfs-user-S26-B6-plain |
+| kdenlive/x86_64 | 658.6 | 219.8 | 225.0 | 214.9 | 226.5 | 209.2 | 211.7 | 218.4 | dwarfs-user-S26-B6-plain |
+| keepassxc/x86_64 | 110.3 | 42.0 |  | 41.3 | 42.9 | 40.2 | 40.4 | 41.4 | dwarfs-user-S26-B6-plain |
+| krita/x86_64 | 1003.6 | 366.7 | 374.1 | 358.9 | 376.1 | 350.6 | 356.9 | 368.4 | dwarfs-user-S26-B6-plain |
+| libreoffice/x86_64 | 732.8 | 299.2 | 303.9 | 294.4 | 305.3 | 289.3 | 290.9 | 300.0 | dwarfs-user-S26-B6-plain |
+| neovim/x86_64 | 38.0 | 13.0 | 13.2 | 12.6 | 13.3 | 12.3 | 12.7 | 12.9 | squashfs-xz-bcjauto-b256K |
+| obsidian/x86_64 | 291.3 | 114.2 | 117.6 | 111.0 | 118.5 | 107.4 | 112.1 | 113.9 | dwarfs-user-S26-B6-plain |
 
 ## Table 3 - zsync update cost (median over patch pairs)
 
@@ -578,9 +638,21 @@ Weighted score = weighted geometric mean of metric/baseline (lower is better); m
 | squashfs-zstd4-b32K | 1024 | 1.2M | 46.7M | 48.4M | 28.4% | 9 |
 | squashfs-zstd4-b32K | 2048 | 598.1K | 47.0M | 47.8M | 29.2% | 7 |
 | squashfs-zstd4-b32K | 4096 | 299.2K | 47.3M | 47.7M | 30.6% | 6 |
-| squashfs-zstd7-b128K | 1024 | 1.4M | 78.5M | 80.8M | 23.6% | 13 |
-| squashfs-zstd7-b128K | 2048 | 717.5K | 78.8M | 80.0M | 23.4% | 11 |
-| squashfs-zstd7-b128K | 4096 | 358.9K | 79.3M | 79.9M | 23.3% | 8 |
+| squashfs-zstd5-b128K | 1024 | 1.1M | 44.0M | 45.5M | 28.1% | 7 |
+| squashfs-zstd5-b128K | 2048 | 556.7K | 44.1M | 44.9M | 28.5% | 6 |
+| squashfs-zstd5-b128K | 4096 | 278.4K | 44.4M | 44.8M | 29.4% | 5 |
+| squashfs-zstd5-b256K | 1024 | 1.1M | 43.3M | 44.6M | 28.6% | 7 |
+| squashfs-zstd5-b256K | 2048 | 546.0K | 43.4M | 44.1M | 29.0% | 6 |
+| squashfs-zstd5-b256K | 4096 | 273.1K | 43.7M | 44.0M | 29.9% | 4 |
+| squashfs-zstd5-b512K | 1024 | 1.0M | 43.3M | 44.6M | 29.1% | 7 |
+| squashfs-zstd5-b512K | 2048 | 534.6K | 43.5M | 44.1M | 29.6% | 6 |
+| squashfs-zstd5-b512K | 4096 | 267.4K | 43.8M | 44.1M | 30.6% | 4 |
+| squashfs-zstd5-b64K | 1024 | 1.1M | 44.6M | 46.2M | 27.8% | 8 |
+| squashfs-zstd5-b64K | 2048 | 568.6K | 44.8M | 45.5M | 28.2% | 7 |
+| squashfs-zstd5-b64K | 4096 | 284.4K | 45.1M | 45.5M | 29.3% | 5 |
+| squashfs-zstd7-b128K | 1024 | 1.1M | 42.9M | 44.4M | 28.1% | 7 |
+| squashfs-zstd7-b128K | 2048 | 544.1K | 43.1M | 43.8M | 28.6% | 6 |
+| squashfs-zstd7-b128K | 4096 | 272.2K | 43.4M | 43.8M | 29.5% | 5 |
 | squashfs-zstd7-b128K+nodup | 1024 | 1.1M | 43.0M | 44.5M | 27.8% | 7 |
 | squashfs-zstd7-b128K+nodup | 2048 | 544.2K | 43.1M | 43.9M | 28.3% | 6 |
 | squashfs-zstd7-b128K+nodup | 4096 | 272.2K | 43.4M | 43.8M | 29.2% | 5 |
@@ -626,10 +698,28 @@ Weighted score = weighted geometric mean of metric/baseline (lower is better); m
 | squashfs-zstd7-b32K+sorttype | 1024 | 538.9K | 7.6M | 8.2M | 25.4% | 2 |
 | squashfs-zstd7-b32K+sorttype | 2048 | 269.6K | 7.7M | 7.9M | 26.1% | 2 |
 | squashfs-zstd7-b32K+sorttype | 4096 | 134.9K | 7.7M | 7.9M | 27.5% | 1 |
+| squashfs-zstd7-b512K | 1024 | 1.0M | 42.3M | 43.6M | 28.7% | 7 |
+| squashfs-zstd7-b512K | 2048 | 523.6K | 42.5M | 43.1M | 29.2% | 6 |
+| squashfs-zstd7-b512K | 4096 | 261.9K | 42.7M | 43.1M | 30.2% | 4 |
+| squashfs-zstd7-b64K | 1024 | 1.1M | 43.6M | 45.2M | 27.8% | 8 |
+| squashfs-zstd7-b64K | 2048 | 557.7K | 43.8M | 44.6M | 28.4% | 7 |
+| squashfs-zstd7-b64K | 4096 | 278.9K | 44.2M | 44.6M | 29.4% | 5 |
+| squashfs-zstd9-b128K | 1024 | 1.1M | 42.7M | 44.2M | 28.1% | 7 |
+| squashfs-zstd9-b128K | 2048 | 540.7K | 42.8M | 43.6M | 28.7% | 6 |
+| squashfs-zstd9-b128K | 4096 | 270.5K | 43.1M | 43.5M | 29.7% | 5 |
+| squashfs-zstd9-b256K | 1024 | 1.0M | 41.7M | 43.1M | 28.1% | 8 |
+| squashfs-zstd9-b256K | 2048 | 524.9K | 41.9M | 42.5M | 28.6% | 6 |
+| squashfs-zstd9-b256K | 4096 | 262.6K | 42.2M | 42.5M | 29.5% | 5 |
+| squashfs-zstd9-b512K | 1024 | 1.0M | 42.1M | 43.4M | 28.8% | 7 |
+| squashfs-zstd9-b512K | 2048 | 521.8K | 42.3M | 42.9M | 29.3% | 6 |
+| squashfs-zstd9-b512K | 4096 | 261.0K | 42.6M | 42.9M | 30.3% | 4 |
+| squashfs-zstd9-b64K | 1024 | 1.1M | 43.4M | 45.0M | 27.9% | 8 |
+| squashfs-zstd9-b64K | 2048 | 554.8K | 43.6M | 44.4M | 28.4% | 7 |
+| squashfs-zstd9-b64K | 4096 | 277.5K | 43.9M | 44.3M | 29.4% | 5 |
 
-No-change rebuild: 332 variants tested; 0 downloaded >1% (non-determinism / unstable layout): none
+No-change rebuild: 393 variants tested; 0 downloaded >1% (non-determinism / unstable layout): none
 
-Ideal references on raw AppDir tars: kdenlive/patch xdelta3=92.3M, keepassxc/patch xdelta3=2.1M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, neovim/patch xdelta3=1.5M, obsidian/patch xdelta3=69.5K, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, keepassxc/patch xdelta3=2.1M, keepassxc/patch xdelta3=2.1M, keepassxc/patch xdelta3=2.1M, keepassxc/patch xdelta3=2.1M, keepassxc/patch xdelta3=2.1M, keepassxc/patch xdelta3=2.1M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, neovim/patch xdelta3=1.5M, neovim/patch xdelta3=1.5M, neovim/patch xdelta3=1.5M, neovim/patch xdelta3=1.5M, neovim/patch xdelta3=1.5M, neovim/patch xdelta3=1.5M, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, keepassxc/patch xdelta3=2.1M, keepassxc/patch xdelta3=2.1M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, neovim/patch xdelta3=1.5M, neovim/patch xdelta3=1.5M, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, keepassxc/patch xdelta3=2.1M, keepassxc/patch xdelta3=2.1M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, neovim/patch xdelta3=1.5M, neovim/patch xdelta3=1.5M, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, kdenlive/patch xdelta3=92.3M, keepassxc/patch xdelta3=2.1M, krita/patch xdelta3=38.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, neovim/patch xdelta3=1.5M, obsidian/patch xdelta3=69.5K, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, keepassxc/patch xdelta3=2.1M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, neovim/patch xdelta3=1.5M, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K
+Ideal references on raw AppDir tars: kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, keepassxc/patch xdelta3=2.1M, keepassxc/patch xdelta3=2.1M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, neovim/patch xdelta3=1.5M, neovim/patch xdelta3=1.5M, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, keepassxc/patch xdelta3=2.1M, keepassxc/patch xdelta3=2.1M, keepassxc/patch xdelta3=2.1M, keepassxc/patch xdelta3=2.1M, keepassxc/patch xdelta3=2.1M, keepassxc/patch xdelta3=2.1M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, neovim/patch xdelta3=1.5M, neovim/patch xdelta3=1.5M, neovim/patch xdelta3=1.5M, neovim/patch xdelta3=1.5M, neovim/patch xdelta3=1.5M, neovim/patch xdelta3=1.5M, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, keepassxc/patch xdelta3=2.1M, keepassxc/patch xdelta3=2.1M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, neovim/patch xdelta3=1.5M, neovim/patch xdelta3=1.5M, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, kdenlive/patch xdelta3=92.3M, keepassxc/patch xdelta3=2.1M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, neovim/patch xdelta3=1.5M, obsidian/patch xdelta3=69.5K, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, keepassxc/patch xdelta3=2.1M, keepassxc/patch xdelta3=2.1M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, neovim/patch xdelta3=1.5M, neovim/patch xdelta3=1.5M, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K, kdenlive/patch xdelta3=92.3M, keepassxc/patch xdelta3=2.1M, krita/patch xdelta3=38.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, neovim/patch xdelta3=1.5M, obsidian/patch xdelta3=69.5K, kdenlive/patch xdelta3=92.3M, kdenlive/patch xdelta3=92.3M, keepassxc/patch xdelta3=2.1M, krita/patch xdelta3=38.2M, krita/patch xdelta3=38.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, libreoffice/patch xdelta3=33.1M, libreoffice/major xdelta3=93.2M, neovim/patch xdelta3=1.5M, obsidian/patch xdelta3=69.5K, obsidian/patch xdelta3=69.5K
 
 ## Table 3b - Compression block x zsync block (update cost, % of image; best per row bold)
 
@@ -697,13 +787,39 @@ Ideal references on raw AppDir tars: kdenlive/patch xdelta3=92.3M, keepassxc/pat
 | 128.0K | **27.8** | 28.2 | 29.2 |
 | 256.0K | **28.5** | 29.1 | 30.2 |
 
+**squashfs zstd level 5**
+
+| compression block \ zsync -b | 1.0K | 2.0K | 4.0K |
+|---|---|---|---|
+| 64.0K | **27.8** | 28.2 | 29.3 |
+| 128.0K | **28.1** | 28.5 | 29.4 |
+| 256.0K | **28.6** | 29.0 | 29.9 |
+| 512.0K | **29.1** | 29.6 | 30.6 |
+
 **squashfs zstd level 7**
 
 | compression block \ zsync -b | 1.0K | 2.0K | 4.0K |
 |---|---|---|---|
 | 32.0K | 23.5 | **23.3** | 23.3 |
-| 128.0K | 23.6 | 23.4 | **23.3** |
+| 128.0K | **28.1** | 28.6 | 29.5 |
 | 256.0K | **28.2** | 28.6 | 29.6 |
+
+**squashfs zstd level 7**
+
+| compression block \ zsync -b | 1.0K | 2.0K | 4.0K |
+|---|---|---|---|
+| 16.0K | **28.2** | 29.3 | 31.5 |
+| 64.0K | **27.8** | 28.4 | 29.4 |
+| 512.0K | **28.7** | 29.2 | 30.2 |
+
+**squashfs zstd level 9**
+
+| compression block \ zsync -b | 1.0K | 2.0K | 4.0K |
+|---|---|---|---|
+| 64.0K | **27.9** | 28.4 | 29.4 |
+| 128.0K | **28.1** | 28.7 | 29.7 |
+| 256.0K | **28.1** | 28.6 | 29.5 |
+| 512.0K | **28.8** | 29.3 | 30.3 |
 
 ## Table 4 - Block-size sweep (mid-level compressor)
 
@@ -745,7 +861,9 @@ dwarfs zstd level 12 (median over apps)
 | squashfs-zstd17 | 4.14 | 2.9 | True |
 | squashfs-zstd3 |  |  |  |
 | squashfs-zstd4 |  |  |  |
+| squashfs-zstd5 |  |  |  |
 | squashfs-zstd7 | 4.14 | 2.9 | True |
+| squashfs-zstd9 |  |  |  |
 
 | codec-only (tar stream) | geomean ratio | note |
 |---|---|---|
@@ -766,13 +884,13 @@ dwarfs zstd level 12 (median over apps)
 
 ## Decision rule
 
-Best by weighted score: `squashfs-zstd12-b32K` (0.758, coverage 100%), `squashfs-zstd7-b32K` (0.776, coverage 100%), `squashfs-zstd7-b256K` (0.786, coverage 100%)
+Best by weighted score: `squashfs-zstd7-b64K` (0.754, coverage 100%), `squashfs-zstd12-b32K` (0.758, coverage 100%), `squashfs-zstd7-b128K` (0.774, coverage 100%)
 
-1. keep variants within +5% of the best update cost and +10% of the best warm startup CPU (when those metrics exist);
+1. among the 10 best weighted scores, keep variants within +5% of the best update cost and +10% of the best warm startup CPU (when those metrics exist);
 2. choose the smallest total size;
 3. reject non-deterministic builds, zsync verification failures, reference-only variants.
 
-_no candidate satisfies the rule yet (need stage 2 data)_
+**Winner: `squashfs-zstd7-b256K`**; candidates: squashfs-zstd7-b64K, squashfs-zstd12-b32K, squashfs-zstd7-b128K, squashfs-zstd7-b256K
 
 - smallest: `dwarfs-user-S26-B6-hot` (0.74), runner-up `dwarfs-user-S26-B6-plain`
 - fastest startup (CPU): `squashfs-zstd12-b128K` (0.27), runner-up `squashfs-zstd12-b256K`
@@ -783,7 +901,7 @@ _no candidate satisfies the rule yet (need stage 2 data)_
 
 - `dwarfs-brotli9-S20`: dw-brotli: best level=8 is the high edge of the tested values -> try level=9
 
-Shortlist for the next stage: `squashfs-zstd12-b32K`, `squashfs-zstd7-b32K`, `squashfs-zstd7-b256K`, `squashfs-zstd4-b32K`, `squashfs-zstd3-b32K`, `squashfs-xz-bcjnone-b256K`, `dwarfs-zstd7-S20`, `dwarfs-user-S26-B6-hot`, `dwarfs-l7-S24`, `dwarfs-brotli8-S20`, `dwarfs-brotli6-S20`, `squashfs-gzip9-b128K`
+Shortlist for the next stage: `squashfs-zstd7-b64K`, `squashfs-zstd12-b32K`, `squashfs-zstd7-b128K`, `squashfs-zstd4-b32K`, `squashfs-zstd3-b32K`, `squashfs-zstd7-b512K`, `squashfs-xz-bcjnone-b256K`, `squashfs-zstd5-b512K`, `dwarfs-user-S26-B6-hot`, `dwarfs-l7-S24`, `dwarfs-brotli8-S20`, `squashfs-gzip9-b128K`
 
-Noisy (CV>10%) variants queued for retry: 134
+Noisy (CV>10%) variants queued for retry: 299
 
