@@ -33,8 +33,8 @@ runtime has it).
 
 1. **It ranks near the top under every weighting that cares about both size and speed**
    (sensitivity table below): 2nd of 79 with our weights, 5th with all metrics weighted
-   equally, 3rd for speed, 3rd for a mix of size and speed. It has the best mean rank of every
-   variant we tried.
+   equally, 3rd for speed. Among the eight finalists we compared across the balanced weightings,
+   it has the best mean rank.
 2. **It improves what people feel** (first-start time, CPU, bytes per update) with no
    penalty elsewhere, while keeping the proven SquashFS format and the current runtime.
 3. **Measured on real AppImages**: neovim, KeePassXC, Obsidian, Krita, Kdenlive and LibreOffice,
@@ -78,11 +78,11 @@ a full-codec runtime only for this measurement).
 
 **"lz4 / lzo are fastest."** lz4 has the lowest startup CPU of anything we tested (0.16), but
 images are 17% larger, app start is 0.72 (zstd 7: 0.57), builds are 6x slower than zstd 7, and
-the score is 0.85 vs 0.76. lzo is 10% larger and slower on every metric. Fine for CPU-starved
+the score is 0.85 vs 0.76. lzo is 10% larger, starts slower (0.86) and uses more CPU (0.53), though its updates are cheaper (0.84). Fine for CPU-starved
 machines; not a good default for downloads.
 
 **"DwarFS compresses better and starts as fast."** DwarFS can: with the project's mkdwarfs
-setup (`zstd:level=22 -S26 -B6 --order=path`) images are 23% smaller, and the `--hotness-list`
+setup (`zstd:level=22 -S26 -B6 --order=path`) images are 23-26% smaller, and the `--hotness-list`
 variant starts in 0.52 (the same setup without it: 0.82), as fast as our recommendation.
 It pays for that: the FUSE process uses 12-40x the RAM, standalone mount is 4-5x slower,
 zsync updates cost 1.5x of today's (ours 0.94), and builds take 6x longer (ours 0.19).
@@ -104,7 +104,7 @@ about 12x slower than level 7 and is slower to start (0.73); it is the best pure
 if build time is free and only the download matters (score 0.86). Level 9 builds 25% slower
 than level 7 for 1-3% size.
 
-**"Use a lower level or smaller block."** zstd 3-5 builds 2-3x faster but is 2-8% larger and
+**"Use a lower level or smaller block."** zstd 3-5 builds 1.5-2.7x faster but is 2-8% larger and
 slower to start; 64K blocks use less RAM and score about the same as 128K (within noise);
 16K blocks are worse in every way (score 0.84) and 512K blocks triple FUSE RAM (score 0.87+).
 256K blocks are 2% smaller than 128K but use 1.37x the RAM, and in the latest re-measurement
