@@ -275,6 +275,18 @@ def cv(xs):
     return statistics.pstdev(xs) / statistics.mean(xs)
 
 
+def uruntime_auto_cache_mb():
+    """The DwarFS block cache the uruntime picks on this host (VHSgunzo/uruntime get_dwfs_cachesize:
+    largest tier strictly below MemAvailable/1.3, else 32M)."""
+    try:
+        with open("/proc/meminfo") as f:
+            kb = {l.split(":")[0]: int(l.split()[1]) for l in f}
+        avail_mb = kb.get("MemAvailable", kb.get("MemFree", 0)) / 1024 / 1.3
+    except (OSError, ValueError):
+        return None
+    return next((t for t in (1536, 1024, 896, 768, 640, 512, 384, 256, 128, 64) if avail_mb > t), 32)
+
+
 def env_facts():
     def sh(c):
         r = subprocess.run(c, shell=True, capture_output=True, text=True)
@@ -283,6 +295,7 @@ def env_facts():
         "cpu": sh("lscpu | sed -n 's/^Model name: *//p'"),
         "cores": os.cpu_count(),
         "ram_gb": round(os.sysconf("SC_PAGE_SIZE") * os.sysconf("SC_PHYS_PAGES") / 2**30, 1),
+        "uruntime_auto_cache_mb": uruntime_auto_cache_mb(),
         "kernel": platform.release(),
         "image": os.environ.get("ImageVersion", ""),
         "runner": os.environ.get("RUNNER_NAME", platform.node()),

@@ -152,6 +152,26 @@ families:
     levers: []
     compat: {kernel: "n/a (FUSE3)", fuse: "3.x", static_reader: true}
 
+  # Same image as dwarfs-user-S26-B6-hot but with the full uruntime (bundles mkdwarfs): shows
+  # how much of the DwarFS "mount time" is the runtime unpacking its helper (issue #1).
+  - name: dw-user-fullrt
+    kind: dwarfs
+    id: "dwarfs-user-S26-B6-hot-fullrt"
+    params: {codec: zstd, preset: default, level: 22, bits: 26, lookback: 6, order: path, hotness: hot, runtime: full}
+    levers: []
+    compat: {kernel: "n/a (FUSE3)", fuse: "3.x", static_reader: true}
+
+  # The uruntime sizes the DwarFS block cache from free host memory (1536M on a 16 GiB runner,
+  # 32M when memory is tight; issue #2), so RAM must be compared at explicit cache sizes.
+  # The unsuffixed dwarfs-* variants use the runtime's automatic choice; env DWARFS_CACHESIZE
+  # overrides it for the measurement.
+  - name: dw-user-cache
+    kind: dwarfs
+    id: "dwarfs-user-S26-B6-{hotness}-c{cache}"
+    params: {codec: zstd, preset: default, level: 22, bits: 26, lookback: 6, order: path, hotness: [plain, hot], cache: [256M, 64M]}
+    levers: []
+    compat: {kernel: "n/a (FUSE3)", fuse: "3.x", static_reader: true}
+
 # Option axes derived for the top-3 shortlisted squashfs variants in stage 3.
 # id = <base>+<suffix>
 squashfs_options:

@@ -57,6 +57,30 @@ class DwarfsUser(unittest.TestCase):
             bv.payload_cmd(common.get_variant("dwarfs-user-S26-B6-hot"), "a", "p", "x86_64", 0, "/tmp")
 
 
+class DwarfsRuntimeAndCache(unittest.TestCase):
+    """Issues #1 and #2: lite runtime by default, explicit cache sizes, native mount reference."""
+
+    def test_runtime_choice(self):
+        rts = common.load_yaml("corpus/runtimes.yml")
+        self.assertIn("lite", rts["dwarfs"]["urls"]["x86_64"])          # default DwarFS runtime is the lite one
+        self.assertNotIn("lite", rts["dwarfs_full"]["urls"]["x86_64"])
+        self.assertEqual(common.get_variant("dwarfs-user-S26-B6-hot-fullrt")["params"]["runtime"], "full")
+        self.assertIsNone(common.get_variant("dwarfs-user-S26-B6-hot")["params"].get("runtime"))
+
+    def test_cache_variants(self):
+        for h in ("plain", "hot"):
+            for c in ("256M", "64M"):
+                v = common.get_variant(f"dwarfs-user-S26-B6-{h}-c{c}")
+                self.assertEqual(v["params"]["cache"], c)
+        import build_variant as bv
+        cmd = bv.payload_cmd(common.get_variant("dwarfs-user-S26-B6-plain-c64M"), "a", "p", "x86_64", 0, "/tmp")
+        self.assertNotIn("cache", " ".join(cmd))        # the cache is a mount-time setting, not a build option
+
+    def test_auto_cache_tiers(self):
+        c = common.uruntime_auto_cache_mb()
+        self.assertIn(c, (1536, 1024, 896, 768, 640, 512, 384, 256, 128, 64, 32))
+
+
 class Corpus(unittest.TestCase):
     def test_every_app_has_an_older_version(self):
         for a in common.load_corpus():

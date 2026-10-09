@@ -7,6 +7,7 @@ Size/zsync metrics are deterministic and relative to the baseline record of
 the same app. Lower is better everywhere."""
 import argparse
 import json
+import re
 import math
 from collections import defaultdict
 from pathlib import Path
@@ -355,6 +356,35 @@ def main():
         md.append(f"{pick[0]} {pick[1]} level {pick[2]} (median over apps)\n")
         md.append(table(["block", "size ratio", "mount ms", "workset ms", "seq MB/s", "update %"], rows))
     md.append("")
+
+    # ---- Table 7: DwarFS runtime overhead and cache size (issues #1, #2)
+    t7 = [v for v in variants if v.startswith("dwarfs-user") or v in
+          ("dwarfs-l3-S24", "dwarfs-l7-S24", "dwarfs-zstd7-S20", "squashfs-gzip9-b128K", "squashfs-zstd7-b128K")]
+    rows7 = []
+    for v in t7:
+        rs = by_v.get(v, [])
+        def med(key, rs=rs):
+            xs = [r.get("summary", {}).get(key) for r in rs]
+            return median([x for x in xs if x is not None]) if any(x is not None for x in xs) else None
+        if not any(r.get("summary", {}).get("mount_ms_warm") for r in rs):
+            continue
+        rt = median([r.get("size", {}).get("runtime") for r in rs if r.get("size", {}).get("runtime")])
+        auto = median([r.get("env", {}).get("uruntime_auto_cache_mb") for r in rs if r.get("env", {}).get("uruntime_auto_cache_mb")])
+        m = re.search(r"-c(\d+M)$", v)
+        cache = m.group(1) if m else (f"auto ({auto:.0f}M)" if v.startswith("dwarfs") and auto else "")
+        l = geomean([rel(r, "launch_ms_cold", base) for r in rs])
+        rows7.append([v, human(rt) if rt else "", cache, fmt(med("mount_ms_warm"), 1), fmt(med("mount_native_ms_warm"), 1),
+                      fmt(med("fuse_rss_mb_warm"), 0), fmt(med("fuse_rss_mb_native_warm"), 0), fmt(l), len(rs)])
+    if rows7:
+        md.append("## Table 7 - DwarFS: runtime vs native mount, and cache size\n")
+        md.append("`mount (runtime)` is `--appimage-mount`, which for DwarFS includes whatever the runtime does before "
+                  "mounting (the full uruntime unpacks a bundled mkdwarfs; the lite one does not). `mount (native)` is "
+                  "the `dwarfs` binary on the same image with no runtime. The uruntime sizes the DwarFS block cache from "
+                  "free host memory (`auto`); the `-cNNN` variants fix it with `DWARFS_CACHESIZE`, so RAM is comparable. "
+                  "Medians over apps; app start is relative to the baseline.\n")
+        md.append(table(["variant", "runtime size", "cache", "mount (runtime) ms", "mount (native) ms",
+                         "FUSE RSS MB (runtime)", "FUSE RSS MB (native)", "app start (cold)", "apps"], rows7))
+        md.append("")
 
     # ---- Table 6: compat + codec-only
     md.append("## Table 6 - Compatibility (recorded, not measured) and codec-only reference\n")

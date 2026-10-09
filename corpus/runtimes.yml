@@ -13,8 +13,17 @@ squashfs_full:
   urls:
     x86_64: https://github.com/probonopd/AppImageTests/releases/download/runtime-full/runtime-full-x86_64
   sha256: {x86_64: "6c881190831e1452013c6ccc3c6b4b1cfbae4b4447d2800f7438f6cff94be57c"}
+# DwarFS runtime. The "lite" uruntime does not bundle mkdwarfs (1.5 MiB smaller, and it does not
+# have to unpack a 7.3 MiB helper on every launch); it is what pkgforge-dev ships (issue #1).
 dwarfs:
-  name: uruntime
+  name: uruntime-lite
+  urls:
+    x86_64: https://github.com/VHSgunzo/uruntime/releases/latest/download/uruntime-appimage-dwarfs-lite-x86_64
+    aarch64: https://github.com/VHSgunzo/uruntime/releases/latest/download/uruntime-appimage-dwarfs-lite-aarch64
+  sha256: {x86_64: "b3c2916153e089d703cee5a7ebc540941d2f1d71baa90eb3092b15eef48345a8", aarch64: "c1641dfe465f4cb70ae545fbfb9de7a221aa6e9a0b1d7ea600b213a1f10738a0"}
+# The full uruntime (bundles mkdwarfs); only used by the -fullrt control variant.
+dwarfs_full:
+  name: uruntime-full
   urls:
     x86_64: https://github.com/VHSgunzo/uruntime/releases/latest/download/uruntime-appimage-dwarfs-x86_64
     aarch64: https://github.com/VHSgunzo/uruntime/releases/latest/download/uruntime-appimage-dwarfs-aarch64

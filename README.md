@@ -81,15 +81,20 @@ images are 17% larger, app start is 0.72 (zstd 7: 0.57), builds are 6x slower th
 the score is 0.85 vs 0.76. lzo is 10% larger, starts slower (0.86) and uses more CPU (0.53), though its updates are cheaper (0.84). Fine for CPU-starved
 machines; not a good default for downloads.
 
-**"DwarFS compresses better and starts as fast."** DwarFS can: with the project's mkdwarfs
-setup (`zstd:level=22 -S26 -B6 --order=path`) images are 23-26% smaller, and the `--hotness-list`
-variant starts in 0.52 (the same setup without it: 0.82), as fast as our recommendation.
-It pays for that: the FUSE process uses 12-40x the RAM, standalone mount is 4-5x slower,
-zsync updates cost 1.5x of today's (ours 0.94), and builds take 6x longer (ours 0.19).
-The one DwarFS setting with cheap updates (level 2, large blocks) is 18% larger than today's
-default. DwarFS also needs a different runtime (uruntime) and FUSE3 instead of the current
-type2 runtime. Its weighted score is 1.08-1.7 against our 0.76. The hotness list is the
-interesting result: if the memory and build costs can be fixed, it deserves a re-test.
+**"DwarFS compresses better and starts as fast."** It can: with the project's mkdwarfs setup
+(`zstd:level=22 -S26 -B6 --order=path`) images are 23-26% smaller, and the `--hotness-list`
+variant starts as fast as our recommendation (cold app start 0.52, the same setup without the
+list 0.82; for LibreOffice 1.8 s drops to 0.55 s). **That is the part users notice**, and it
+is a real advantage of DwarFS with a hotness list. Our earlier DwarFS "mount time" and "RAM"
+comparisons were unfair and have been withdrawn (issues #1 and #2): the mount number mostly
+measured the full uruntime unpacking a bundled `mkdwarfs` helper on every launch (the `-lite`
+runtime, which is what DwarFS AppImages should use, avoids that), and the RAM number measured
+a block cache that the uruntime deliberately sizes from free host memory (1536M on a 16 GiB
+runner). They are being re-measured with the lite runtime, a native `dwarfs` mount as
+reference, and explicit cache sizes; see Table 7 of the report. What remains true is that
+DwarFS builds take about 6x longer than today's, that zsync updates cost 1.5x of today's
+(ours 0.94), and that the format needs a different runtime (uruntime) and FUSE3 instead of
+the current type2 runtime.
 
 **"gzip is the safe, compatible choice."** gzip is the most widely supported codec, but the
 runtime we ship already reads zstd, and the squashfs reader is the runtime's own FUSE code,

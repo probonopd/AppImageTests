@@ -6,7 +6,7 @@ export PATH="$HOME/bin:$PATH"
 mkdir -p e2e-out
 python3 tools/fetch_corpus.py --app synthetic
 V="squashfs-zstd12-b128K,squashfs-gzip3-b32K"
-command -v mkdwarfs >/dev/null && V="$V,dwarfs-l5-S20,dwarfs-user-S26-B6-plain,dwarfs-user-S26-B6-hot"
+command -v mkdwarfs >/dev/null && V="$V,dwarfs-l5-S20,dwarfs-user-S26-B6-plain,dwarfs-user-S26-B6-hot,dwarfs-user-S26-B6-plain-c64M"
 python3 tools/run_group.py --app synthetic --variants "$V" --stage 2 \
   --reps-warm 2 --reps-cold 2 --reps-launch 1 --out e2e-out/synthetic.json
 python3 tools/codec_reference.py --app synthetic --out e2e-out/codec-synthetic.json

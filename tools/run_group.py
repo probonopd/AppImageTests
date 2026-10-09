@@ -43,6 +43,10 @@ def summarise(rec):
         for k in TIMING_KEYS + ("fuse_rss_mb", "cpu_s_total", "walk_ms"):
             vals = [r.get(k) for r in runs if r.get(k) is not None]
             s[f"{k}_{state}"] = median(vals)
+    nat = [r for r in st.get("mount_native", []) if "error" not in r]
+    if nat:
+        s["mount_native_ms_warm"] = median([r["mount_ms"] for r in nat if r.get("mount_ms") is not None])
+        s["fuse_rss_mb_native_warm"] = median([r["fuse_rss_mb"] for r in nat if r.get("fuse_rss_mb") is not None])
     for state, runs in st.get("launch", {}).items():
         s[f"launch_ms_{state}"] = median([r["launch_ms"] for r in runs if r.get("launch_ms")])
     return s
@@ -94,11 +98,16 @@ def main():
 
     recs = {}
     hot_of = {}
+    env_of = {}           # vid -> extra environment (DwarFS cache size, see issue #2)
+    cache_of = {}
     for vid in ids:
         v = get_variant(vid)
         img = run_dir / "img" / f"{vid}.AppImage"
         print(f"== build {vid}", flush=True)
         hot = None
+        if v["params"].get("cache"):
+            env_of[vid] = {"DWARFS_CACHESIZE": v["params"]["cache"]}
+            cache_of[vid] = v["params"]["cache"]
         if v["params"].get("hotness") == "hot":
             if workset:
                 hot = run_dir / "hotness.txt"
@@ -141,7 +150,7 @@ def main():
                     rec, img = recs[vid]
                     path, cleanup = ms.prepare_state(img, state)
                     try:
-                        res = ms.mount_run(path, workset, a.cpus)
+                        res = ms.mount_run(path, workset, a.cpus, env=env_of.get(vid))
                         if "supports only" in res.get("stderr", ""):
                             unsupported[vid] = res["stderr"].splitlines()[0]
                             rec["runtime_unsupported"] = unsupported[vid]
@@ -153,6 +162,10 @@ def main():
                         if "error" in res:
                             failures += 1
                         rec["startup"]["mount"][state].append(res)
+                        if state == "warm" and get_variant(vid)["kind"] == "dwarfs" and shutil.which("dwarfs"):
+                            # DwarFS itself, without the runtime (what the runtime adds is the difference)
+                            nres = ms.native_mount_run(path, cache_of.get(vid), a.cpus)
+                            rec["startup"].setdefault("mount_native", []).append(nres)
                     finally:
                         cleanup()
         launch = app.get("launch")
@@ -167,7 +180,7 @@ def main():
                         rec, img = recs[vid]
                         path, cleanup = ms.prepare_state(img, state)
                         try:
-                            rec["startup"]["launch"][state].append(ms.launch_run(path, launch))
+                            rec["startup"]["launch"][state].append(ms.launch_run(path, launch, extra_env=env_of.get(vid)))
                         finally:
                             cleanup()
         if xvfb:

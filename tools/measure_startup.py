@@ -77,11 +77,12 @@ def _read_file(path, limit=None, chunk=1 << 20):
     return n
 
 
-def mount_run(image, workset=None, cpus="0,1", sample=200, seed=1, timeout=120):
+def mount_run(image, workset=None, cpus="0,1", sample=200, seed=1, timeout=120, env=None):
     cmd = (["taskset", "-c", cpus] if cpus else []) + [str(image), "--appimage-mount"]
     t0 = time.perf_counter()
     errf = tempfile.TemporaryFile("w+")
-    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, text=True, stderr=errf)
+    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, text=True, stderr=errf,
+                         env=dict(os.environ, **env) if env else None)
     mp = p.stdout.readline().strip()
     deadline = time.time() + timeout
     while True:
@@ -154,8 +155,49 @@ def mount_run(image, workset=None, cpus="0,1", sample=200, seed=1, timeout=120):
     return r
 
 
-def launch_run(image, launch, display=":99", cpus=None):
+def native_mount_run(image, cachesize=None, cpus="0,1", timeout=60):
+    """Mount a DwarFS AppImage with the native `dwarfs` binary, no runtime involved (the
+    payload is found with offset=auto). Gives the mount cost of DwarFS itself, separate from
+    the runtime's own startup work (issue #1). Reads the whole tree so the cache fills."""
+    mp = tempfile.mkdtemp(prefix="native-mp-")
+    opts = "offset=auto" + (f",cachesize={cachesize}" if cachesize else "")
+    cmd = (["taskset", "-c", cpus] if cpus else []) + ["dwarfs", str(image), mp, "-o", opts]
+    t0 = time.perf_counter()
+    r = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout)
+    out = {}
+    deadline = time.time() + timeout
+    while True:
+        try:
+            if os.listdir(mp):
+                break
+        except OSError:
+            pass
+        if time.time() > deadline or r.returncode != 0:
+            subprocess.run(["fusermount3", "-u", "-z", mp], capture_output=True)
+            os.rmdir(mp)
+            return {"error": "native mount failed", "stderr": (r.stderr or "")[-300:]}
+        time.sleep(0.002)
+    out["mount_ms"] = (time.perf_counter() - t0) * 1000
+    try:
+        for dp, _, fns in os.walk(mp):
+            for fn in fns:
+                fp = os.path.join(dp, fn)
+                if os.path.isfile(fp) and not os.path.islink(fp):
+                    _read_file(fp)
+        _, out["fuse_rss_mb"] = _tree_cpu(os.getpid() + 10**9, image)    # daemon found by image path
+    finally:
+        subprocess.run(["fusermount3", "-u", "-z", mp], capture_output=True)
+        time.sleep(0.2)
+        try:
+            os.rmdir(mp)
+        except OSError:
+            pass
+    return out
+
+
+def launch_run(image, launch, display=":99", cpus=None, extra_env=None):
     env = dict(os.environ, DISPLAY=display, **{k: str(v) for k, v in launch.get("env", {}).items()})
+    env.update(extra_env or {})
     ready = launch.get("ready", {"type": "exit", "timeout_s": 30})
     cmd = (["taskset", "-c", cpus] if cpus else []) + [str(image)] + launch.get("cmd", [])
     t0 = time.perf_counter()
