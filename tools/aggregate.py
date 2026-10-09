@@ -371,7 +371,7 @@ def main():
     md.append("")
 
     # ---- Table 7: DwarFS runtime overhead and cache size (issues #1, #2)
-    t7 = [v for v in variants if v.startswith("dwarfs-user") or v in
+    t7 = [v for v in variants if v.startswith("dwarfs-user") or v.startswith("dwarfs-l5-S20") or v in
           ("dwarfs-l3-S24", "dwarfs-l7-S24", "dwarfs-zstd7-S20", "squashfs-gzip9-b128K", "squashfs-zstd7-b128K")]
     rows7 = []
     for v in t7:
