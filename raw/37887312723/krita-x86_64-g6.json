@@ -1,0 +1,852 @@
+{
+  "records": [
+    {
+      "run_id": "37887312723",
+      "app": "krita",
+      "arch": "x86_64",
+      "category": "large-qt",
+      "variant": "squashfs-gzip9-b128K",
+      "container": "squashfs",
+      "codec": "gzip",
+      "level": 9,
+      "block_bytes": 131072,
+      "family_key": "sq-baseline",
+      "stage": "2",
+      "retry": false,
+      "runtime": "type2-runtime@156f4bdbde9c",
+      "size": {
+        "payload": 367497216,
+        "runtime": 944632,
+        "total": 368441848,
+        "uncompressed": 1003593087,
+        "ratio": 0.367122744040982
+      },
+      "build": {
+        "wall_s": 33.96,
+        "cpu_s": 134.08,
+        "rss_mb": 945.13671875,
+        "timeout": false,
+        "deterministic": null
+      },
+      "env": {
+        "cpu": "AMD EPYC 7763 64-Core Processor",
+        "cores": 4,
+        "ram_gb": 15.6,
+        "uruntime_auto_cache_mb": 1536,
+        "kernel": "6.17.0-1022-azure",
+        "image": "20261004.327.1",
+        "runner": "GitHub Actions 1000009568",
+        "tools": {
+          "mksquashfs": "mksquashfs version 4.6.1 (2023/03/25)",
+          "mkdwarfs": "___                  ___ ___",
+          "zsync": "zsync v0.6.2 (compiled Apr 18 2024 17:54:59)"
+        }
+      },
+      "startup": {
+        "mount": {
+          "warm": [
+            {
+              "mount_ms": 6.881722999992235,
+              "workset_ms": 1132.613818999971,
+              "cpu_s_startup": 1.05,
+              "walk_ms": 726.28200500003,
+              "rand4k_ms": 0.4544902399999273,
+              "seq_mb_s": 289.5747208957764,
+              "uncompressed_bytes": 1003593087,
+              "cpu_s_total": 3.9200000000000004,
+              "fuse_rss_mb": 31.45703125
+            },
+            {
+              "mount_ms": 8.153875000004973,
+              "workset_ms": 1165.8121589999837,
+              "cpu_s_startup": 1.07,
+              "walk_ms": 721.5041800000108,
+              "rand4k_ms": 0.4362346849998744,
+              "seq_mb_s": 275.9214863676252,
+              "uncompressed_bytes": 1003593087,
+              "cpu_s_total": 4.05,
+              "fuse_rss_mb": 31.34375
+            },
+            {
+              "mount_ms": 6.688493000012841,
+              "workset_ms": 1134.4637379999654,
+              "cpu_s_startup": 1.04,
+              "walk_ms": 678.2660739999642,
+              "rand4k_ms": 0.46004877000001443,
+              "seq_mb_s": 279.0015451253351,
+              "uncompressed_bytes": 1003593087,
+              "cpu_s_total": 3.95,
+              "fuse_rss_mb": 31.59765625
+            },
+            {
+              "mount_ms": 6.89828600002329,
+              "workset_ms": 1151.327555000023,
+              "cpu_s_startup": 1.06,
+              "walk_ms": 684.7432090000325,
+              "rand4k_ms": 0.4376974600000949,
+              "seq_mb_s": 289.80243148539336,
+              "uncompressed_bytes": 1003593087,
+              "cpu_s_total": 3.91,
+              "fuse_rss_mb": 31.59765625
+            },
+            {
+              "mount_ms": 7.4172559999965415,
+              "workset_ms": 1137.638279999976,
+              "cpu_s_startup": 1.05,
+              "walk_ms": 754.6230529999889,
+              "rand4k_ms": 0.43448210499974493,
+              "seq_mb_s": 285.40570213837685,
+              "uncompressed_bytes": 1003593087,
+              "cpu_s_total": 3.95,
+              "fuse_rss_mb": 31.3125
+            },
+            {
+              "mount_ms": 7.5715140000056635,
+              "workset_ms": 1133.5129409999922,
+              "cpu_s_startup": 1.04,
+              "walk_ms": 737.5811079999721,
+              "rand4k_ms": 0.48051735999990797,
+              "seq_mb_s": 275.85076069116843,
+              "uncompressed_bytes": 1003593087,
+              "cpu_s_total": 4.04,
+              "fuse_rss_mb": 31.52734375
+            },
+            {
+              "mount_ms": 7.448750999969889,
+              "workset_ms": 1131.4804009999762,
+              "cpu_s_startup": 1.04,
+              "walk_ms": 674.826607,
+              "rand4k_ms": 0.43565647999997736,
+              "seq_mb_s": 275.46182558701946,
+              "uncompressed_bytes": 1003593087,
+              "cpu_s_total": 4.0,
+              "fuse_rss_mb": 31.34375
+            }
+          ],
+          "cold": [
+            {
+              "mount_ms": 30.303088999971806,
+              "workset_ms": 1328.475602000026,
+              "cpu_s_startup": 1.09,
+              "walk_ms": 759.8709189999795,
+              "rand4k_ms": 0.6937161799999103,
+              "seq_mb_s": 268.2581927606152,
+              "uncompressed_bytes": 1003593087,
+              "cpu_s_total": 4.109999999999999,
+              "fuse_rss_mb": 31.05859375
+            },
+            {
+              "mount_ms": 35.86881800003994,
+              "workset_ms": 1333.1367339999929,
+              "cpu_s_startup": 1.1,
+              "walk_ms": 725.2152170000272,
+              "rand4k_ms": 0.7421990599999617,
+              "seq_mb_s": 262.26124844357656,
+              "uncompressed_bytes": 1003593087,
+              "cpu_s_total": 4.18,
+              "fuse_rss_mb": 31.1796875
+            },
+            {
+              "mount_ms": 33.08359599998312,
+              "workset_ms": 1377.118472999996,
+              "cpu_s_startup": 1.12,
+              "walk_ms": 693.7196949999702,
+              "rand4k_ms": 0.6842406999999184,
+              "seq_mb_s": 259.6600559468134,
+              "uncompressed_bytes": 1003593087,
+              "cpu_s_total": 4.09,
+              "fuse_rss_mb": 31.35546875
+            },
+            {
+              "mount_ms": 33.59336899995924,
+              "workset_ms": 1328.1461579999814,
+              "cpu_s_startup": 1.08,
+              "walk_ms": 660.5539839999892,
+              "rand4k_ms": 0.7053219549999312,
+              "seq_mb_s": 265.1619870946211,
+              "uncompressed_bytes": 1003593087,
+              "cpu_s_total": 4.08,
+              "fuse_rss_mb": 31.140625
+            },
+            {
+              "mount_ms": 31.84714000008171,
+              "workset_ms": 1367.1374179999702,
+              "cpu_s_startup": 1.12,
+              "walk_ms": 743.5719249999693,
+              "rand4k_ms": 0.6953388350001433,
+              "seq_mb_s": 259.6228947036366,
+              "uncompressed_bytes": 1003593087,
+              "cpu_s_total": 4.22,
+              "fuse_rss_mb": 31.11328125
+            }
+          ],
+          "tmpfs": [
+            {
+              "mount_ms": 26.429552999957195,
+              "workset_ms": 1120.856046999961,
+              "cpu_s_startup": 1.03,
+              "walk_ms": 727.4241190000339,
+              "rand4k_ms": 0.43719549999991614,
+              "seq_mb_s": 263.6375581098731,
+              "uncompressed_bytes": 1003593087,
+              "cpu_s_total": 4.140000000000001,
+              "fuse_rss_mb": 30.796875
+            },
+            {
+              "mount_ms": 26.64306500003022,
+              "workset_ms": 1183.584609000036,
+              "cpu_s_startup": 1.09,
+              "walk_ms": 733.6761300000489,
+              "rand4k_ms": 0.482373515000063,
+              "seq_mb_s": 268.97427967264974,
+              "uncompressed_bytes": 1003593087,
+              "cpu_s_total": 4.08,
+              "fuse_rss_mb": 30.546875
+            },
+            {
+              "mount_ms": 25.80181200005427,
+              "workset_ms": 1162.5313579999101,
+              "cpu_s_startup": 1.08,
+              "walk_ms": 751.5268350000497,
+              "rand4k_ms": 0.4353921900002433,
+              "seq_mb_s": 273.3328600446517,
+              "uncompressed_bytes": 1003593087,
+              "cpu_s_total": 4.08,
+              "fuse_rss_mb": 30.546875
+            },
+            {
+              "mount_ms": 28.59516800003803,
+              "workset_ms": 1158.021410999936,
+              "cpu_s_startup": 1.05,
+              "walk_ms": 671.8077489999814,
+              "rand4k_ms": 0.4885277500000029,
+              "seq_mb_s": 279.4567905309989,
+              "uncompressed_bytes": 1003593087,
+              "cpu_s_total": 3.93,
+              "fuse_rss_mb": 30.859375
+            },
+            {
+              "mount_ms": 27.61969300001965,
+              "workset_ms": 1177.5559879999946,
+              "cpu_s_startup": 1.08,
+              "walk_ms": 736.6835220000212,
+              "rand4k_ms": 0.4332650650002279,
+              "seq_mb_s": 260.1398523379685,
+              "uncompressed_bytes": 1003593087,
+              "cpu_s_total": 4.22,
+              "fuse_rss_mb": 30.7421875
+            }
+          ]
+        },
+        "launch": {
+          "warm": [
+            {
+              "launch_ms": null,
+              "ok": false,
+              "output": "es: Filled version table\nQObject::startTimer: Timers cannot have negative intervals\nCould not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nConsider setting $PYTHONHOME to <prefix>[:<exec_prefix>]\n/tmp/.mount_squashHJmKlH/usr/lib/krita-python-libs/krita added to PYTHONPATH\nWarning: requested data for unknown action \"path-break-at-selection\"\n"
+            },
+            {
+              "launch_ms": null,
+              "ok": false,
+              "output": "QObject::startTimer: Timers cannot have negative intervals\nCould not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nConsider setting $PYTHONHOME to <prefix>[:<exec_prefix>]\n/tmp/.mount_squashpnHAFf/usr/lib/krita-python-libs/krita added to PYTHONPATH\nWarning: requested data for unknown action \"path-break-at-selection\"\n"
+            },
+            {
+              "launch_ms": null,
+              "ok": false,
+              "output": "QObject::startTimer: Timers cannot have negative intervals\nCould not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nConsider setting $PYTHONHOME to <prefix>[:<exec_prefix>]\n/tmp/.mount_squashINfcID/usr/lib/krita-python-libs/krita added to PYTHONPATH\nWarning: requested data for unknown action \"path-break-at-selection\"\n"
+            }
+          ],
+          "cold": [
+            {
+              "launch_ms": null,
+              "ok": false,
+              "output": "QObject::startTimer: Timers cannot have negative intervals\nCould not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nConsider setting $PYTHONHOME to <prefix>[:<exec_prefix>]\n/tmp/.mount_squashHhGjIc/usr/lib/krita-python-libs/krita added to PYTHONPATH\nWarning: requested data for unknown action \"path-break-at-selection\"\n"
+            },
+            {
+              "launch_ms": null,
+              "ok": false,
+              "output": "QObject::startTimer: Timers cannot have negative intervals\nCould not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nConsider setting $PYTHONHOME to <prefix>[:<exec_prefix>]\n/tmp/.mount_squashBpfohG/usr/lib/krita-python-libs/krita added to PYTHONPATH\nWarning: requested data for unknown action \"path-break-at-selection\"\n"
+            },
+            {
+              "launch_ms": null,
+              "ok": false,
+              "output": "QObject::startTimer: Timers cannot have negative intervals\nCould not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nConsider setting $PYTHONHOME to <prefix>[:<exec_prefix>]\n/tmp/.mount_squashlijkhh/usr/lib/krita-python-libs/krita added to PYTHONPATH\nWarning: requested data for unknown action \"path-break-at-selection\"\n"
+            }
+          ],
+          "tmpfs": [
+            {
+              "launch_ms": null,
+              "ok": false,
+              "output": "QObject::startTimer: Timers cannot have negative intervals\nCould not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nConsider setting $PYTHONHOME to <prefix>[:<exec_prefix>]\n/tmp/.mount_bench-EDnohn/usr/lib/krita-python-libs/krita added to PYTHONPATH\nWarning: requested data for unknown action \"path-break-at-selection\"\n"
+            },
+            {
+              "launch_ms": null,
+              "ok": false,
+              "output": "QObject::startTimer: Timers cannot have negative intervals\nCould not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nConsider setting $PYTHONHOME to <prefix>[:<exec_prefix>]\n/tmp/.mount_bench-hdlBmf/usr/lib/krita-python-libs/krita added to PYTHONPATH\nWarning: requested data for unknown action \"path-break-at-selection\"\n"
+            },
+            {
+              "launch_ms": null,
+              "ok": false,
+              "output": "QObject::startTimer: Timers cannot have negative intervals\nCould not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nConsider setting $PYTHONHOME to <prefix>[:<exec_prefix>]\n/tmp/.mount_bench-ibAeIN/usr/lib/krita-python-libs/krita added to PYTHONPATH\nWarning: requested data for unknown action \"path-break-at-selection\"\n"
+            }
+          ]
+        }
+      },
+      "zsync": [
+        {
+          "zsync_block": 1024,
+          "zsync_file": 2518885,
+          "control_served": 2518885,
+          "downloaded": 86416228,
+          "requests": 12,
+          "ok": true,
+          "update_cost": 88935113,
+          "update_ratio": 0.2413816820286929,
+          "pair": "patch"
+        },
+        {
+          "zsync_block": 2048,
+          "zsync_file": 1259564,
+          "control_served": 1259564,
+          "downloaded": 86682524,
+          "requests": 10,
+          "ok": true,
+          "update_cost": 87942088,
+          "update_ratio": 0.23868648058675462,
+          "pair": "patch"
+        },
+        {
+          "zsync_block": 4096,
+          "zsync_file": 629900,
+          "control_served": 629900,
+          "downloaded": 87187020,
+          "requests": 9,
+          "ok": true,
+          "update_cost": 87816920,
+          "update_ratio": 0.23834675804796202,
+          "pair": "patch"
+        },
+        {
+          "zsync_block": 2048,
+          "zsync_file": 1259564,
+          "control_served": 1259564,
+          "downloaded": 265036,
+          "requests": 1,
+          "ok": true,
+          "update_cost": 1524600,
+          "update_ratio": 0.004137966434258032,
+          "pair": "rebuild"
+        }
+      ],
+      "summary": {
+        "build_wall_s": 33.96,
+        "build_cpu_s": 134.08,
+        "build_rss_mb": 945.13671875,
+        "mount_ms_warm": 7.4172559999965415,
+        "workset_ms_warm": 1134.4637379999654,
+        "rand4k_ms_warm": 0.4376974600000949,
+        "cpu_s_startup_warm": 1.05,
+        "seq_mb_s_warm": 279.0015451253351,
+        "fuse_rss_mb_warm": 31.45703125,
+        "cpu_s_total_warm": 3.95,
+        "walk_ms_warm": 721.5041800000108,
+        "mount_ms_cold": 33.08359599998312,
+        "workset_ms_cold": 1333.1367339999929,
+        "rand4k_ms_cold": 0.6953388350001433,
+        "cpu_s_startup_cold": 1.1,
+        "seq_mb_s_cold": 262.26124844357656,
+        "fuse_rss_mb_cold": 31.140625,
+        "cpu_s_total_cold": 4.109999999999999,
+        "walk_ms_cold": 725.2152170000272,
+        "mount_ms_tmpfs": 26.64306500003022,
+        "workset_ms_tmpfs": 1162.5313579999101,
+        "rand4k_ms_tmpfs": 0.43719549999991614,
+        "cpu_s_startup_tmpfs": 1.08,
+        "seq_mb_s_tmpfs": 268.97427967264974,
+        "fuse_rss_mb_tmpfs": 30.7421875,
+        "cpu_s_total_tmpfs": 4.08,
+        "walk_ms_tmpfs": 733.6761300000489,
+        "launch_ms_warm": null,
+        "launch_ms_cold": null,
+        "launch_ms_tmpfs": null
+      },
+      "canary": {
+        "build_wall_s": 33.96,
+        "build_cpu_s": 134.08,
+        "build_rss_mb": 945.13671875,
+        "mount_ms_warm": 7.4172559999965415,
+        "workset_ms_warm": 1134.4637379999654,
+        "rand4k_ms_warm": 0.4376974600000949,
+        "cpu_s_startup_warm": 1.05,
+        "seq_mb_s_warm": 279.0015451253351,
+        "fuse_rss_mb_warm": 31.45703125,
+        "cpu_s_total_warm": 3.95,
+        "walk_ms_warm": 721.5041800000108,
+        "mount_ms_cold": 33.08359599998312,
+        "workset_ms_cold": 1333.1367339999929,
+        "rand4k_ms_cold": 0.6953388350001433,
+        "cpu_s_startup_cold": 1.1,
+        "seq_mb_s_cold": 262.26124844357656,
+        "fuse_rss_mb_cold": 31.140625,
+        "cpu_s_total_cold": 4.109999999999999,
+        "walk_ms_cold": 725.2152170000272,
+        "mount_ms_tmpfs": 26.64306500003022,
+        "workset_ms_tmpfs": 1162.5313579999101,
+        "rand4k_ms_tmpfs": 0.43719549999991614,
+        "cpu_s_startup_tmpfs": 1.08,
+        "seq_mb_s_tmpfs": 268.97427967264974,
+        "fuse_rss_mb_tmpfs": 30.7421875,
+        "cpu_s_total_tmpfs": 4.08,
+        "walk_ms_tmpfs": 733.6761300000489,
+        "launch_ms_warm": null,
+        "launch_ms_cold": null,
+        "launch_ms_tmpfs": null
+      },
+      "noisy": []
+    },
+    {
+      "run_id": "37887312723",
+      "app": "krita",
+      "arch": "x86_64",
+      "category": "large-qt",
+      "variant": "dwarfs-user-S26-B6-hot-c256M",
+      "container": "dwarfs",
+      "codec": "zstd",
+      "level": 22,
+      "block_bytes": 67108864,
+      "family_key": "dw-user-cache/hotness=hot/cache=256M",
+      "stage": "2",
+      "retry": false,
+      "runtime": "uruntime-lite@b3c2916153e0",
+      "size": {
+        "payload": 267716832,
+        "runtime": 1507016,
+        "total": 269223848,
+        "uncompressed": 1003593087,
+        "ratio": 0.2682599666013841
+      },
+      "build": {
+        "wall_s": 127.7,
+        "cpu_s": 477.15999999999997,
+        "rss_mb": 3324.5234375,
+        "timeout": false,
+        "deterministic": null
+      },
+      "env": {
+        "cpu": "AMD EPYC 7763 64-Core Processor",
+        "cores": 4,
+        "ram_gb": 15.6,
+        "uruntime_auto_cache_mb": 1536,
+        "kernel": "6.17.0-1022-azure",
+        "image": "20261004.327.1",
+        "runner": "GitHub Actions 1000009568",
+        "tools": {
+          "mksquashfs": "mksquashfs version 4.6.1 (2023/03/25)",
+          "mkdwarfs": "___                  ___ ___",
+          "zsync": "zsync v0.6.2 (compiled Apr 18 2024 17:54:59)"
+        }
+      },
+      "startup": {
+        "mount": {
+          "warm": [
+            {
+              "mount_ms": 26.52502899996989,
+              "workset_ms": 7765.567136999948,
+              "cpu_s_startup": 7.77,
+              "walk_ms": 658.7101630000234,
+              "rand4k_ms": 11.45662129499982,
+              "seq_mb_s": 198.04552879485462,
+              "uncompressed_bytes": 1003593087,
+              "cpu_s_total": 14.729999999999999,
+              "fuse_rss_mb": 642.65625
+            },
+            {
+              "mount_ms": 25.264750000019376,
+              "workset_ms": 7710.242366000046,
+              "cpu_s_startup": 7.72,
+              "walk_ms": 656.359569000017,
+              "rand4k_ms": 11.41035654999996,
+              "seq_mb_s": 198.3791531438418,
+              "uncompressed_bytes": 1003593087,
+              "cpu_s_total": 14.659999999999998,
+              "fuse_rss_mb": 638.57421875
+            },
+            {
+              "mount_ms": 24.576187000036498,
+              "workset_ms": 7707.193945999961,
+              "cpu_s_startup": 7.709999999999999,
+              "walk_ms": 659.8405240000034,
+              "rand4k_ms": 11.461344655000119,
+              "seq_mb_s": 196.490687123174,
+              "uncompressed_bytes": 1003593087,
+              "cpu_s_total": 14.7,
+              "fuse_rss_mb": 640.83984375
+            },
+            {
+              "mount_ms": 26.49094100002003,
+              "workset_ms": 7715.8385769999995,
+              "cpu_s_startup": 7.72,
+              "walk_ms": 662.4858739999695,
+              "rand4k_ms": 11.445856414999867,
+              "seq_mb_s": 196.92386185011475,
+              "uncompressed_bytes": 1003593087,
+              "cpu_s_total": 14.69,
+              "fuse_rss_mb": 638.75
+            },
+            {
+              "mount_ms": 24.71621199998708,
+              "workset_ms": 7701.972773999955,
+              "cpu_s_startup": 7.7,
+              "walk_ms": 654.0599049999969,
+              "rand4k_ms": 11.417488419999984,
+              "seq_mb_s": 198.090713034252,
+              "uncompressed_bytes": 1003593087,
+              "cpu_s_total": 14.68,
+              "fuse_rss_mb": 640.67578125
+            },
+            {
+              "mount_ms": 23.022416999992856,
+              "workset_ms": 7733.468101000028,
+              "cpu_s_startup": 7.75,
+              "walk_ms": 661.807557999964,
+              "rand4k_ms": 11.471491579999906,
+              "seq_mb_s": 198.5865321010551,
+              "uncompressed_bytes": 1003593087,
+              "cpu_s_total": 14.719999999999999,
+              "fuse_rss_mb": 627.0625
+            },
+            {
+              "mount_ms": 23.15879500002893,
+              "workset_ms": 7694.8282250000375,
+              "cpu_s_startup": 7.6899999999999995,
+              "walk_ms": 659.1468000000305,
+              "rand4k_ms": 11.43462884999991,
+              "seq_mb_s": 198.2736413437283,
+              "uncompressed_bytes": 1003593087,
+              "cpu_s_total": 14.649999999999999,
+              "fuse_rss_mb": 639.4609375
+            }
+          ],
+          "cold": [
+            {
+              "mount_ms": 46.38029000000188,
+              "workset_ms": 7928.565300000002,
+              "cpu_s_startup": 7.76,
+              "walk_ms": 685.4564500000038,
+              "rand4k_ms": 11.440031230000045,
+              "seq_mb_s": 198.2045707219921,
+              "uncompressed_bytes": 1003593087,
+              "cpu_s_total": 14.74,
+              "fuse_rss_mb": 642.88671875
+            },
+            {
+              "mount_ms": 42.78254900003731,
+              "workset_ms": 7988.300406999997,
+              "cpu_s_startup": 7.8,
+              "walk_ms": 676.5752869999915,
+              "rand4k_ms": 11.43803442999996,
+              "seq_mb_s": 195.64377469372292,
+              "uncompressed_bytes": 1003593087,
+              "cpu_s_total": 14.81,
+              "fuse_rss_mb": 643.23046875
+            },
+            {
+              "mount_ms": 39.218846000039775,
+              "workset_ms": 7928.885330000014,
+              "cpu_s_startup": 7.75,
+              "walk_ms": 651.5486789999159,
+              "rand4k_ms": 11.441035975000204,
+              "seq_mb_s": 197.5256494782153,
+              "uncompressed_bytes": 1003593087,
+              "cpu_s_total": 14.709999999999999,
+              "fuse_rss_mb": 594.68359375
+            },
+            {
+              "mount_ms": 40.222560999950474,
+              "workset_ms": 7925.537767000037,
+              "cpu_s_startup": 7.75,
+              "walk_ms": 660.3556680000793,
+              "rand4k_ms": 11.450891865000017,
+              "seq_mb_s": 196.46236791360906,
+              "uncompressed_bytes": 1003593087,
+              "cpu_s_total": 14.739999999999998,
+              "fuse_rss_mb": 637.98828125
+            },
+            {
+              "mount_ms": 37.618650000013076,
+              "workset_ms": 7916.591071000084,
+              "cpu_s_startup": 7.739999999999999,
+              "walk_ms": 664.4918270000062,
+              "rand4k_ms": 11.428233235000107,
+              "seq_mb_s": 198.02942474539634,
+              "uncompressed_bytes": 1003593087,
+              "cpu_s_total": 14.73,
+              "fuse_rss_mb": 640.8125
+            }
+          ],
+          "tmpfs": [
+            {
+              "mount_ms": 44.95061199997963,
+              "workset_ms": 9881.815497000047,
+              "cpu_s_startup": 9.85,
+              "walk_ms": 684.3677730000763,
+              "rand4k_ms": 13.63617857500003,
+              "seq_mb_s": 186.83298149462328,
+              "uncompressed_bytes": 1003593087,
+              "cpu_s_total": 17.580000000000002,
+              "fuse_rss_mb": 587.046875
+            },
+            {
+              "mount_ms": 39.02198999992379,
+              "workset_ms": 8359.836330000007,
+              "cpu_s_startup": 8.4,
+              "walk_ms": 665.8034349999298,
+              "rand4k_ms": 12.89231068499987,
+              "seq_mb_s": 187.7815750517461,
+              "uncompressed_bytes": 1003593087,
+              "cpu_s_total": 15.93,
+              "fuse_rss_mb": 664.515625
+            },
+            {
+              "mount_ms": 39.89452199994048,
+              "workset_ms": 8322.827028999996,
+              "cpu_s_startup": 8.379999999999999,
+              "walk_ms": 666.8039579999459,
+              "rand4k_ms": 13.192824009999526,
+              "seq_mb_s": 184.98583157404133,
+              "uncompressed_bytes": 1003593087,
+              "cpu_s_total": 15.99,
+              "fuse_rss_mb": 644.5234375
+            },
+            {
+              "mount_ms": 37.431529999935265,
+              "workset_ms": 8317.432317999988,
+              "cpu_s_startup": 8.37,
+              "walk_ms": 676.6510659999767,
+              "rand4k_ms": 12.921371040000054,
+              "seq_mb_s": 186.36258519520086,
+              "uncompressed_bytes": 1003593087,
+              "cpu_s_total": 15.94,
+              "fuse_rss_mb": 644.44921875
+            },
+            {
+              "mount_ms": 40.2767399999675,
+              "workset_ms": 8409.070224000061,
+              "cpu_s_startup": 8.43,
+              "walk_ms": 656.7646299999979,
+              "rand4k_ms": 12.921565920000262,
+              "seq_mb_s": 187.08809849053662,
+              "uncompressed_bytes": 1003593087,
+              "cpu_s_total": 15.979999999999999,
+              "fuse_rss_mb": 597.9453125
+            }
+          ]
+        },
+        "mount_native": [
+          {
+            "mount_ms": 61.5650440000195,
+            "fuse_rss_mb": 478.15234375
+          },
+          {
+            "mount_ms": 93.473758000016,
+            "fuse_rss_mb": 478.01953125
+          },
+          {
+            "mount_ms": 64.75788099999136,
+            "fuse_rss_mb": 482.15234375
+          },
+          {
+            "mount_ms": 62.581523000005745,
+            "fuse_rss_mb": 480.02734375
+          },
+          {
+            "mount_ms": 62.70745199998373,
+            "fuse_rss_mb": 480.15625
+          },
+          {
+            "mount_ms": 64.19896299996708,
+            "fuse_rss_mb": 480.15234375
+          },
+          {
+            "mount_ms": 61.209974000007605,
+            "fuse_rss_mb": 478.15625
+          }
+        ],
+        "launch": {
+          "warm": [
+            {
+              "launch_ms": null,
+              "ok": false,
+              "output": "QObject::startTimer: Timers cannot have negative intervals\nCould not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nConsider setting $PYTHONHOME to <prefix>[:<exec_prefix>]\n/tmp/.mount_dwarfremp16128814642806418272/usr/lib/krita-python-libs/krita added to PYTHONPATH\nWarning: requested data for unknown action \"path-break-at-selection\"\n"
+            },
+            {
+              "launch_ms": null,
+              "ok": false,
+              "output": "QObject::startTimer: Timers cannot have negative intervals\nCould not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nConsider setting $PYTHONHOME to <prefix>[:<exec_prefix>]\n/tmp/.mount_dwarfremp16128814642806418272/usr/lib/krita-python-libs/krita added to PYTHONPATH\nWarning: requested data for unknown action \"path-break-at-selection\"\n"
+            },
+            {
+              "launch_ms": null,
+              "ok": false,
+              "output": "QObject::startTimer: Timers cannot have negative intervals\nCould not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nConsider setting $PYTHONHOME to <prefix>[:<exec_prefix>]\n/tmp/.mount_dwarfremp16128814642806418272/usr/lib/krita-python-libs/krita added to PYTHONPATH\nWarning: requested data for unknown action \"path-break-at-selection\"\n"
+            }
+          ],
+          "cold": [
+            {
+              "launch_ms": null,
+              "ok": false,
+              "output": "QObject::startTimer: Timers cannot have negative intervals\nCould not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nConsider setting $PYTHONHOME to <prefix>[:<exec_prefix>]\n/tmp/.mount_dwarfremp16128814642806418272/usr/lib/krita-python-libs/krita added to PYTHONPATH\nWarning: requested data for unknown action \"path-break-at-selection\"\n"
+            },
+            {
+              "launch_ms": null,
+              "ok": false,
+              "output": "QObject::startTimer: Timers cannot have negative intervals\nCould not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nConsider setting $PYTHONHOME to <prefix>[:<exec_prefix>]\n/tmp/.mount_dwarfremp16128814642806418272/usr/lib/krita-python-libs/krita added to PYTHONPATH\nWarning: requested data for unknown action \"path-break-at-selection\"\n"
+            },
+            {
+              "launch_ms": null,
+              "ok": false,
+              "output": "QObject::startTimer: Timers cannot have negative intervals\nCould not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nConsider setting $PYTHONHOME to <prefix>[:<exec_prefix>]\n/tmp/.mount_dwarfremp16128814642806418272/usr/lib/krita-python-libs/krita added to PYTHONPATH\nWarning: requested data for unknown action \"path-break-at-selection\"\n"
+            }
+          ],
+          "tmpfs": [
+            {
+              "launch_ms": null,
+              "ok": false,
+              "output": "QObject::startTimer: Timers cannot have negative intervals\nCould not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nConsider setting $PYTHONHOME to <prefix>[:<exec_prefix>]\n/tmp/.mount_benchremp16128814642806418272/usr/lib/krita-python-libs/krita added to PYTHONPATH\nWarning: requested data for unknown action \"path-break-at-selection\"\n"
+            },
+            {
+              "launch_ms": null,
+              "ok": false,
+              "output": "QObject::startTimer: Timers cannot have negative intervals\nCould not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nConsider setting $PYTHONHOME to <prefix>[:<exec_prefix>]\n/tmp/.mount_benchremp16128814642806418272/usr/lib/krita-python-libs/krita added to PYTHONPATH\nWarning: requested data for unknown action \"path-break-at-selection\"\n"
+            },
+            {
+              "launch_ms": null,
+              "ok": false,
+              "output": "QObject::startTimer: Timers cannot have negative intervals\nCould not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nConsider setting $PYTHONHOME to <prefix>[:<exec_prefix>]\n/tmp/.mount_benchremp16128814642806418272/usr/lib/krita-python-libs/krita added to PYTHONPATH\nWarning: requested data for unknown action \"path-break-at-selection\"\n"
+            }
+          ]
+        }
+      },
+      "zsync": [
+        {
+          "zsync_block": 1024,
+          "zsync_file": 1840642,
+          "control_served": 1840642,
+          "downloaded": 194512273,
+          "requests": 73,
+          "ok": true,
+          "update_cost": 196352915,
+          "update_ratio": 0.7293295763308457,
+          "pair": "patch"
+        },
+        {
+          "zsync_block": 2048,
+          "zsync_file": 920443,
+          "control_served": 920443,
+          "downloaded": 196836883,
+          "requests": 43,
+          "ok": true,
+          "update_cost": 197757326,
+          "update_ratio": 0.7345460941483906,
+          "pair": "patch"
+        },
+        {
+          "zsync_block": 4096,
+          "zsync_file": 460347,
+          "control_served": 460347,
+          "downloaded": 199228237,
+          "requests": 31,
+          "ok": true,
+          "update_cost": 199688584,
+          "update_ratio": 0.741719522558789,
+          "pair": "patch"
+        },
+        {
+          "zsync_block": 2048,
+          "zsync_file": 920443,
+          "control_served": 920443,
+          "downloaded": 164098,
+          "requests": 1,
+          "ok": true,
+          "update_cost": 1084541,
+          "update_ratio": 0.004028398702629048,
+          "pair": "rebuild"
+        }
+      ],
+      "summary": {
+        "build_wall_s": 127.7,
+        "build_cpu_s": 477.15999999999997,
+        "build_rss_mb": 3324.5234375,
+        "mount_ms_warm": 24.71621199998708,
+        "workset_ms_warm": 7710.242366000046,
+        "rand4k_ms_warm": 11.445856414999867,
+        "cpu_s_startup_warm": 7.72,
+        "seq_mb_s_warm": 198.090713034252,
+        "fuse_rss_mb_warm": 639.4609375,
+        "cpu_s_total_warm": 14.69,
+        "walk_ms_warm": 659.1468000000305,
+        "mount_ms_cold": 40.222560999950474,
+        "workset_ms_cold": 7928.565300000002,
+        "rand4k_ms_cold": 11.440031230000045,
+        "cpu_s_startup_cold": 7.75,
+        "seq_mb_s_cold": 197.5256494782153,
+        "fuse_rss_mb_cold": 640.8125,
+        "cpu_s_total_cold": 14.739999999999998,
+        "walk_ms_cold": 664.4918270000062,
+        "mount_ms_tmpfs": 39.89452199994048,
+        "workset_ms_tmpfs": 8359.836330000007,
+        "rand4k_ms_tmpfs": 12.921565920000262,
+        "cpu_s_startup_tmpfs": 8.4,
+        "seq_mb_s_tmpfs": 186.83298149462328,
+        "fuse_rss_mb_tmpfs": 644.44921875,
+        "cpu_s_total_tmpfs": 15.979999999999999,
+        "walk_ms_tmpfs": 666.8039579999459,
+        "mount_native_ms_warm": 62.70745199998373,
+        "fuse_rss_mb_native_warm": 480.02734375,
+        "launch_ms_warm": null,
+        "launch_ms_cold": null,
+        "launch_ms_tmpfs": null
+      },
+      "canary": {
+        "build_wall_s": 33.96,
+        "build_cpu_s": 134.08,
+        "build_rss_mb": 945.13671875,
+        "mount_ms_warm": 7.4172559999965415,
+        "workset_ms_warm": 1134.4637379999654,
+        "rand4k_ms_warm": 0.4376974600000949,
+        "cpu_s_startup_warm": 1.05,
+        "seq_mb_s_warm": 279.0015451253351,
+        "fuse_rss_mb_warm": 31.45703125,
+        "cpu_s_total_warm": 3.95,
+        "walk_ms_warm": 721.5041800000108,
+        "mount_ms_cold": 33.08359599998312,
+        "workset_ms_cold": 1333.1367339999929,
+        "rand4k_ms_cold": 0.6953388350001433,
+        "cpu_s_startup_cold": 1.1,
+        "seq_mb_s_cold": 262.26124844357656,
+        "fuse_rss_mb_cold": 31.140625,
+        "cpu_s_total_cold": 4.109999999999999,
+        "walk_ms_cold": 725.2152170000272,
+        "mount_ms_tmpfs": 26.64306500003022,
+        "workset_ms_tmpfs": 1162.5313579999101,
+        "rand4k_ms_tmpfs": 0.43719549999991614,
+        "cpu_s_startup_tmpfs": 1.08,
+        "seq_mb_s_tmpfs": 268.97427967264974,
+        "fuse_rss_mb_tmpfs": 30.7421875,
+        "cpu_s_total_tmpfs": 4.08,
+        "walk_ms_tmpfs": 733.6761300000489,
+        "launch_ms_warm": null,
+        "launch_ms_cold": null,
+        "launch_ms_tmpfs": null
+      },
+      "noisy": []
+    }
+  ],
+  "reference": [
+    {
+      "pair": "patch",
+      "xdelta3_bytes": 40088256
+    }
+  ],
+  "app": "krita",
+  "arch": "x86_64"
+}
