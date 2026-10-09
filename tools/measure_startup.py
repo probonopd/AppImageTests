@@ -155,12 +155,13 @@ def mount_run(image, workset=None, cpus="0,1", sample=200, seed=1, timeout=120, 
     return r
 
 
-def native_mount_run(image, cachesize=None, cpus="0,1", timeout=60):
+def native_mount_run(image, cachesize=None, cpus="0,1", timeout=60, offset=None):
     """Mount a DwarFS AppImage with the native `dwarfs` binary, no runtime involved (the
     payload is found with offset=auto). Gives the mount cost of DwarFS itself, separate from
     the runtime's own startup work (issue #1). Reads the whole tree so the cache fills."""
     mp = tempfile.mkdtemp(prefix="native-mp-")
-    opts = "offset=auto" + (f",cachesize={cachesize}" if cachesize else "")
+    # exact offset (= runtime size): offset=auto scans the file for the magic, which inflates the time
+    opts = f"offset={offset if offset else 'auto'}" + (f",cachesize={cachesize}" if cachesize else "")
     cmd = (["taskset", "-c", cpus] if cpus else []) + ["dwarfs", str(image), mp, "-o", opts]
     t0 = time.perf_counter()
     r = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout)

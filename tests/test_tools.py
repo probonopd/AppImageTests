@@ -76,6 +76,11 @@ class DwarfsRuntimeAndCache(unittest.TestCase):
         cmd = bv.payload_cmd(common.get_variant("dwarfs-user-S26-B6-plain-c64M"), "a", "p", "x86_64", 0, "/tmp")
         self.assertNotIn("cache", " ".join(cmd))        # the cache is a mount-time setting, not a build option
 
+    def test_small_block_cache_variants(self):
+        for c in ("256M", "128M", "64M"):
+            v = common.get_variant(f"dwarfs-l5-S20-c{c}")
+            self.assertEqual((v["params"]["bits"], v["params"]["cache"]), (20, c))
+
     def test_auto_cache_tiers(self):
         c = common.uruntime_auto_cache_mb()
         self.assertIn(c, (1536, 1024, 896, 768, 640, 512, 384, 256, 128, 64, 32))

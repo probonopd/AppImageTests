@@ -172,6 +172,15 @@ families:
     levers: []
     compat: {kernel: "n/a (FUSE3)", fuse: "3.x", static_reader: true}
 
+  # Small blocks (-S20 = 1 MiB) at small caches: the user's -S26 (64 MiB blocks) cannot work with a
+  # 64M cache; this shows whether DwarFS can match squashfs's memory use with smaller blocks (issue #2).
+  - name: dw-s20-cache
+    kind: dwarfs
+    id: "dwarfs-l5-S20-c{cache}"
+    params: {codec: preset, level: 5, bits: 20, cache: [256M, 128M, 64M]}
+    levers: []
+    compat: {kernel: "n/a (FUSE3)", fuse: "3.x", static_reader: true}
+
 # Option axes derived for the top-3 shortlisted squashfs variants in stage 3.
 # id = <base>+<suffix>
 squashfs_options:

@@ -164,7 +164,7 @@ def main():
                         rec["startup"]["mount"][state].append(res)
                         if state == "warm" and get_variant(vid)["kind"] == "dwarfs" and shutil.which("dwarfs"):
                             # DwarFS itself, without the runtime (what the runtime adds is the difference)
-                            nres = ms.native_mount_run(path, cache_of.get(vid), a.cpus)
+                            nres = ms.native_mount_run(path, cache_of.get(vid), a.cpus, offset=rec.get("size", {}).get("runtime"))
                             rec["startup"].setdefault("mount_native", []).append(nres)
                     finally:
                         cleanup()

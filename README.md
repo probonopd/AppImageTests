@@ -81,20 +81,31 @@ images are 17% larger, app start is 0.72 (zstd 7: 0.57), builds are 6x slower th
 the score is 0.85 vs 0.76. lzo is 10% larger, starts slower (0.86) and uses more CPU (0.53), though its updates are cheaper (0.84). Fine for CPU-starved
 machines; not a good default for downloads.
 
-**"DwarFS compresses better and starts as fast."** It can: with the project's mkdwarfs setup
-(`zstd:level=22 -S26 -B6 --order=path`) images are 23-26% smaller, and the `--hotness-list`
-variant starts as fast as our recommendation (cold app start 0.52, the same setup without the
-list 0.82; for LibreOffice 1.8 s drops to 0.55 s). **That is the part users notice**, and it
-is a real advantage of DwarFS with a hotness list. Our earlier DwarFS "mount time" and "RAM"
-comparisons were unfair and have been withdrawn (issues #1 and #2): the mount number mostly
-measured the full uruntime unpacking a bundled `mkdwarfs` helper on every launch (the `-lite`
-runtime, which is what DwarFS AppImages should use, avoids that), and the RAM number measured
-a block cache that the uruntime deliberately sizes from free host memory (1536M on a 16 GiB
-runner). They are being re-measured with the lite runtime, a native `dwarfs` mount as
-reference, and explicit cache sizes; see Table 7 of the report. What remains true is that
-DwarFS builds take about 6x longer than today's, that zsync updates cost 1.5x of today's
-(ours 0.94), and that the format needs a different runtime (uruntime) and FUSE3 instead of
-the current type2 runtime.
+**"DwarFS compresses better and starts as fast."** Partly true, and we corrected our
+earlier DwarFS comparison after two issues (#1, #2) pointed out unfair measurements. With the
+`-lite` uruntime (what DwarFS AppImages should use) and the project's mkdwarfs setup
+(`zstd:level=22 -S26 -B6 --order=path`), images are 23-26% smaller than today's default and cold
+app start is about as fast as our recommendation (0.51-0.56 vs 0.73 for zstd 7 / 128K in the same
+run; a difference of that size is within our timing noise). A hotness list did **not** make a
+measurable difference in our runs (0.56 with, 0.51 without), so we do not claim it. What we
+measured about the two disputed numbers:
+
+- *Mount time.* Mounting the same image takes about 27 ms with the lite runtime and 40 ms with
+  the full uruntime (which unpacks a bundled `mkdwarfs` helper on every launch), against about 8 ms
+  for squashfs. The difference is small next to app start times of 0.5-2 s; we no longer count mount
+  time separately. (Our "native `dwarfs`" mount number, 46-57 ms, is not trustworthy yet: it uses
+  `offset=auto`, which scans the file; it is being re-measured with the exact offset.)
+- *RAM.* The uruntime sizes the DwarFS block cache from free memory (1536M on a 16 GiB runner),
+  so the FUSE process uses 150-960 MB there against about 31 MB for squashfs. That is by design, but
+  the cache cannot simply be made small: with `-S26` blocks are 64 MiB, so a 256M cache holds four
+  blocks and a 64M cache holds one. At 256M cold app start was 1.4-3.1x today's default and at 64M
+  7-17x (KeePassXC 8.6 s, LibreOffice 43 s, Obsidian 64 s), with CPU 10x higher. The uruntime picks
+  such small caches on machines with little free memory, so a `-S26` image would be slow there. How
+  a smaller block size (for example `-S20`) behaves at small caches is being measured.
+
+DwarFS builds take about 5-6x longer than today's, zsync updates cost 1.5x of today's (ours 0.94),
+and the format needs a different runtime (uruntime) and FUSE3 instead of the current type2
+runtime. Its weighted score with our weights is 1.07-1.3 against our 0.80.
 
 **"gzip is the safe, compatible choice."** gzip is the most widely supported codec, but the
 runtime we ship already reads zstd, and the squashfs reader is the runtime's own FUSE code,
