@@ -81,6 +81,22 @@ class DwarfsRuntimeAndCache(unittest.TestCase):
         self.assertIn(c, (1536, 1024, 896, 768, 640, 512, 384, 256, 128, 64, 32))
 
 
+class AggregateOrder(unittest.TestCase):
+    def test_newer_run_wins_regardless_of_path_order(self):
+        import json, tempfile, aggregate
+        from pathlib import Path
+        d = Path(tempfile.mkdtemp())
+        def rec(run, rt, mount):
+            return {"app": "a", "arch": "x86_64", "variant": "v", "run_id": str(run), "retry": False,
+                    "size": {"runtime": rt, "total": rt + 1}, "summary": {"mount_ms_warm": mount}}
+        (d / "aaa.json").write_text(json.dumps({"app": "a", "records": [rec(200, 1000, 5.0)]}))   # sorts first, newer
+        (d / "zzz.json").write_text(json.dumps({"app": "a", "records": [rec(100, 3000, 30.0)]}))  # sorts last, older
+        recs, _, _ = aggregate.load([d / "aaa.json", d / "zzz.json"])
+        self.assertEqual(recs[0]["size"]["runtime"], 1000)
+        self.assertEqual(recs[0]["summary"]["mount_ms_warm"], 5.0)
+        self.assertEqual(recs[0]["run_id"], "200")
+
+
 class Corpus(unittest.TestCase):
     def test_every_app_has_an_older_version(self):
         for a in common.load_corpus():

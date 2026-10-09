@@ -38,26 +38,39 @@ def merge(a, b):
     return a
 
 
+def _run_key(r):
+    try:
+        return int(r.get("run_id"))
+    except (TypeError, ValueError):
+        return 0
+
+
 def load(paths):
+    """Merge records of the same (app, arch, variant). Records are applied in run order (oldest
+    first), so a newer run supersedes an older one: re-running a variant replaces its old
+    measurements. (Path order is not time order: a plain sorted() put the current run's files
+    before the results branch's older ones, and the older values then won.)"""
     recs, ref, codec = {}, [], []
+    items = []
     for p in sorted(paths):
         d = json.loads(Path(p).read_text())
         codec += [dict(r, app=d.get("app")) for r in d.get("codec_records", [])]
         ref += [dict(r, app=d["app"]) for r in d.get("reference", [])]
-        for r in d.get("records", []):
-            key = (r["app"], r["arch"], r["variant"])
-            if key in recs and r.get("retry") is False and recs[key].get("retry"):
-                continue
-            if key in recs:
-                if r.get("retry"):          # retry replaces noisy timings wholesale
-                    recs[key]["startup"] = r.get("startup", {})
-                    recs[key]["summary"] = r.get("summary", {})
-                    recs[key]["canary"] = r.get("canary", {})
-                    recs[key]["noisy"] = r.get("noisy", [])
-                else:
-                    merge(recs[key], r)
+        items += list(d.get("records", []))
+    for r in sorted(items, key=_run_key):          # stable: same-run records keep path order
+        key = (r["app"], r["arch"], r["variant"])
+        if key in recs and r.get("retry") is False and recs[key].get("retry") and _run_key(r) == _run_key(recs[key]):
+            continue
+        if key in recs:
+            if r.get("retry"):          # retry replaces noisy timings wholesale
+                recs[key]["startup"] = r.get("startup", {})
+                recs[key]["summary"] = r.get("summary", {})
+                recs[key]["canary"] = r.get("canary", {})
+                recs[key]["noisy"] = r.get("noisy", [])
             else:
-                recs[key] = r
+                merge(recs[key], r)
+        else:
+            recs[key] = r
     return list(recs.values()), ref, codec
 
 
